@@ -119,8 +119,8 @@
 
     const PRODUCTS = [
       { id: 1, name: { en: 'Organic Da Lat Strawberries', vi: 'Dâu Tây Đà Lạt Hữu Cơ', ko: '유기농 달랏 딸기' }, price: 'VND 150,000 / kg', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Highland Berry Farm', origin: 'Da Lat, VN' },
-      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, price: 'VND 35,000 / kg', image: 'https://images.unsplash.com/photo-1556801712-75c5910bfbc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Mekong Greens', origin: 'Can Tho, VN' },
-      { id: 3, name: { en: 'Premium Jasmine Rice', vi: 'Gạo Lài Cao Cấp', ko: '프리미엄 자스민 쌀' }, price: 'VND 45,000 / kg', image: 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN' },
+      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, price: 'VND 35,000 / kg', image: './bap_cai.jpg', farm: 'Mekong Greens', origin: 'Can Tho, VN' },
+      { id: 3, name: { en: 'Premium Jasmine Rice', vi: 'Gạo Lài Cao Cấp', ko: '프리미엄 자스민 쌀' }, price: 'VND 45,000 / kg', image: './gao_lai.jpg', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN' },
     ];
 
     const LEDGER_LOGS = [
@@ -159,12 +159,14 @@
                 <button onClick={() => setActiveTab('farmer')} className={`font-medium pb-1 ${activeTab === 'farmer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_farm}</button>
                 <button onClick={() => setActiveTab('admin')} className={`font-medium pb-1 ${activeTab === 'admin' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_ledger}</button>
                 
-                <div className="relative group ml-4 cursor-pointer">
-                  <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none"><Globe className="w-4 h-4"/> {lang.toUpperCase()}</button>
-                  <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] hidden group-hover:block transition-all opacity-0 group-hover:opacity-100 text-gray-800 border overflow-hidden">
-                    <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">English (EN)</button>
-                    <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors">Tiếng Việt (VI)</button>
-                    <button onClick={()=>setLang('ko')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">한국어 (KO)</button>
+                <div className="relative group ml-4 h-full flex items-center cursor-pointer">
+                  <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none py-2"><Globe className="w-4 h-4"/> {lang.toUpperCase()}</button>
+                  <div className="absolute right-0 top-full pt-2 w-32 hidden group-hover:block z-50">
+                    <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
+                      <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">English (EN)</button>
+                      <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors">Tiếng Việt (VI)</button>
+                      <button onClick={()=>setLang('ko')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">한국어 (KO)</button>
+                    </div>
                   </div>
                 </div>
               </nav>
