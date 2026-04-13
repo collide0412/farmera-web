@@ -1,0 +1,194 @@
+<body class="bg-gray-50 text-gray-900 font-sans antialiased overflow-x-hidden">
+  <div id="root"></div>
+
+  <!-- Main Application Script -->
+  <script type="text/babel" data-type="module">
+    import React, { useState, useEffect } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { motion, AnimatePresence } from 'framer-motion';
+    import { 
+      Leaf, ScanLine, ShieldCheck, Activity, BarChart3, Fingerprint, 
+      X, TrendingUp, Droplets, Bug, Sprout, PackageCheck, Store, Globe,
+      ClipboardCheck, Plus, CheckCircle2
+    } from 'lucide-react';
+    import {
+      Chart as ChartJS, CategoryScale, LinearScale, PointElement, 
+      LineElement, Title, Tooltip, Legend, Filler
+    } from 'chart.js';
+    import { Line } from 'react-chartjs-2';
+
+    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+
+    // --- TRANSLATIONS ---
+    const t = {
+      en: {
+        nav_market: "Marketplace", nav_farm: "Smart Farm View", nav_ledger: "Trust Ledger", nav_trace: "Trace Demo",
+        title: "Direct from Farm to Table.",
+        subtitle: "Discover premium, blockchain-verified agricultural produce. 100% transparency.",
+        verified: "Verified", scan: "Scan QR for Origin", store: "Store", farm: "Farm", ledger: "Ledger",
+        soil_moist: "Soil Moisture", soil_ph: "Soil pH Level", pest_alert: "Pest Alerts (AI)",
+        demand: "Market Demand", ai_rec: "AI Recommendation", ai_desc: "Market price is hitting a peak. Expected optimal harvest date is in 2 days. Prepare packaging resources.",
+        view_plan: "View Action Plan", tx_id: "Transaction ID", event_status: "Event Status", time: "Timestamp", hash: "Block Hash",
+        reading: "Reading Blockchain Data...", auth_ver: "Authenticity Verified",
+        contract: "Smart Contract Address", lifecycle: "Life Cycle Journey", meet_farmer: "Meet the Farmer:", farmer_quote: '"We grew this with love and pure tech."',
+        seed: "Seed Planted", seed_desc: "High-yield seeds planted in smart soil.",
+        iot: "IoT Monitored", iot_desc: "Optimal soil moisture and pH maintained automatically.",
+        harvest: "Harvested", harvest_desc: "Hand-picked at peak ripeness.",
+        pack: "Packaged & Distributed", pack_desc: "Temperature-controlled transit to facility."
+      },
+      vi: {
+        nav_market: "Chá»£ NÃ´ng Sáº£n", nav_farm: "NÃ´ng Tráº¡i ThÃ´ng Minh", nav_ledger: "Sá»• CÃ¡i Tin Cáºy", nav_trace: "Demo Truy Xuáº¥t",
+        title: "Trá»±c Tiáº¿p Tá»« NÃ´ng Tráº¡i Äº¿n BÃ n Ä‚n.",
+        subtitle: "KhÃ¡m phÃ¡ nÃ´ng sáº£n cao cáº¥p, Ä‘Æ°á»£c xÃ¡c minh báº±ng blockchain. Minh báº¡ch 100%.",
+        verified: "Ä£ XÃ¡c Minh", scan: "QuÃ©t QR Xem Nguá»“n Gá»‘c", store: "Cá»a HÃ ng", farm: "NÃ´ng Tráº¡i", ledger: "Sá»• CÃ¡i",
+        soil_moist: "Ä»™ áº¨m Äº¥t", soil_ph: "Ä»™ pH cá»§a Äº¥t", pest_alert: "Cáº£nh BÃ¡o SÃ¢u Bá»‡nh",
+        demand: "Nhu Cáº§u Thá»‹ TrÆ°á»»c Dá»¯ Liá»‡u Blockchain...", auth_ver: "Ä£ XÃ¡c Thá»±c Nguá»“n Gá»‘c",
+        contract: "Ä»‹a Chá»‰ Há»£p Ä»“ng ThÃ´ng Minh", lifecycle: "HÃ nh TrÃ¬nh VÃ²ng Ä»t vá»›i tÃ¬nh yÃªu vÃ  cÃ´ng nghá»‡ thuáº§n tÃºy."',
+        seed: "Ä£ Gieo Háº¡t", seed_desc: "Háº¡t giá»‘ng nÄƒng suáº¥t cao trá»“ng trÃªn Ä‘áº¥t thÃ´ng minh.",
+        iot: "GiÃ¡m SÃ¡t IoT", iot_desc: "Ä»™ áº©m vÃ  pH Ä‘áº¥t tá»‘i Æ°u Ä‘Æ°á»£c duy trÃ¬ tá»± Ä‘á»™ng.",
+        harvest: "Ä£ Thu Hoáº¡ch", harvest_desc: "Thu hoáº¡ch thá»§ cÃ´ng lÃºc Ä‘á»™ chÃn tá»‘i Æ°u.",
+        pack: "Ä³ng GÃ³i & PhÃ¢n Phá»‘i", pack_desc: "Váºn chuyá»ƒn kiá»ƒm soÃ¡t nhiá»‡t Ä‘á»™ Ä‘áº¿n cÆ¡ sá»Ÿ."
+      },
+      ko: {
+        nav_market: "ì‹œìž¥", nav_farm: "ìŠ¤ë§ˆíŠ¸ ë†ìž¥", nav_ledger: "ì‹ ë¢° ì›ž¥", nav_trace: "ì¶”ì  ë°ëª¨",
+        title: "ë†ìž¥ì—„œ ì‹ê¹Œì§€ ì§ì ‘.",
+        subtitle: "ë¸”ë¡ í”„ë¦¬ë¯¸ì—„ ë†ì‚°ë¬¼ì", scan: "ì›‚°ì§€ í™•ìì ìž¥", ledger: "ì›ž¥",
+        soil_moist: "í† ì–‘ ìˆ˜ë¶„", soil_ph: "í† ì–‘ pH ìˆ˜ì¤€", pest_alert: "í•´ì¶© ê²½ê³  (AI)",
+        demand: "ì‹œìž¥ ìˆ˜ìš”", ai_rec: "AI ì¶”ì²œ", ai_desc: "ì‹œìž¥ ê°€ê²©ì„ë‹¬í•˜ê³  ìžˆìŠµë‹ˆë‹¤. ì˜ˆìƒ ìµœì  ìˆ˜í™•ì¬ìž¥ ìž› ë³´ê¸°", tx_id: "íŠ¸ëžœìžì…˜ ID", event_status: "ìíƒœ", time: "íƒ€ìž„ìŠ¤íƒ¬í”„", hash: "ë¸”ë¡°ì",
+        contract: "ìŠ¤ë§ˆíŠ¸ ê³„ì•½ ì£¼ì†Œ", lifecycle: "ë´ ì—¬ì •", meet_farmer: "ë†ë¶€ ë§Œë‚˜ê¸°:", farmer_quote: '"ì‚¬ëž‘ê³¼ ìˆœìˆ˜ ê¸°ìˆ ë¡œ í‚¤ì› ìŠµë‹ˆë‹¤."',
+        seed: "íŒŒì¢…ë", seed_desc: "ìŠ¤ë§ˆíŠ¸ í† ì–‘ì—‹¬ì–´ì§„ ê³ ìˆ˜í™• ì¢…ìž", iot_desc: "ìµœì ì™ìœ¼ë¡œ ìœ ì§€ëë‹ˆë‹¤.",
+        harvest: "ìˆ˜í™•ë", harvest_desc: "ê°€ìž¥ ìž˜ ìœ¼ë¡œ ìˆ˜í™•í•¨.",
+        pack: "í¬ìž¥ ë° ìœ í†µ", pack_desc: "ì˜¨ë„ê°€ ì¡°ì ˆë ìƒíƒœë¡œ ì‹œì„¤ë¡œ ì™."
+      }
+    };
+
+    const INITIAL_PRODUCTS = [
+      { id: 1, name: { en: 'Organic Da Lat Strawberries', vi: 'DÃ¢u TÃ¢y Ä  Láº¡t Há»¯u CÆ¡', ko: 'ìœ ê¸°ë† ë‹¬ëž ë”¸ê¸°' }, price: 'VND 150,000 / kg', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Highland Berry Farm', origin: 'Da Lat, VN', logs: [{ date: '2026-03-05', type: 'Fertilizer', details: 'Organic Compost' }], certs: ['VietGAP', 'OCOP 4 Sao', 'HACCP'] },
+      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Báº¯p Cáº£i GiÃ²n VietGAP', ko: 'ë¹„ì—£ê° ë°”ì‚í•œ ì–‘ë°°ì¶”' }, price: 'VND 35,000 / kg', image: './bap_cai.jpg', farm: 'Mekong Greens', origin: 'Can Tho, VN', logs: [{ date: '2026-03-10', type: 'Pesticide', details: 'Bio-Pesticide Neem Oil' }], certs: ['VietGAP', 'ISO 22000'] },
+      { id: 3, name: { en: 'Premium OCOP Jasmine Rice', vi: 'Gáº¡o LÃ i OCOP Cao Cáº¥p', ko: 'í”„ë¦¬ë¯¸ì—„ ìžŠ¤ë¯¼ ìŒ€' }, price: 'VND 45,000 / kg', image: './gao_lai.jpg', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN', logs: [{ date: '2026-03-15', type: 'Fertilizer', details: 'NPK 20-20-15' }], certs: ['OCOP 5 Sao', 'HACCP', 'ISO 14001'] },
+    ];
+
+    const LEDGER_LOGS = [
+      { id: 'tx-881a', status: {en:'Seeded', vi:'Ä£ Gieo Háº¡t', ko:'íŒŒì¢…ë'}, time: '2026-03-01 08:30 AM', hash: '0x3f...9bA' },
+      { id: 'tx-223b', status: {en:'IoT Watered', vi:'TÆ°á»›i TiÃªu IoT', ko:'IoT ê¸‰ìˆ˜ë'}, time: '2026-04-10 09:15 AM', hash: '0x8c...1fD' },
+      { id: 'tx-994c', status: {en:'Harvested', vi:'Ä£ Thu Hoáº¡ch', ko:'ìˆ˜í™•ë'}, time: '2026-04-12 06:45 AM', hash: '0x1a...4eE' },
+      { id: 'tx-001d', status: {en:'Packaged', vi:'Ä£ Ä³ng GÃ³i', ko:'í¬ìž¥ë'}, time: '2026-04-12 11:00 AM', hash: '0x7b...99F' },
+    ];
+
+    const CHART_DATA = {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{ fill: true, label: 'Market Price (VND/kg)', data: [140000, 142000, 145000, 145000, 148000, 150000, 155000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.2)', tension: 0.4 }]
+    };
+
+    const CHART_OPTIONS = { responsive: true, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: false } } };
+
+    const DashboardCard = ({ title, value, icon, trend, status }) => (
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start justify-between">
+        <div><p className="text-gray-500 text-sm font-semibold mb-1">{title}</p><h4 className="text-3xl font-black text-brand-teal mb-2">{value}</h4><p className="text-xs font-bold text-gray-400">{trend}</p></div>
+        <div className={`p-3 rounded-xl ${status === 'optimal' ? 'bg-brand-light border-brand-green/20' : 'bg-gray-100'} border`}>{icon}</div>
+      </div>
+    );
+
+    const JourneyStep = ({ icon, title, desc, time, isLast }) => (
+      <div className="relative flex items-start gap-4">
+        <div className="absolute left-0 w-10 h-10 rounded-full bg-brand-light border-2 border-brand-green flex items-center justify-center text-brand-green z-10 shrink-0">{icon}</div>
+        <div className="ml-14 bg-gray-50 p-4 rounded-xl border border-gray-100 flex-1">
+          <div className="flex justify-between items-start mb-1"><h5 className="font-bold text-brand-teal">{title}</h5><span className="text-xs text-gray-400 font-mono tracking-tighter">{time}</span></div>
+          <p className="text-sm text-gray-600">{desc}</p>
+        </div>
+      </div>
+    );
+
+    const AdminLedger = ({ lang }) => (
+      <div className="mt-4">
+        <h2 className="text-3xl font-black text-brand-teal mb-8">{t[lang].nav_ledger}</h2>
+        <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden overflow-x-auto">
+          <table className="w-full text-left whitespace-nowrap">
+            <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm">
+              <tr><th className="p-4">{t[lang].tx_id}</th><th className="p-4">{t[lang].event_status}</th><th className="p-4">{t[lang].time}</th><th className="p-4">{t[lang].hash}</th></tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {LEDGER_LOGS.map((log) => (
+                <tr key={log.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="p-4 font-mono font-medium text-brand-teal">{log.id}</td>
+                  <td className="p-4"><span className="bg-brand-light text-brand-green px-2 py-1 rounded text-xs font-bold border border-brand-green/20">{log.status[lang] || log.status.en}</span></td>
+                  <td className="p-4 text-gray-600 text-sm">{log.time}</td>
+                  <td className="p-4 font-mono text-xs text-gray-400">{log.hash}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+
+    const ConsumerMarketplace = ({ products, lang, onScan }) => (
+      <div>
+        <div className="mb-8 md:text-center mt-4">
+          <h1 className="text-3xl md:text-5xl font-black text-brand-teal mb-4 tracking-tight">{t[lang].title}</h1>
+          <p className="text-gray-500 md:text-xl max-w-2xl mx-auto">{t[lang].subtitle}</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((prod) => (
+            <motion.div whileHover={{ y: -5 }} key={prod.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+              <div className="relative h-60">
+                <img src={prod.image} alt={prod.name[lang]} className="w-full h-full object-cover" />
+                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-green flex items-center gap-1 shadow">
+                  <ShieldCheck className="w-4 h-4" /> {t[lang].verified}
+                </div>
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-brand-teal mb-1">{prod.name[lang]}</h3>
+                <p className="text-gray-500 text-sm mb-4">{prod.farm} â€¢ {prod.origin}</p>
+                <div className="text-lg font-black text-brand-green mb-6">{prod.price}</div>
+                <div className="mt-auto">
+                  <button onClick={() => onScan(prod)} className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors focus:ring-4 focus:ring-brand-green/30">
+                    <ScanLine className="w-5 h-5" /> {t[lang].scan}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+
+    const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan }) => {
+      const [selectedProduct, setSelectedProduct] = React.useState(products[0].id);
+      const [logDate, setLogDate] = React.useState(new Date().toISOString().split('T')[0]);
+      const [logType, setLogType] = React.useState('Fertilizer');
+      const [logDetails, setLogDetails] = React.useState('');
+
+      const handleAddLog = (e) => {
+        e.preventDefault();
+        const updated = products.map(p => {
+          if (p.id === selectedProduct) {
+            return { ...p, logs: [{ date: logDate, type: logType, details: logDetails }, ...p.logs] };
+          }
+          return p;
+        });
+        setProducts(updated);
+        setLogDetails('');
+        alert(lang === 'vi' ? 'Ä£ thÃªm nháºt kÃ½!' : 'Log added successfully!');
+      };
+
+      return (
+      <div className="space-y-8 mt-4 pb-24">
+        <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+
+        {/* Input Form for Actions */}
+        <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+            <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
+            {lang === 'vi' ? 'Nháºt kÃ½ Canh tÃ¡c' : 'Farming Logbook'}
+          </h3>
+          <form onSubmit={handleAddLog} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Sáº£n pháº©m' : 'Product'}</label>
+              <select value={selectedProduct} onChange={e => setSelectedProduct(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
+                {products.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'NgÃ y thá»±c hiá»‡n' : 'Date'}</label>
+              <input type="date" value={logDate} onChange={e => setLogDate(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
