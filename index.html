@@ -84,7 +84,23 @@
         seed: "Seed Planted", seed_desc: "High-yield seeds planted in smart soil.",
         iot: "IoT Monitored", iot_desc: "Optimal soil moisture and pH maintained automatically.",
         harvest: "Harvested", harvest_desc: "Hand-picked at peak ripeness.",
-        pack: "Packaged & Distributed", pack_desc: "Temperature-controlled transit to facility."
+        pack: "Packaged & Distributed", pack_desc: "Temperature-controlled transit to facility.",
+        demo_desc: "Interactive demo preview. Data is verified via blockchain.",
+        prod_scanned: "Product Scanned",
+        harvest_date: "Harvest Date",
+        days_ago: "2 days ago",
+        close_demo: "Close Demo",
+        market_opp: "Market Opportunity Detected",
+        today: "Today",
+        today_desc: "Check soil moisture and prepare harvest tools.",
+        now: "Now",
+        tomorrow: "Tomorrow",
+        tomorrow_desc: "Begin preliminary harvesting of mature crops.",
+        in_1_day: "In 1 day",
+        day_3: "Day 3",
+        day_3_desc: "Package and deploy to smart contracts.",
+        in_2_days: "In 2 days",
+        understood: "Understood"
       },
       vi: {
         nav_market: "Chợ Nông Sản", nav_farm: "Nông Trại Thông Minh", nav_ledger: "Sổ Cái Tin Cậy", nav_trace: "Demo Truy Xuất",
@@ -99,7 +115,23 @@
         seed: "Đã Gieo Hạt", seed_desc: "Hạt giống năng suất cao trồng trên đất thông minh.",
         iot: "Giám Sát IoT", iot_desc: "Độ ẩm và pH đất tối ưu được duy trì tự động.",
         harvest: "Đã Thu Hoạch", harvest_desc: "Thu hoạch thủ công lúc độ chín tối ưu.",
-        pack: "Đóng Gói & Phân Phối", pack_desc: "Vận chuyển kiểm soát nhiệt độ đến cơ sở."
+        pack: "Đóng Gói & Phân Phối", pack_desc: "Vận chuyển kiểm soát nhiệt độ đến cơ sở.",
+        demo_desc: "Bản xem trước demo tương tác. Dữ liệu được xác minh qua blockchain.",
+        prod_scanned: "Sản phẩm vừa quét",
+        harvest_date: "Ngày thu hoạch",
+        days_ago: "2 ngày trước",
+        close_demo: "Đóng cửa sổ",
+        market_opp: "Phát hiện cơ hội thị trường",
+        today: "Hôm nay",
+        today_desc: "Kiểm tra độ ẩm đất và chuẩn bị công cụ.",
+        now: "Ngay bây giờ",
+        tomorrow: "Ngày mai",
+        tomorrow_desc: "Bắt đầu thu hoạch sơ bộ vụ mùa chín.",
+        in_1_day: "Trong 1 ngày",
+        day_3: "Ngày thứ 3",
+        day_3_desc: "Đóng gói và triển khai lên smart contract.",
+        in_2_days: "Trong 2 ngày",
+        understood: "Đã hiểu và xác nhận"
       },
       ko: {
         nav_market: "시장", nav_farm: "스마트 농장", nav_ledger: "신뢰 원장", nav_trace: "추적 데모",
@@ -114,7 +146,23 @@
         seed: "파종됨", seed_desc: "스마트 토양에 심어진 고수확 종자.",
         iot: "IoT 모니터링", iot_desc: "최적의 토양 수분과 pH가 자동으로 유지됩니다.",
         harvest: "수확됨", harvest_desc: "가장 잘 익었을 때 손으로 수확함.",
-        pack: "포장 및 유통", pack_desc: "온도가 조절된 상태로 시설로 이동."
+        pack: "포장 및 유통", pack_desc: "온도가 조절된 상태로 시설로 이동.",
+        demo_desc: "대화형 데모 미리보기. 데이터는 블록체인으로 검증됩니다.",
+        prod_scanned: "스캔된 제품",
+        harvest_date: "수확 날짜",
+        days_ago: "2일 전",
+        close_demo: "데모 닫기",
+        market_opp: "시장 기회 감지됨",
+        today: "오늘",
+        today_desc: "토양 수분 확인 및 수확 도구 준비.",
+        now: "지금",
+        tomorrow: "내일",
+        tomorrow_desc: "성숙한 작물의 예비 수확 시작.",
+        in_1_day: "1일 후",
+        day_3: "3일 차",
+        day_3_desc: "포장 및 스마트 컨트랙트 배포.",
+        in_2_days: "2일 후",
+        understood: "내용 확인"
       }
     };
 
@@ -551,27 +599,27 @@
                   <div className="bg-brand-teal p-6 text-white text-center">
                     <Fingerprint className="w-16 h-16 mx-auto mb-4 text-brand-green mix-blend-screen" />
                     <h2 className="text-2xl font-bold">{t[lang].nav_trace}</h2>
-                    <p className="text-white/80 mt-2 text-sm">Interactive demo preview. Data is verified via blockchain.</p>
+                    <p className="text-white/80 mt-2 text-sm">{t[lang].demo_desc}</p>
                   </div>
                   <div className="p-6 space-y-4">
                     <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
                       <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase">Product Scanned</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase">{t[lang].prod_scanned}</p>
                         <p className="font-bold text-brand-teal">Premium Organic Rice</p>
                       </div>
                       <ShieldCheck className="w-6 h-6 text-brand-green" />
                     </div>
                     <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
                       <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase">Harvest Date</p>
-                        <p className="font-bold text-brand-teal">2 days ago</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase">{t[lang].harvest_date}</p>
+                        <p className="font-bold text-brand-teal">{t[lang].days_ago}</p>
                       </div>
                       <Activity className="w-6 h-6 text-blue-500" />
                     </div>
                   </div>
                   <div className="p-6 bg-gray-50 border-t border-gray-100 text-center">
                     <button onClick={() => setShowTrace(false)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 w-full">
-                      Close Demo
+                      {t[lang].close_demo}
                     </button>
                   </div>
                 </motion.div>
@@ -590,18 +638,18 @@
                   </div>
                   <div className="p-6 space-y-6">
                     <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-xl">
-                      <h4 className="font-bold text-orange-800 mb-1">Market Opportunity Detected</h4>
-                      <p className="text-sm text-orange-700">Market price is hitting a peak. Expected optimal harvest date is in 2 days. Prepare packaging resources.</p>
+                      <h4 className="font-bold text-orange-800 mb-1">{t[lang].market_opp}</h4>
+                      <p className="text-sm text-orange-700">{t[lang].ai_desc}</p>
                     </div>
                     <div className="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200">
-                      <JourneyStep icon={<Activity className="w-5 h-5"/>} title="Today" desc="Check soil moisture and prepare harvest tools." time="Now" />
-                      <JourneyStep icon={<Leaf className="w-5 h-5"/>} title="Tomorrow" desc="Begin preliminary harvesting of mature crops." time="In 1 day" />
-                      <JourneyStep icon={<PackageCheck className="w-5 h-5"/>} title="Day 3" desc="Package and deploy to smart contracts." time="In 2 days" isLast />
+                      <JourneyStep icon={<Activity className="w-5 h-5"/>} title={t[lang].today} desc={t[lang].today_desc} time={t[lang].now} />
+                      <JourneyStep icon={<Leaf className="w-5 h-5"/>} title={t[lang].tomorrow} desc={t[lang].tomorrow_desc} time={t[lang].in_1_day} />
+                      <JourneyStep icon={<PackageCheck className="w-5 h-5"/>} title={t[lang].day_3} desc={t[lang].day_3_desc} time={t[lang].in_2_days} isLast />
                     </div>
                   </div>
                   <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end">
                     <button onClick={() => setShowActionPlan(false)} className="bg-brand-teal hover:bg-teal-800 text-white font-bold py-2 px-6 rounded-lg transition-colors">
-                      Understood
+                      {t[lang].understood}
                     </button>
                   </div>
                 </motion.div>
