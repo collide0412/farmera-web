@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf } from 'lucide-react';
+import {
+  Chart as ChartJS, CategoryScale, LinearScale, PointElement,
+  LineElement, Title, Tooltip, Legend, Filler
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { t, CHART_DATA, CHART_OPTIONS } from '../data/constants.js';
 import { DashboardCard } from './Shared.jsx';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan }) => {
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
