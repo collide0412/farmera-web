@@ -58,7 +58,8 @@
     import { motion, AnimatePresence } from 'framer-motion';
     import { 
       Leaf, ScanLine, ShieldCheck, Activity, BarChart3, Fingerprint, 
-      X, TrendingUp, Droplets, Bug, Sprout, PackageCheck, Store, Globe
+      X, TrendingUp, Droplets, Bug, Sprout, PackageCheck, Store, Globe,
+      ClipboardCheck, Plus, CheckCircle2
     } from 'lucide-react';
     import {
       Chart as ChartJS, CategoryScale, LinearScale, PointElement, 
@@ -117,10 +118,10 @@
       }
     };
 
-    const PRODUCTS = [
-      { id: 1, name: { en: 'Organic Da Lat Strawberries', vi: 'Dâu Tây Đà Lạt Hữu Cơ', ko: '유기농 달랏 딸기' }, price: 'VND 150,000 / kg', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Highland Berry Farm', origin: 'Da Lat, VN' },
-      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, price: 'VND 35,000 / kg', image: './bap_cai.jpg', farm: 'Mekong Greens', origin: 'Can Tho, VN' },
-      { id: 3, name: { en: 'Premium Jasmine Rice', vi: 'Gạo Lài Cao Cấp', ko: '프리미엄 자스민 쌀' }, price: 'VND 45,000 / kg', image: './gao_lai.jpg', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN' },
+    const INITIAL_PRODUCTS = [
+      { id: 1, name: { en: 'Organic Da Lat Strawberries', vi: 'Dâu Tây Đà Lạt Hữu Cơ', ko: '유기농 달랏 딸기' }, price: 'VND 150,000 / kg', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Highland Berry Farm', origin: 'Da Lat, VN', logs: [{ date: '2026-03-05', type: 'Fertilizer', details: 'Organic Compost' }], certs: ['VietGAP', 'OCOP 4 Sao', 'HACCP'] },
+      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, price: 'VND 35,000 / kg', image: './bap_cai.jpg', farm: 'Mekong Greens', origin: 'Can Tho, VN', logs: [{ date: '2026-03-10', type: 'Pesticide', details: 'Bio-Pesticide Neem Oil' }], certs: ['VietGAP', 'ISO 22000'] },
+      { id: 3, name: { en: 'Premium OCOP Jasmine Rice', vi: 'Gạo Lài OCOP Cao Cấp', ko: '프리미엄 자스민 쌀' }, price: 'VND 45,000 / kg', image: './gao_lai.jpg', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN', logs: [{ date: '2026-03-15', type: 'Fertilizer', details: 'NPK 20-20-15' }], certs: ['OCOP 5 Sao', 'HACCP', 'ISO 14001'] },
     ];
 
     const LEDGER_LOGS = [
@@ -177,14 +178,14 @@
       </div>
     );
 
-    const ConsumerMarketplace = ({ lang, onScan }) => (
+    const ConsumerMarketplace = ({ products, lang, onScan }) => (
       <div>
         <div className="mb-8 md:text-center mt-4">
           <h1 className="text-3xl md:text-5xl font-black text-brand-teal mb-4 tracking-tight">{t[lang].title}</h1>
           <p className="text-gray-500 md:text-xl max-w-2xl mx-auto">{t[lang].subtitle}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PRODUCTS.map((prod) => (
+          {products.map((prod) => (
             <motion.div whileHover={{ y: -5 }} key={prod.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
               <div className="relative h-60">
                 <img src={prod.image} alt={prod.name[lang]} className="w-full h-full object-cover" />
@@ -208,9 +209,68 @@
       </div>
     );
 
-    const FarmerDashboard = ({ lang, setShowActionPlan }) => (
-      <div className="space-y-8 mt-4">
+    const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan }) => {
+      const [selectedProduct, setSelectedProduct] = React.useState(products[0].id);
+      const [logDate, setLogDate] = React.useState(new Date().toISOString().split('T')[0]);
+      const [logType, setLogType] = React.useState('Fertilizer');
+      const [logDetails, setLogDetails] = React.useState('');
+
+      const handleAddLog = (e) => {
+        e.preventDefault();
+        const updated = products.map(p => {
+          if (p.id === selectedProduct) {
+            return { ...p, logs: [{ date: logDate, type: logType, details: logDetails }, ...p.logs] };
+          }
+          return p;
+        });
+        setProducts(updated);
+        setLogDetails('');
+        alert(lang === 'vi' ? 'Đã thêm nhật ký!' : 'Log added successfully!');
+      };
+
+      return (
+      <div className="space-y-8 mt-4 pb-24">
         <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+
+        {/* Input Form for Actions */}
+        <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+            <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
+            {lang === 'vi' ? 'Nhật ký Canh tác' : 'Farming Logbook'}
+          </h3>
+          <form onSubmit={handleAddLog} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Sản phẩm' : 'Product'}</label>
+              <select value={selectedProduct} onChange={e => setSelectedProduct(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
+                {products.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Ngày thực hiện' : 'Date'}</label>
+              <input type="date" value={logDate} onChange={e => setLogDate(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Loại vật tư/Hoạt động' : 'Type'}</label>
+              <select value={logType} onChange={e => setLogType(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
+                <option value="Phân bón/Fertilizer">{lang === 'vi' ? 'Phân bón' : 'Fertilizer'}</option>
+                <option value="Thuốc BVTV/Pesticide">{lang === 'vi' ? 'Thuốc bảo vệ thực vật' : 'Pesticide'}</option>
+                <option value="Tưới nước/Watering">{lang === 'vi' ? 'Tưới tiêu' : 'Watering'}</option>
+                <option value="Thu hoạch/Harvest">{lang === 'vi' ? 'Thu hoạch' : 'Harvest'}</option>
+              </select>
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Tên vật tư, quy cách, liều lượng' : 'Details'}</label>
+              <input type="text" value={logDetails} onChange={e => setLogDetails(e.target.value)} placeholder={lang === 'vi' ? 'VD: Phân Đầu Trâu NPK, 50kg/ha' : 'e.g. NPK Fertilizer, 50kg/ha'} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
+            </div>
+            <div className="md:col-span-2">
+              <button type="submit" className="w-full sm:w-auto px-6 py-3 bg-brand-green text-white font-bold rounded-xl hover:bg-green-700 transition flex items-center justify-center">
+                <Plus className="w-5 h-5 mr-2" />
+                {lang === 'vi' ? 'Thêm Lịch Sử Cập Nhật' : 'Add History Event'}
+              </button>
+            </div>
+          </form>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <DashboardCard title={t[lang].soil_moist} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2% today" status="optimal" />
           <DashboardCard title={t[lang].soil_ph} value="6.5" icon={<Activity className="text-purple-500" />} trend="Stable" status="optimal" />
@@ -236,17 +296,24 @@
           </div>
         </div>
       </div>
-    );
+    };
 
     const App = () => {
+      const [role, setRole] = useState('consumer'); // 'consumer' or 'farmer'
       const [activeTab, setActiveTab] = useState('consumer');
+      const [products, setProducts] = useState(INITIAL_PRODUCTS);
       const [selectedProduct, setSelectedProduct] = useState(null);
       const [isScanning, setIsScanning] = useState(false);
-      const [lang, setLang] = useState('en');
+      const [lang, setLang] = useState('vi');
       const [showTrace, setShowTrace] = useState(false);
       const [showActionPlan, setShowActionPlan] = useState(false);
 
       const handleScan = (product) => { setIsScanning(true); setTimeout(() => { setIsScanning(false); setSelectedProduct(product); }, 1500); };
+      
+      const toggleRole = () => {
+        if (role === 'consumer') { setRole('farmer'); setActiveTab('farmer'); }
+        else { setRole('consumer'); setActiveTab('consumer'); }
+      };
 
       return (
         <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
@@ -258,12 +325,21 @@
               </div>
               
               <nav className="hidden md:flex gap-4 lg:gap-6 items-center justify-center flex-1">
-                <button onClick={() => setActiveTab('consumer')} className={`font-medium pb-1 ${activeTab === 'consumer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_market}</button>
-                <button onClick={() => setActiveTab('farmer')} className={`font-medium pb-1 ${activeTab === 'farmer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_farm}</button>
-                <button onClick={() => setActiveTab('admin')} className={`font-medium pb-1 ${activeTab === 'admin' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_ledger}</button>
+                {role === 'consumer' ? (
+                  <button onClick={() => setActiveTab('consumer')} className={`font-medium pb-1 ${activeTab === 'consumer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_market}</button>
+                ) : (
+                  <>
+                    <button onClick={() => setActiveTab('farmer')} className={`font-medium pb-1 ${activeTab === 'farmer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_farm}</button>
+                    <button onClick={() => setActiveTab('admin')} className={`font-medium pb-1 ${activeTab === 'admin' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_ledger}</button>
+                  </>
+                )}
               </nav>
 
               <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline px-2 hover:text-brand-green transition-colors">
+                  {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
+                </button>
+
                 <div className="relative group h-full flex items-center cursor-pointer">
                   <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none py-2 text-sm md:text-base"><Globe className="w-5 h-5"/> <span className="uppercase">{lang}</span></button>
                   <div className="absolute right-0 top-full pt-4 w-32 hidden group-hover:block z-50">
@@ -284,22 +360,27 @@
 
           <main className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-8">
             <AnimatePresence mode="wait">
-              {activeTab === 'consumer' && ( <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <ConsumerMarketplace lang={lang} onScan={handleScan} /> </motion.div> )}
-              {activeTab === 'farmer' && ( <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <FarmerDashboard lang={lang} setShowActionPlan={setShowActionPlan} /> </motion.div> )}
-              {activeTab === 'admin' && ( <motion.div key="admin" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <AdminLedger lang={lang} /> </motion.div> )}
+              {activeTab === 'consumer' && ( <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <ConsumerMarketplace products={products} lang={lang} onScan={handleScan} /> </motion.div> )}
+              {activeTab === 'farmer' && ( <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <FarmerDashboard products={products} setProducts={setProducts} lang={lang} setShowActionPlan={setShowActionPlan} /> </motion.div> )}
+              {activeTab === 'admin' && ( <motion.div key="admin" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <AdminLedger products={products} lang={lang} /> </motion.div> )}
             </AnimatePresence>
           </main>
 
           <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex justify-around p-3 z-40 border-t border-gray-100">
-            <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-              <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].store}</span>
-            </button>
-            <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-              <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].farm}</span>
-            </button>
-            <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'admin' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-              <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].ledger}</span>
-            </button>
+            {role === 'consumer' ? (
+              <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+                <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].store}</span>
+              </button>
+            ) : (
+              <>
+                <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+                  <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].farm}</span>
+                </button>
+                <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'admin' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+                  <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].ledger}</span>
+                </button>
+              </>
+            )}
           </div>
 
           <AnimatePresence>
@@ -329,9 +410,35 @@
                       <p className="font-mono text-sm text-gray-700 break-all bg-white p-2 rounded border">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</p>
                     </div>
 
+                    {selectedProduct.certs && selectedProduct.certs.length > 0 && (
+                      <div className="mb-8">
+                        <h4 className="font-bold text-lg mb-3 text-brand-teal flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-brand-green" /> {lang === 'vi' ? 'Chứng nhận & Tiêu chuẩn' : 'Certifications'}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProduct.certs.map(cert => (
+                            <span key={cert} className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold border border-yellow-200">
+                              {cert}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <h4 className="font-bold text-lg mb-4 text-brand-teal">{t[lang].lifecycle}</h4>
                     <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
                       <JourneyStep icon={<Sprout />} title={t[lang].seed} desc={t[lang].seed_desc} time="Mar 01, 2026" />
+                      
+                      {selectedProduct.logs && selectedProduct.logs.map((log, index) => (
+                        <JourneyStep 
+                          key={index} 
+                          icon={<ClipboardCheck className="w-5 h-5" />} 
+                          title={log.type} 
+                          desc={log.details} 
+                          time={log.date} 
+                        />
+                      ))}
+
                       <JourneyStep icon={<Activity />} title={t[lang].iot} desc={t[lang].iot_desc} time="Mar - Apr, 2026" />
                       <JourneyStep icon={<Leaf />} title={t[lang].harvest} desc={t[lang].harvest_desc} time="Apr 12, 2026" />
                       <JourneyStep icon={<PackageCheck />} title={t[lang].pack} desc={t[lang].pack_desc} time="Apr 12, 2026" isLast />
