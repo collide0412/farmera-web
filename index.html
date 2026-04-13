@@ -148,20 +148,22 @@
       return (
         <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
           <header className="bg-brand-teal text-white sticky top-0 z-40 shadow-xl">
-            <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <img src="./farmera_logo.png" alt="FARMERA Logo" className="h-10 md:h-12 lg:h-14 object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
                 <span className="text-2xl font-bold tracking-tight" style={{display: 'none'}}>FARMERA</span>
               </div>
               
-              <nav className="hidden md:flex gap-6 items-center">
+              <nav className="hidden md:flex gap-4 lg:gap-6 items-center justify-center flex-1">
                 <button onClick={() => setActiveTab('consumer')} className={`font-medium pb-1 ${activeTab === 'consumer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_market}</button>
                 <button onClick={() => setActiveTab('farmer')} className={`font-medium pb-1 ${activeTab === 'farmer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_farm}</button>
                 <button onClick={() => setActiveTab('admin')} className={`font-medium pb-1 ${activeTab === 'admin' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_ledger}</button>
-                
-                <div className="relative group ml-4 h-full flex items-center cursor-pointer">
-                  <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none py-2"><Globe className="w-4 h-4"/> {lang.toUpperCase()}</button>
-                  <div className="absolute right-0 top-full pt-2 w-32 hidden group-hover:block z-50">
+              </nav>
+
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                <div className="relative group h-full flex items-center cursor-pointer">
+                  <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none py-2 text-sm md:text-base"><Globe className="w-5 h-5"/> <span className="uppercase">{lang}</span></button>
+                  <div className="absolute right-0 top-full pt-4 w-32 hidden group-hover:block z-50">
                     <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
                       <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">English (EN)</button>
                       <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors">Tiếng Việt (VI)</button>
@@ -169,18 +171,18 @@
                     </div>
                   </div>
                 </div>
-              </nav>
 
-              <button className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-5 py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center gap-2">
-                <Fingerprint className="w-5 h-5" /> {t[lang].nav_trace}
-              </button>
+                <button onClick={()=>setShowTrace(true)} className="bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
+                  <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span>{t[lang].nav_trace}</span>
+                </button>
+              </div>
             </div>
           </header>
 
           <main className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-8">
             <AnimatePresence mode="wait">
               {activeTab === 'consumer' && ( <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <ConsumerMarketplace lang={lang} onScan={handleScan} /> </motion.div> )}
-              {activeTab === 'farmer' && ( <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <FarmerDashboard lang={lang} /> </motion.div> )}
+              {activeTab === 'farmer' && ( <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <FarmerDashboard lang={lang} setShowTrace={setShowTrace} /> </motion.div> )}
               {activeTab === 'admin' && ( <motion.div key="admin" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <AdminLedger lang={lang} /> </motion.div> )}
             </AnimatePresence>
           </main>
@@ -279,7 +281,7 @@
       </div>
     );
 
-    const FarmerDashboard = ({ lang }) => (
+    const FarmerDashboard = ({ lang, setShowTrace }) => (
       <div className="space-y-8 mt-4">
         <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -294,9 +296,16 @@
           </div>
           <div className="bg-gradient-to-br from-brand-teal to-teal-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col justify-center">
             <Leaf className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />
-            <h3 className="font-bold text-xl mb-2">{t[lang].ai_rec}</h3>
-            <p className="text-teal-50 leading-relaxed mb-6">{t[lang].ai_desc}</p>
-            <button className="bg-brand-green text-white font-bold py-2 px-4 rounded-xl shadow hover:bg-emerald-400 transition">{t[lang].view_plan}</button>
+            <h3 className="font-bold text-xl mb-2 relative z-10">{t[lang].ai_rec}</h3>
+            <p className="text-teal-50 leading-relaxed mb-6 relative z-10 text-sm md:text-base">{t[lang].ai_desc}</p>
+            <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
+              <button 
+                onClick={() => setShowTrace(true)} 
+                className="bg-brand-green text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-emerald-400 transition transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-2">
+                <Activity className="w-5 h-5" />
+                {t[lang].view_plan}
+              </button>
+            </div>
           </div>
         </div>
       </div>
