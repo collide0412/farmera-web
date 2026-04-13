@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARMERA | Farm-to-Table Trust Protocol</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#10b981', // Emerald Green
+              teal: '#134e4a',  // Deep Teal
+              light: '#ecfdf5', // Light Emerald
+            }
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        }
+      }
+    }
+  </script>
+
+  <!-- Setup correct font to support Vietnamese, Korean and English perfectly -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Import maps for modern module fetching -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0",
+        "lucide-react": "https://esm.sh/lucide-react@0.292.0?deps=react@18.2.0",
+        "chart.js": "https://esm.sh/chart.js@4.4.0",
+        "react-chartjs-2": "https://esm.sh/react-chartjs-2@5.2.0?deps=react@18.2.0,chart.js@4.4.0"
+      }
+    }
+  </script>
+
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased overflow-x-hidden">
+  <div id="root"></div>
+
+  <!-- Main Application Script -->
+  <script type="text/babel" data-type="module">
+    import React, { useState, useEffect } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { motion, AnimatePresence } from 'framer-motion';
+    import { 
+      Leaf, ScanLine, ShieldCheck, Activity, BarChart3, Fingerprint, 
+      X, TrendingUp, Droplets, Bug, Sprout, PackageCheck, Store, Globe
+    } from 'lucide-react';
+    import {
+      Chart as ChartJS, CategoryScale, LinearScale, PointElement, 
+      LineElement, Title, Tooltip, Legend, Filler
+    } from 'chart.js';
+    import { Line } from 'react-chartjs-2';
+
+    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+
+    // --- TRANSLATIONS ---
+    const t = {
+      en: {
+        nav_market: "Marketplace", nav_farm: "Smart Farm View", nav_ledger: "Trust Ledger", nav_trace: "Trace Demo",
+        title: "Direct from Farm to Table.",
+        subtitle: "Discover premium, blockchain-verified agricultural produce. 100% transparency.",
+        verified: "Verified", scan: "Scan QR for Origin", store: "Store", farm: "Farm", ledger: "Ledger",
+        soil_moist: "Soil Moisture", soil_ph: "Soil pH Level", pest_alert: "Pest Alerts (AI)",
+        demand: "Market Demand", ai_rec: "AI Recommendation", ai_desc: "Market price is hitting a peak. Expected optimal harvest date is in 2 days. Prepare packaging resources.",
+        view_plan: "View Action Plan", tx_id: "Transaction ID", event_status: "Event Status", time: "Timestamp", hash: "Block Hash",
+        reading: "Reading Blockchain Data...", auth_ver: "Authenticity Verified",
+        contract: "Smart Contract Address", lifecycle: "Life Cycle Journey", meet_farmer: "Meet the Farmer:", farmer_quote: '"We grew this with love and pure tech."',
+        seed: "Seed Planted", seed_desc: "High-yield seeds planted in smart soil.",
+        iot: "IoT Monitored", iot_desc: "Optimal soil moisture and pH maintained automatically.",
+        harvest: "Harvested", harvest_desc: "Hand-picked at peak ripeness.",
+        pack: "Packaged & Distributed", pack_desc: "Temperature-controlled transit to facility."
+      },
+      vi: {
+        nav_market: "Chợ Nông Sản", nav_farm: "Nông Trại Thông Minh", nav_ledger: "Sổ Cái Tin Cậy", nav_trace: "Demo Truy Xuất",
+        title: "Trực Tiếp Từ Nông Trại Đến Bàn Ăn.",
+        subtitle: "Khám phá nông sản cao cấp, được xác minh bằng blockchain. Minh bạch 100%.",
+        verified: "Đã Xác Minh", scan: "Quét QR Xem Nguồn Gốc", store: "Cửa Hàng", farm: "Nông Trại", ledger: "Sổ Cái",
+        soil_moist: "Độ Ẩm Đất", soil_ph: "Độ pH của Đất", pest_alert: "Cảnh Báo Sâu Bệnh",
+        demand: "Nhu Cầu Thị Trường", ai_rec: "Khuyến Nghị từ AI", ai_desc: "Giá thị trường đang đạt đỉnh. Ngày thu hoạch tối ưu dự kiến là trong 2 ngày tới. Chuẩn bị nguồn lực đóng gói.",
+        view_plan: "Xem Kế Hoạch", tx_id: "Mã Giao Dịch", event_status: "Trạng Thái Sự Kiện", time: "Thời Gian", hash: "Mã Hash",
+        reading: "Đang Đọc Dữ Liệu Blockchain...", auth_ver: "Đã Xác Thực Nguồn Gốc",
+        contract: "Địa Chỉ Hợp Đồng Thông Minh", lifecycle: "Hành Trình Vòng Đời", meet_farmer: "Gặp Gỡ Nông Dân:", farmer_quote: '"Chúng tôi trồng trọt với tình yêu và công nghệ thuần túy."',
+        seed: "Đã Gieo Hạt", seed_desc: "Hạt giống năng suất cao trồng trên đất thông minh.",
+        iot: "Giám Sát IoT", iot_desc: "Độ ẩm và pH đất tối ưu được duy trì tự động.",
+        harvest: "Đã Thu Hoạch", harvest_desc: "Thu hoạch thủ công lúc độ chín tối ưu.",
+        pack: "Đóng Gói & Phân Phối", pack_desc: "Vận chuyển kiểm soát nhiệt độ đến cơ sở."
+      },
+      ko: {
+        nav_market: "시장", nav_farm: "스마트 농장", nav_ledger: "신뢰 원장", nav_trace: "추적 데모",
+        title: "농장에서 식탁까지 직접.",
+        subtitle: "블록체인으로 검증된 프리미엄 농산물을 만나보세요. 100% 투명성.",
+        verified: "인증됨", scan: "원산지 확인용 QR 스캔", store: "상점", farm: "농장", ledger: "원장",
+        soil_moist: "토양 수분", soil_ph: "토양 pH 수준", pest_alert: "해충 경고 (AI)",
+        demand: "시장 수요", ai_rec: "AI 추천", ai_desc: "시장 가격이 최고치에 도달하고 있습니다. 예상 최적 수확일은 2일 후입니다. 포장 자원을 준비하세요.",
+        view_plan: "작업 계획 보기", tx_id: "트랜잭션 ID", event_status: "이벤트 상태", time: "타임스탬프", hash: "블록 해시",
+        reading: "블록체인 데이터 읽는 중...", auth_ver: "진위 확인됨",
+        contract: "스마트 계약 주소", lifecycle: "라이프 사이클 여정", meet_farmer: "농부 만나기:", farmer_quote: '"사랑과 순수 기술로 키웠습니다."',
+        seed: "파종됨", seed_desc: "스마트 토양에 심어진 고수확 종자.",
+        iot: "IoT 모니터링", iot_desc: "최적의 토양 수분과 pH가 자동으로 유지됩니다.",
+        harvest: "수확됨", harvest_desc: "가장 잘 익었을 때 손으로 수확함.",
+        pack: "포장 및 유통", pack_desc: "온도가 조절된 상태로 시설로 이동."
+      }
+    };
+
+    const PRODUCTS = [
+      { id: 1, name: { en: 'Organic Da Lat Strawberries', vi: 'Dâu Tây Đà Lạt Hữu Cơ', ko: '유기농 달랏 딸기' }, price: 'VND 150,000 / kg', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Highland Berry Farm', origin: 'Da Lat, VN' },
+      { id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, price: 'VND 35,000 / kg', image: 'https://images.unsplash.com/photo-1556801712-75c5910bfbc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Mekong Greens', origin: 'Can Tho, VN' },
+      { id: 3, name: { en: 'Premium Jasmine Rice', vi: 'Gạo Lài Cao Cấp', ko: '프리미엄 자스민 쌀' }, price: 'VND 45,000 / kg', image: 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', farm: 'Golden Delta Fields', origin: 'Soc Trang, VN' },
+    ];
+
+    const LEDGER_LOGS = [
+      { id: 'tx-881a', status: {en:'Seeded', vi:'Đã Gieo Hạt', ko:'파종됨'}, time: '2026-03-01 08:30 AM', hash: '0x3f...9bA' },
+      { id: 'tx-223b', status: {en:'IoT Watered', vi:'Tưới Tiêu IoT', ko:'IoT 급수됨'}, time: '2026-04-10 09:15 AM', hash: '0x8c...1fD' },
+      { id: 'tx-994c', status: {en:'Harvested', vi:'Đã Thu Hoạch', ko:'수확됨'}, time: '2026-04-12 06:45 AM', hash: '0x1a...4eE' },
+      { id: 'tx-001d', status: {en:'Packaged', vi:'Đã Đóng Gói', ko:'포장됨'}, time: '2026-04-12 11:00 AM', hash: '0x7b...99F' },
+    ];
+
+    const CHART_DATA = {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{ fill: true, label: 'Market Price (VND/kg)', data: [140000, 142000, 145000, 145000, 148000, 150000, 155000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.2)', tension: 0.4 }]
+    };
+
+    const CHART_OPTIONS = { responsive: true, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: false } } };
+
+    const App = () => {
+      const [activeTab, setActiveTab] = useState('consumer');
+      const [selectedProduct, setSelectedProduct] = useState(null);
+      const [isScanning, setIsScanning] = useState(false);
+      const [lang, setLang] = useState('en');
+
+      const handleScan = (product) => { setIsScanning(true); setTimeout(() => { setIsScanning(false); setSelectedProduct(product); }, 1500); };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
+          <header className="bg-brand-teal text-white sticky top-0 z-40 shadow-xl">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <img src="./farmera_logo.png" alt="FARMERA Logo" className="h-10 md:h-12 lg:h-14 object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
+                <span className="text-2xl font-bold tracking-tight" style={{display: 'none'}}>FARMERA</span>
+              </div>
+              
+              <nav className="hidden md:flex gap-6 items-center">
+                <button onClick={() => setActiveTab('consumer')} className={`font-medium pb-1 ${activeTab === 'consumer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_market}</button>
+                <button onClick={() => setActiveTab('farmer')} className={`font-medium pb-1 ${activeTab === 'farmer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_farm}</button>
+                <button onClick={() => setActiveTab('admin')} className={`font-medium pb-1 ${activeTab === 'admin' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}>{t[lang].nav_ledger}</button>
+                
+                <div className="relative group ml-4 cursor-pointer">
+                  <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none focus:outline-none"><Globe className="w-4 h-4"/> {lang.toUpperCase()}</button>
+                  <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] hidden group-hover:block transition-all opacity-0 group-hover:opacity-100 text-gray-800 border overflow-hidden">
+                    <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">English (EN)</button>
+                    <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors">Tiếng Việt (VI)</button>
+                    <button onClick={()=>setLang('ko')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors">한국어 (KO)</button>
+                  </div>
+                </div>
+              </nav>
+
+              <button className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-5 py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center gap-2">
+                <Fingerprint className="w-5 h-5" /> {t[lang].nav_trace}
+              </button>
+            </div>
+          </header>
+
+          <main className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-8">
+            <AnimatePresence mode="wait">
+              {activeTab === 'consumer' && ( <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <ConsumerMarketplace lang={lang} onScan={handleScan} /> </motion.div> )}
+              {activeTab === 'farmer' && ( <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <FarmerDashboard lang={lang} /> </motion.div> )}
+              {activeTab === 'admin' && ( <motion.div key="admin" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> <AdminLedger lang={lang} /> </motion.div> )}
+            </AnimatePresence>
+          </main>
+
+          <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex justify-around p-3 z-40 border-t border-gray-100">
+            <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+              <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].store}</span>
+            </button>
+            <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+              <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].farm}</span>
+            </button>
+            <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-lg ${activeTab === 'admin' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
+              <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t[lang].ledger}</span>
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {isScanning && (
+              <motion.div className="fixed inset-0 bg-brand-teal/90 z-50 flex flex-col items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 1.5 }}> <ScanLine className="w-24 h-24 text-brand-green mb-4" /> </motion.div>
+                <h2 className="text-2xl text-white font-bold animate-pulse">{t[lang].reading}</h2>
+              </motion.div>
+            )}
+
+            {selectedProduct && !isScanning && (
+              <motion.div className="fixed inset-0 z-50 flex justify-end" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedProduct(null)} />
+                <motion.div className="bg-white w-full max-w-md lg:max-w-lg h-full overflow-y-auto shadow-2xl relative" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}>
+                  <div className="sticky top-0 bg-white/90 backdrop-blur-md p-4 flex items-center justify-between border-b z-10">
+                    <h2 className="text-xl flex items-center gap-2 font-bold text-brand-teal"> <ShieldCheck className="text-brand-green" /> {t[lang].auth_ver} </h2>
+                    <button onClick={() => setSelectedProduct(null)} className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"> <X className="w-5 h-5 text-gray-600" /> </button>
+                  </div>
+                  
+                  <div className="p-6">
+                    <img src={selectedProduct.image} alt={selectedProduct.name[lang]} className="w-full h-56 object-cover rounded-xl shadow-md mb-6" />
+                    <h3 className="text-2xl font-bold mb-1">{selectedProduct.name[lang]}</h3>
+                    <p className="text-gray-500 mb-6 flex items-center gap-1"><Store className="w-4 h-4"/> {selectedProduct.farm} • {selectedProduct.origin}</p>
+                    
+                    <div className="bg-brand-light border border-brand-green/20 rounded-xl p-4 mb-8">
+                      <p className="text-xs text-brand-teal uppercase font-bold tracking-widest mb-2">{t[lang].contract}</p>
+                      <p className="font-mono text-sm text-gray-700 break-all bg-white p-2 rounded border">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</p>
+                    </div>
+
+                    <h4 className="font-bold text-lg mb-4 text-brand-teal">{t[lang].lifecycle}</h4>
+                    <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
+                      <JourneyStep icon={<Sprout />} title={t[lang].seed} desc={t[lang].seed_desc} time="Mar 01, 2026" />
+                      <JourneyStep icon={<Activity />} title={t[lang].iot} desc={t[lang].iot_desc} time="Mar - Apr, 2026" />
+                      <JourneyStep icon={<Leaf />} title={t[lang].harvest} desc={t[lang].harvest_desc} time="Apr 12, 2026" />
+                      <JourneyStep icon={<PackageCheck />} title={t[lang].pack} desc={t[lang].pack_desc} time="Apr 12, 2026" isLast />
+                    </div>
+                    
+                    <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                      <img src="https://images.unsplash.com/photo-1595825833444-94e4fbd604f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Farmer" className="w-full h-48 object-cover" />
+                      <div className="p-4 bg-white">
+                        <p className="font-bold">{t[lang].meet_farmer} Nguyen Van A</p>
+                        <p className="text-sm text-gray-500">{t[lang].farmer_quote}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    };
+
+    const ConsumerMarketplace = ({ lang, onScan }) => (
+      <div>
+        <div className="mb-8 md:text-center mt-4">
+          <h1 className="text-3xl md:text-5xl font-black text-brand-teal mb-4 tracking-tight">{t[lang].title}</h1>
+          <p className="text-gray-500 md:text-xl max-w-2xl mx-auto">{t[lang].subtitle}</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PRODUCTS.map((prod) => (
+            <motion.div whileHover={{ y: -5 }} key={prod.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+              <div className="relative h-60">
+                <img src={prod.image} alt={prod.name[lang]} className="w-full h-full object-cover" />
+                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-green flex items-center gap-1 shadow">
+                  <ShieldCheck className="w-4 h-4" /> {t[lang].verified}
+                </div>
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-brand-teal mb-1">{prod.name[lang]}</h3>
+                <p className="text-gray-500 text-sm mb-4">{prod.farm} • {prod.origin}</p>
+                <div className="text-lg font-black text-brand-green mb-6">{prod.price}</div>
+                <div className="mt-auto">
+                  <button onClick={() => onScan(prod)} className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors focus:ring-4 focus:ring-brand-green/30">
+                    <ScanLine className="w-5 h-5" /> {t[lang].scan}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+
+    const FarmerDashboard = ({ lang }) => (
+      <div className="space-y-8 mt-4">
+        <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <DashboardCard title={t[lang].soil_moist} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2% today" status="optimal" />
+          <DashboardCard title={t[lang].soil_ph} value="6.5" icon={<Activity className="text-purple-500" />} trend="Stable" status="optimal" />
+          <DashboardCard title={t[lang].pest_alert} value="Zero Detected" icon={<Bug className="text-red-500" />} trend="Safe" status="safe" alert={false} />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><TrendingUp className="text-brand-green" /> {t[lang].demand}</h3>
+            <div className="h-64"><Line data={CHART_DATA} options={CHART_OPTIONS} /></div>
+          </div>
+          <div className="bg-gradient-to-br from-brand-teal to-teal-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col justify-center">
+            <Leaf className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />
+            <h3 className="font-bold text-xl mb-2">{t[lang].ai_rec}</h3>
+            <p className="text-teal-50 leading-relaxed mb-6">{t[lang].ai_desc}</p>
+            <button className="bg-brand-green text-white font-bold py-2 px-4 rounded-xl shadow hover:bg-emerald-400 transition">{t[lang].view_plan}</button>
+          </div>
+        </div>
+      </div>
+    );
+
+    const AdminLedger = ({ lang }) => (
+      <div className="mt-4">
+        <h2 className="text-3xl font-black text-brand-teal mb-8">{t[lang].nav_ledger}</h2>
+        <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden overflow-x-auto">
+          <table className="w-full text-left whitespace-nowrap">
+            <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm">
+              <tr><th className="p-4">{t[lang].tx_id}</th><th className="p-4">{t[lang].event_status}</th><th className="p-4">{t[lang].time}</th><th className="p-4">{t[lang].hash}</th></tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {LEDGER_LOGS.map((log) => (
+                <tr key={log.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="p-4 font-mono font-medium text-brand-teal">{log.id}</td>
+                  <td className="p-4"><span className="bg-brand-light text-brand-green px-2 py-1 rounded text-xs font-bold border border-brand-green/20">{log.status[lang] || log.status.en}</span></td>
+                  <td className="p-4 text-gray-600 text-sm">{log.time}</td>
+                  <td className="p-4 font-mono text-xs text-gray-400">{log.hash}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+
+    const DashboardCard = ({ title, value, icon, trend, status }) => (
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start justify-between">
+        <div><p className="text-gray-500 text-sm font-semibold mb-1">{title}</p><h4 className="text-3xl font-black text-brand-teal mb-2">{value}</h4><p className="text-xs font-bold text-gray-400">{trend}</p></div>
+        <div className={`p-3 rounded-xl ${status === 'optimal' ? 'bg-brand-light border-brand-green/20' : 'bg-gray-100'} border`}>{icon}</div>
+      </div>
+    );
+
+    const JourneyStep = ({ icon, title, desc, time, isLast }) => (
+      <div className="relative flex items-start gap-4">
+        <div className="absolute left-0 w-10 h-10 rounded-full bg-brand-light border-2 border-brand-green flex items-center justify-center text-brand-green z-10 shrink-0">{icon}</div>
+        <div className="ml-14 bg-gray-50 p-4 rounded-xl border border-gray-100 flex-1">
+          <div className="flex justify-between items-start mb-1"><h5 className="font-bold text-brand-teal">{title}</h5><span className="text-xs text-gray-400 font-mono tracking-tighter">{time}</span></div>
+          <p className="text-sm text-gray-600">{desc}</p>
+        </div>
+      </div>
+    );
+
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      const root = createRoot(rootElement);
+      root.render(<App />);
+    }
+  </script>
+</body>
+</html>
