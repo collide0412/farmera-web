@@ -1,4 +1,7 @@
-export const translations = {
+import os
+
+# --- 1. Fix src/data/translations.js ---
+translations_content = """export const translations = {
   en: {
     // Nav & Shell
     nav_market: "Marketplace", nav_farm: "Smart Farm View", nav_ledger: "Trust Ledger", nav_trace: "Trace Demo",
@@ -174,3 +177,9 @@ export const translations = {
     cg_s5: "VietGAP 인증 획득", cg_s5_1: "온라인 심사 신청", cg_s5_2: "블록체인 증명 기록"
   }
 };
+"""
+
+with open('src/data/translations.js', 'w', encoding='utf-8') as f:
+    f.write(translations_content)
+
+print('Translations updated.')

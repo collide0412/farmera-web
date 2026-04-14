@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
+import { useTranslation } from '../contexts/LanguageContext.jsx';
 import { Leaf, Warehouse, Sprout, Apple, Droplets, Thermometer, Activity, AlertTriangle } from 'lucide-react';
 import { DashboardCard } from './Shared.jsx';
 
-const ZONES = [
-  { id: 'A', name: 'Khu A (Lúa OCOP)', icon: <Sprout className="w-8 h-8" />, type: 'crop', stats: { moist: 68, temp: 28, ph: 6.5 }, logs: ['2026-03-10: Phân bón NPK', '2026-03-15: Tưới tiêu định kỳ'] },
-  { id: 'B', name: 'Khu B (Cây ăn quả)', icon: <Apple className="w-8 h-8" />, type: 'orchard', stats: { moist: 28, temp: 32, ph: 5.8 }, logs: ['2026-03-12: Cắt tỉa cành'] }, // Moisture < 30% -> warning
-  { id: 'C', name: 'Khu C (Rau màu VietGAP)', icon: <Leaf className="w-8 h-8" />, type: 'veg', stats: { moist: 72, temp: 26, ph: 6.2 }, logs: ['2026-03-14: Gieo hạt giống cải', '2026-03-16: Phun phòng sâu sinh học'] },
-  { id: 'D', name: 'Nhà kho (Storage)', icon: <Warehouse className="w-8 h-8" />, type: 'storage', stats: { moist: 55, temp: 18, ph: null }, logs: ['2026-03-15: Nhập kho 500kg phân hữu cơ'] },
-];
-
 export const FarmZoneMap = () => {
+  const { t } = useTranslation();
+
+  const ZONES = [
+    { id: 'A', name: t('fz_zoneA'), icon: <Sprout className="w-8 h-8" />, type: 'crop', stats: { moist: 68, temp: 28, ph: 6.5 }, logs: ['2026-03-10: NPK', '2026-03-15: Weekly water'] },
+    { id: 'B', name: t('fz_zoneB'), icon: <Apple className="w-8 h-8" />, type: 'orchard', stats: { moist: 28, temp: 32, ph: 5.8 }, logs: ['2026-03-12: Pruning'] },
+    { id: 'C', name: t('fz_zoneC'), icon: <Leaf className="w-8 h-8" />, type: 'veg', stats: { moist: 72, temp: 26, ph: 6.2 }, logs: ['2026-03-14: Seed planted', '2026-03-16: Bio-pesticides'] },
+    { id: 'D', name: t('fz_zoneD'), icon: <Warehouse className="w-8 h-8" />, type: 'storage', stats: { moist: 55, temp: 18, ph: null }, logs: ['2026-03-15: 500kg organic imported'] },
+  ];
+
   const [selected, setSelected] = useState(ZONES[0]);
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
       <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-        <Activity className="w-6 h-6 text-brand-green" /> Bản đồ Nông trại (IoT & Zoning)
+        <Activity className="w-6 h-6 text-brand-green" /> {t('fz_title')}
       </h3>
       <div className="flex flex-col lg:flex-row gap-8">
-        
-        {/* Interactive Map Grid */}
         <div className="flex-1 grid grid-cols-2 gap-4">
           {ZONES.map(z => {
             const hasWarning = z.stats.moist && z.stats.moist < 30;
@@ -28,50 +29,79 @@ export const FarmZoneMap = () => {
               <div 
                 key={z.id}
                 onClick={() => setSelected(z)}
-                className={`cursor-pointer p-6 rounded-2xl border-2 transition-all flex flex-col items-center justify-center min-h-[160px] text-center
-                  ${isSelected ? 'ring-4 ring-brand-green/30' : 'hover:scale-105'}
-                  ${hasWarning 
-                    ? 'bg-red-50 border-red-200 text-red-700' 
-                    : 'bg-green-50 border-green-200 text-green-700'}`}
+                className={`cursor-pointer p-4 rounded-2xl border-2 transition-all relative overflow-hidden group
+                  ${isSelected ? 'border-brand-green bg-brand-light/30 shadow-md' : 'border-gray-100 hover:border-brand-green/30 hover:bg-gray-50'}
+                `}
               >
-                {hasWarning && <AlertTriangle className="w-6 h-6 text-red-500 absolute top-4 right-4 animate-pulse" />}
-                <div className="mb-3">{z.icon}</div>
-                <h4 className="font-bold">{z.name}</h4>
-                {hasWarning && <span className="text-xs font-bold text-red-600 mt-2 bg-red-100 px-2 py-1 rounded">CẦN TƯỚI NƯỚC</span>}
+                {hasWarning && <span className="absolute top-2 right-2 w-3 h-3 rounded-full bg-red-500 animate-ping"></span>}
+                <div className={`mb-3 ${isSelected ? 'text-brand-green' : 'text-gray-400 group-hover:text-brand-green/70'}`}>
+                  {z.icon}
+                </div>
+                <h4 className="font-bold text-gray-800 text-sm md:text-base">{z.name}</h4>
+                {z.stats.moist && (
+                  <div className="mt-2 text-xs font-bold flex gap-2">
+                    <span className={hasWarning ? 'text-red-500 flex items-center' : 'text-blue-500 flex items-center'}><Droplets className="w-3 h-3 mr-1"/> {z.stats.moist}%</span>
+                    <span className="text-orange-500 flex items-center"><Thermometer className="w-3 h-3 mr-1"/> {z.stats.temp}°C</span>
+                  </div>
+                )}
               </div>
-            )
+            );
           })}
         </div>
 
-        {/* Side Panel stats */}
-        <div className="w-full lg:w-96 bg-gray-50 p-6 rounded-2xl border border-gray-100">
-          <h4 className="font-bold text-lg mb-4 text-brand-teal pb-2 border-b">Thông số: {selected.name}</h4>
+        <div className="w-full lg:w-1/3 bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col">
+          <h4 className="font-black text-xl text-brand-teal mb-4">{selected.name}</h4>
           
-          <div className="space-y-4 mb-6">
-            <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 text-gray-600"><Droplets className="w-5 h-5 text-blue-500"/> Độ ẩm</div>
-              <span className={`font-bold ${selected.stats.moist < 30 ? 'text-red-500' : 'text-brand-teal'}`}>{selected.stats.moist}%</span>
-            </div>
-            <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 text-gray-600"><Thermometer className="w-5 h-5 text-orange-500"/> Nhiệt độ</div>
-              <span className="font-bold text-brand-teal">{selected.stats.temp}°C</span>
-            </div>
-            {selected.stats.ph && (
-              <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-gray-100">
-                <div className="flex items-center gap-2 text-gray-600"><Activity className="w-5 h-5 text-purple-500"/> pH Đất</div>
-                <span className="font-bold text-brand-teal">{selected.stats.ph}</span>
+          <div className="mb-6 space-y-3">
+            <h5 className="text-sm font-bold text-gray-500 uppercase tracking-wider">{t('fz_realtime')}</h5>
+            {selected.stats.moist ? (
+              <div className="grid grid-cols-2 gap-2">
+                <div className={`p-3 rounded-xl border flex items-center justify-between ${selected.stats.moist < 30 ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-100 text-gray-700'}`}>
+                  <span className="flex items-center gap-1 text-sm font-bold"><Droplets className="w-4 h-4"/> Nước</span>
+                  <span className="font-black">{selected.stats.moist}%</span>
+                </div>
+                <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700">
+                  <span className="flex items-center gap-1 text-sm font-bold"><Thermometer className="w-4 h-4"/> Nhiệt</span>
+                  <span className="font-black">{selected.stats.temp}°C</span>
+                </div>
+                <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700 col-span-2">
+                  <span className="flex items-center gap-1 text-sm font-bold"><Activity className="w-4 h-4"/> pH</span>
+                  <span className="font-black">{selected.stats.ph}</span>
+                </div>
               </div>
+            ) : (
+               <div className="p-4 bg-white rounded-xl border border-gray-100 text-gray-500 italic text-sm">IoT N/A</div>
             )}
           </div>
 
-          <h5 className="font-bold text-sm text-gray-500 uppercase tracking-widest mb-3">Nhật ký khu vực</h5>
-          <ul className="space-y-2 text-sm text-gray-700">
-            {selected.logs.map((log, idx) => (
-              <li key={idx} className="bg-white p-2 rounded border border-gray-100 flex gap-2">
-                <div className="w-2 h-2 mt-1.5 rounded-full bg-brand-green shrink-0"/> {log}
-              </li>
-            ))}
-          </ul>
+          <div className="mb-6">
+             <h5 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">{t('fz_status')}</h5>
+             {selected.stats.moist && selected.stats.moist < 30 ? (
+               <div className="flex items-center gap-2 text-red-600 bg-red-100 p-3 rounded-lg text-sm font-bold">
+                 <AlertTriangle className="w-5 h-5"/> {t('fz_alert_moist')}
+               </div>
+             ) : (
+               <div className="flex items-center gap-2 text-green-600 bg-green-100 p-3 rounded-lg text-sm font-bold">
+                 <Activity className="w-5 h-5"/> {t('fz_normal')}
+               </div>
+             )}
+          </div>
+
+          <div className="flex-1 border-t border-gray-200 pt-4 mt-auto">
+             <h5 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">{t('fz_logs')}</h5>
+             {selected.logs.length > 0 ? (
+               <ul className="space-y-2">
+                 {selected.logs.map((lg, i) => (
+                   <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+                     <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1.5 shrink-0"></span>
+                     {lg}
+                   </li>
+                 ))}
+               </ul>
+             ) : (
+               <p className="text-sm text-gray-400 italic">{t('fz_no_logs')}</p>
+             )}
+          </div>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
   const { t, lang } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
   const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
-  const [logType, setLogType] = useState('Phân bón/Fertilizer');
+  const [logType, setLogType] = useState('f_type_fert');
   const [logDetails, setLogDetails] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
   const [farmerTab, setFarmerTab] = useState('overview'); // overview | zones | compliance | logistics | finance
@@ -135,10 +135,10 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
           <div>
             <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_type')}</label>
             <select value={logType} onChange={e => setLogType(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
-              <option value="Phân bón/Fertilizer">{t('f_type_fert')}</option>
-              <option value="Thuốc BVTV/Pesticide">{t('f_type_pest')}</option>
-              <option value="Tưới nước/Watering">{t('f_type_water')}</option>
-              <option value="Thu hoạch/Harvest">{t('f_type_harv')}</option>
+              <option value="f_type_fert">{t('f_type_fert')}</option>
+              <option value="f_type_pest">{t('f_type_pest')}</option>
+              <option value="f_type_water">{t('f_type_water')}</option>
+              <option value="f_type_harv">{t('f_type_harv')}</option>
             </select>
           </div>
           <div className="md:col-span-2">
@@ -182,7 +182,7 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
                 {activeProduct.logs.map((log, index) => (
                   <tr key={index} className={`hover:bg-brand-light/30 transition-colors ${editingIndex === index ? 'bg-brand-light/50 border-l-4 border-brand-green' : ''}`}>
                     <td className="p-4 text-sm font-mono text-gray-600">{log.date}</td>
-                    <td className="p-4 font-bold text-brand-teal text-sm">{log.type}</td>
+                    <td className="p-4 font-bold text-brand-teal text-sm">{t(log.type) || log.type}</td>
                     <td className="p-4 text-sm text-gray-600"><span className="whitespace-normal break-words max-w-[200px] md:max-w-xs line-clamp-2">{log.details}</span></td>
                     <td className="p-4 text-right space-x-2">
                       <button onClick={() => handleEdit(index, log)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title={t('f_edit')}>
@@ -205,9 +205,9 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <DashboardCard title={t('soil_moist')} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2% today" status="optimal" />
-        <DashboardCard title={t('soil_ph')} value="6.5" icon={<Activity className="text-purple-500" />} trend="Stable" status="optimal" />
-        <DashboardCard title={t('pest_alert')} value="Zero Detected" icon={<Bug className="text-red-500" />} trend="Safe" status="safe" alert={false} />
+        <DashboardCard title={t('soil_moist')} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2%" status="optimal" />
+        <DashboardCard title={t('soil_ph')} value="6.5" icon={<Activity className="text-purple-500" />} trend="" status="optimal" />
+        <DashboardCard title={t('pest_alert')} value="0" icon={<Bug className="text-red-500" />} trend="" status="safe" alert={false} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2">
