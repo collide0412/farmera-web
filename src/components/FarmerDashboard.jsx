@@ -80,31 +80,31 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
             onClick={() => setFarmerTab('overview')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Activity className=\"w-4 h-4\"/> {t('nav_overview')}
+            <Activity className="w-4 h-4"/> {t('nav_overview')}
           </button>
           <button 
             onClick={() => setFarmerTab('zones')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'zones' ? 'bg-brand-teal text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <MapIcon className=\"w-4 h-4\"/> {t('nav_zones')}
+            <MapIcon className="w-4 h-4"/> {t('nav_zones')}
           </button>
           <button 
             onClick={() => setFarmerTab('logistics')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'logistics' ? 'bg-orange-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Truck className=\"w-4 h-4\"/> {t('nav_logistics')}
+            <Truck className="w-4 h-4"/> {t('nav_logistics')}
           </button>
           <button 
             onClick={() => setFarmerTab('finance')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'finance' ? 'bg-yellow-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <PiggyBank className=\"w-4 h-4\"/> {t('nav_finance')}
+            <PiggyBank className="w-4 h-4"/> {t('nav_finance')}
           </button>
           <button 
             onClick={() => setFarmerTab('compliance')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'compliance' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <ShieldCheck className=\"w-4 h-4\"/> {t('nav_compliance')}
+            <ShieldCheck className="w-4 h-4"/> {t('nav_compliance')}
           </button>
         </div>
       </div>
