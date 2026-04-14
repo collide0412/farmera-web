@@ -1,5 +1,11 @@
 export const translations = {
   en: {
+    lw_title: 'Logistics Overview', lw_est_harvest: 'Est. Harvest:', lw_days_left: 'Days Left', lw_book: 'Book Transport',
+    lw_manage: 'Manage Fleet & Routes', lw_trip: 'Trip', lw_route: 'Route: Farm → HCM City', lw_in_transit: 'In Transit',
+    lw_eta: 'ETA: 48 hours', lw_est_cost: 'Estimate Cost', lw_payload: 'Total Payload (kg)', lw_placeholder: 'e.g. 5000',
+    lw_dest: 'Dest. Hub', lw_hcm: 'Ho Chi Minh City', lw_hanoi: 'Hanoi Center', lw_type: 'Vehicle Type',
+    lw_standard: 'Standard Dry', lw_cold: 'Cold Chain', lw_total: 'Est. Total:', lw_confirm: 'Confirm Booking',
+
     // Nav & Shell
     nav_market: "Marketplace", nav_farm: "Smart Farm View", nav_ledger: "Trust Ledger", nav_trace: "Trace Demo",
     nav_overview: "Overview", nav_zones: "Zoning (IoT)", nav_logistics: "Logistics", nav_finance: "Finance", nav_compliance: "VietGAP / OCOP",
@@ -63,6 +69,13 @@ export const translations = {
     cg_s5: "VietGAP Certification", cg_s5_1: "Online Application", cg_s5_2: "Blockchain Minting"
   },
   vi: {
+    lw_title: 'Tổng Quan Kho Vận', lw_est_harvest: 'Dự Kiến Thu:
+Hoạch: ', lw_days_left: 'Số Ngày Còn Lại', lw_book: 'Đặt Xe Vận Chuyển',
+    lw_manage: 'Quản Lý Chuyến Đi', lw_trip: 'Chuyến', lw_route: 'Lộ trình: Nông Trại → TP.HCM', lw_in_transit: 'Đang Di Chuyển',
+    lw_eta: 'Thời gian tới: 48 giờ', lw_est_cost: 'Ước Tính Chi Phí', lw_payload: 'Tổng Tải Trọng (kg)', lw_placeholder: 'VD: 5000',
+    lw_dest: 'Nơi Đến', lw_hcm: 'TP. Hồ Chí Minh', lw_hanoi: 'Trung Tâm Hà Nội', lw_type: 'Loại Xe',
+    lw_standard: 'Thùng Kín Thường', lw_cold: 'Khoang Lạnh', lw_total: 'Tổng Ước Tính:', lw_confirm: 'Xác Nhận Đặt Chuyến',
+
     nav_market: "Chợ Nông Sản", nav_farm: "Nông Trại Thông Minh", nav_ledger: "Sổ Cái Tin Cậy", nav_trace: "Truy Xuất Nguồn Gốc",
     nav_overview: "Tổng Quan", nav_zones: "Phân Khu (IoT)", nav_logistics: "Vận Tải", nav_finance: "Tài Chính", nav_compliance: "VietGAP / OCOP",
     title: "Từ Nông Trại Đến Bàn Ăn.",
@@ -120,6 +133,12 @@ export const translations = {
     cg_s5: "Cấp chứng nhận VietGAP", cg_s5_1: "Nộp hồ sơ trực tuyến", cg_s5_2: "Tạo bằng chứng Hash trên Blockchain"
   },
   ko: {
+    lw_title: '물류 및 운송', lw_est_harvest: '예상 수확일:', lw_days_left: '남은 일수', lw_book: '운송 예약',
+    lw_manage: '차량 및 경로 관리', lw_trip: '일련번호', lw_route: '경로: 농장 → 호치민시', lw_in_transit: '운송 중',
+    lw_eta: '예상 도착: 48시간', lw_est_cost: '비용 계산', lw_payload: '화물 중량 (kg)', lw_placeholder: '예: 5000',
+    lw_dest: '목적지 센터', lw_hcm: '호치민 시', lw_hanoi: '하노이 센터', lw_type: '차량 종류',
+    lw_standard: '일반 트럭 (건식)', lw_cold: '냉동 탑차', lw_total: '예상 총액:', lw_confirm: '예약 확인',
+
     nav_market: "농산물 마켓플레이스", nav_farm: "스마트 팜 대시보드", nav_ledger: "블록체인 원장", nav_trace: "이력 추적 데모",
     nav_overview: "개요", nav_zones: "구역 (IoT)", nav_logistics: "물류", nav_finance: "재무", nav_compliance: "VietGAP 인증",
     title: "농장에서 식탁까지, 투명하게.",

@@ -31,16 +31,16 @@ export const LogisticsWidget = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-gray-800">{t('lw_title')}</h3>
-            <p className="text-gray-500">Est. Harvest: {harvestDate.toLocaleDateString()}</p>
+            <p className="text-gray-500">{t('lw_est_harvest')} {harvestDate.toLocaleDateString()}</p>
           </div>
         </div>
         <div className="flex items-center gap-6">
           <div className="text-center">
-            <p className="text-sm text-gray-500 font-bold uppercase">Days Left</p>
+            <p className="text-sm text-gray-500 font-bold uppercase">{t('lw_days_left')}</p>
             <p className="text-3xl font-black text-orange-500">{daysLeft}</p>
           </div>
           <button onClick={() => setShowModal(true)} className="bg-brand-teal text-white px-6 py-3 rounded-xl font-bold hover:bg-teal-700 shadow-md transition flex items-center">
-             Book Transport <ArrowRight className="ml-2 w-5 h-5"/>
+             {t('lw_book')} <ArrowRight className="ml-2 w-5 h-5"/>
           </button>
         </div>
       </div>
@@ -55,13 +55,13 @@ export const LogisticsWidget = () => {
             <div className="flex items-center gap-4">
               <Truck className="w-8 h-8 text-orange-500" />
               <div>
-                <p className="font-bold text-gray-800">Trip #TRK-8821</p>
-                <p className="text-sm text-gray-500">Route: Farm &rarr; HCM City</p>
+                <p className="font-bold text-gray-800">{t('lw_trip')} #TRK-8821</p>
+                <p className="text-sm text-gray-500">{t('lw_route')}</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full mb-1">In Transit</span>
-              <p className="text-sm font-bold text-gray-600">ETA: 48 hours</p>
+              <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full mb-1">{t('lw_in_transit')}</span>
+              <p className="text-sm font-bold text-gray-600">{t('lw_eta')}</p>
             </div>
           </div>
         </div>
@@ -72,39 +72,39 @@ export const LogisticsWidget = () => {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
             <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative">
               <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">✕</button>
-              <h2 className="text-2xl font-black text-brand-teal mb-6 flex items-center gap-2"><Calculator /> Estimate Cost</h2>
+              <h2 className="text-2xl font-black text-brand-teal mb-6 flex items-center gap-2"><Calculator /> {t('lw_est_cost')}</h2>
               
               <div className="space-y-4 mb-8">
                  <div>
-                   <label className="block text-sm font-bold text-gray-600 mb-1">Total Payload (kg)</label>
-                   <input type="number" value={weight} onChange={e => setWeight(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl" placeholder="e.g. 5000" />
+                   <label className="block text-sm font-bold text-gray-600 mb-1">{t('lw_payload')}</label>
+                   <input type="number" value={weight} onChange={e => setWeight(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl" placeholder="{t('lw_placeholder')}" />
                  </div>
                  <div>
-                   <label className="block text-sm font-bold text-gray-600 mb-1">Dest. Hub</label>
+                   <label className="block text-sm font-bold text-gray-600 mb-1">{t('lw_dest')}</label>
                    <select value={destination} onChange={e => setDestination(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl">
-                     <option value="hcm">Ho Chi Minh City</option>
-                     <option value="hanoi">Hanoi Center</option>
+                     <option value="hcm">{t('lw_hcm')}</option>
+                     <option value="hanoi">{t('lw_hanoi')}</option>
                    </select>
                  </div>
                  <div>
-                   <label className="block text-sm font-bold text-gray-600 mb-1">Vehicle Type</label>
+                   <label className="block text-sm font-bold text-gray-600 mb-1">{t('lw_type')}</label>
                    <div className="flex gap-4">
                      <button onClick={() => setTruckType('normal')} className={`flex-1 p-3 rounded-xl border-2 font-bold flex flex-col items-center gap-2 ${truckType === 'normal' ? 'border-brand-green bg-brand-light text-brand-green' : 'border-gray-100 text-gray-500'}`}>
-                       <Package /> Standard Dry
+                       <Package /> {t('lw_standard')}
                      </button>
                      <button onClick={() => setTruckType('cold')} className={`flex-1 p-3 rounded-xl border-2 font-bold flex flex-col items-center gap-2 ${truckType === 'cold' ? 'border-blue-500 bg-blue-50 text-blue-600' : 'border-gray-100 text-gray-500'}`}>
-                       <Snowflake /> Cold Chain
+                       <Snowflake /> {t('lw_cold')}
                      </button>
                    </div>
                  </div>
               </div>
 
               <div className="bg-gray-50 p-4 rounded-xl flex items-center justify-between mb-6">
-                 <span className="font-bold text-gray-600">Est. Total:</span>
+                 <span className="font-bold text-gray-600">{t('lw_total')}</span>
                  <span className="text-2xl font-black text-brand-teal">₫ {calculateCost()}</span>
               </div>
               
-              <button onClick={() => setShowModal(false)} className="w-full py-4 bg-brand-green text-white font-bold rounded-xl hover:bg-green-700 shadow-lg">Confirm Booking</button>
+              <button onClick={() => setShowModal(false)} className="w-full py-4 bg-brand-green text-white font-bold rounded-xl hover:bg-green-700 shadow-lg">{t('lw_confirm')}</button>
             </motion.div>
           </motion.div>
         )}

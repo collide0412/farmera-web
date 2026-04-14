@@ -6,15 +6,17 @@ import { Upload, CheckCircle2, Circle, Clock, ClipboardList, ShieldCheck } from 
 export const ComplianceGuide = () => {
   const { t } = useTranslation();
 
-  const ROADMAP_STEPS = [
-    { id: 1, title: t('cg_s1'), status: 'completed', tasks: [t('cg_s1_1'), t('cg_s1_2'), t('cg_s1_3')] },
-    { id: 2, title: t('cg_s2'), status: 'in_progress', tasks: [t('cg_s2_1'), t('cg_s2_2'), t('cg_s2_3')] },
-    { id: 3, title: t('cg_s3'), status: 'pending', tasks: [t('cg_s3_1'), t('cg_s3_2')] },
-    { id: 4, title: t('cg_s4'), status: 'pending', tasks: [t('cg_s4_1'), t('cg_s4_2')] },
-    { id: 5, title: t('cg_s5'), status: 'pending', tasks: [t('cg_s5_1'), t('cg_s5_2')] },
+  const [stepStatuses, setStepStatuses] = useState([
+    'completed', 'in_progress', 'pending', 'pending', 'pending'
+  ]);
+  
+  const steps = [
+    { id: 1, title: t('cg_s1'), status: stepStatuses[0], tasks: [t('cg_s1_1'), t('cg_s1_2'), t('cg_s1_3')] },
+    { id: 2, title: t('cg_s2'), status: stepStatuses[1], tasks: [t('cg_s2_1'), t('cg_s2_2'), t('cg_s2_3')] },
+    { id: 3, title: t('cg_s3'), status: stepStatuses[2], tasks: [t('cg_s3_1'), t('cg_s3_2')] },
+    { id: 4, title: t('cg_s4'), status: stepStatuses[3], tasks: [t('cg_s4_1'), t('cg_s4_2')] },
+    { id: 5, title: t('cg_s5'), status: stepStatuses[4], tasks: [t('cg_s5_1'), t('cg_s5_2')] },
   ];
-
-  const [steps, setSteps] = useState(ROADMAP_STEPS);
   const completedCount = steps.filter(s => s.status === 'completed').length;
   const progressPercent = Math.round((completedCount / steps.length) * 100);
 
@@ -32,12 +34,12 @@ export const ComplianceGuide = () => {
 
   const handleUpload = (stepId) => {
     alert(`File Hash (IPFS) Generated for Step ${stepId}!`);
-    const newSteps = steps.map(s => {
-      if (s.id === stepId) return { ...s, status: 'completed' };
-      if (s.id === stepId + 1 && s.status === 'pending') return { ...s, status: 'in_progress' };
-      return s;
-    });
-    setSteps(newSteps);
+    const newStatuses = [...stepStatuses];
+    newStatuses[stepId - 1] = 'completed';
+    if (stepId < newStatuses.length && newStatuses[stepId] === 'pending') {
+      newStatuses[stepId] = 'in_progress';
+    }
+    setStepStatuses(newStatuses);
   };
 
   return (
