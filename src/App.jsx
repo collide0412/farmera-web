@@ -188,7 +188,7 @@ export const App = () => {
                 {selectedProduct.certs && selectedProduct.certs.length > 0 && (
                   <div className="mb-8">
                     <h4 className="font-bold text-lg mb-3 text-brand-teal flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green" /> {lang === 'vi' ? 'Chứng nhận & Tiêu chuẩn' : 'Certifications'}
+                      <CheckCircle2 className="w-5 h-5 text-brand-green" /> {t('certifications')}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProduct.certs.map(cert => (
@@ -202,9 +202,11 @@ export const App = () => {
 
                 <div className="flex bg-gray-100 p-1 mb-6 rounded-xl relative">
                   <button onClick={() => setTraceTab('lifecycle')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'lifecycle' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}>
-                    Hành trình
+                    {t('trace_lifecycle')}
                   </button>
                   <button onClick={() => setTraceTab('environment')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'environment' ? 'bg-white shadow text-brand-green' : 'text-gray-500 hover:text-gray-700'}`}>
+                    {t('trace_environment')}
+                  </button>
                     Nhật ký Môi trường IoT
                   </button>
                 </div>
@@ -232,19 +234,19 @@ export const App = () => {
                     <div className="bg-green-50 border border-green-200 p-4 rounded-xl mb-6 flex items-start gap-3">
                       <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-bold text-green-800 text-sm">Dữ liệu được xác thực tự động từ cảm biến</h4>
-                        <p className="text-xs text-green-700 mt-1">Thông số được thu thập trực tiếp, mã hóa hash (SHA-256) và đưa lên Blockchain mỗi 1 giờ. KHÔNG thể can thiệp.</p>
+                        <h4 className="font-bold text-green-800 text-sm">{t('trace_verified_data')}</h4>
+                        <p className=\"text-xs text-green-700 mt-1\">{t('trace_verified_desc')}</p>
                       </div>
                     </div>
                     
-                    <h4 className="font-bold text-gray-700 text-sm mb-3">Biến động 7 ngày gần nhất</h4>
+                    <h4 className=\"font-bold text-gray-700 text-sm mb-3\">{t('trace_7_days')}</h4>
                     <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
                       <Line 
                         data={{
                           labels: ['1P', '2P', '3P', '4P', '5P', '6P', '7P'],
                           datasets: [
-                            { label: 'Nhiệt độ (°C)', data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
-                            { label: 'Độ ẩm đất (%)', data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
+                            { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
+                            { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
                           ]
                         }} 
                         options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
@@ -253,11 +255,11 @@ export const App = () => {
                     <div className="grid grid-cols-2 gap-4 mt-4">
                       <div className="bg-orange-50 p-3 rounded-lg flex items-center gap-2 border border-orange-100">
                         <Thermometer className="w-5 h-5 text-orange-500" />
-                        <div><p className="text-xs text-orange-600 font-bold">Nhiệt độ TB</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
+                        <div><p className="text-xs text-orange-600 font-bold">{t('trace_avg_temp')}</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
                       </div>
                       <div className="bg-blue-50 p-3 rounded-lg flex items-center gap-2 border border-blue-100">
                         <Droplets className="w-5 h-5 text-blue-500" />
-                        <div><p className="text-xs text-blue-600 font-bold">Độ ẩm TB</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
+                        <div><p className="text-xs text-blue-600 font-bold">{t('trace_avg_humid')}</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
                       </div>
                     </div>
                   </div>

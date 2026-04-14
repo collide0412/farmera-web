@@ -5,7 +5,8 @@ import {
   LineElement, Title, Tooltip, Legend, Filler
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { t, CHART_DATA, CHART_OPTIONS } from '../data/constants.js';
+import { CHART_DATA, CHART_OPTIONS } from '../data/constants.js';
+import { useTranslation } from '../contexts/LanguageContext.jsx';
 import { DashboardCard } from './Shared.jsx';
 import { FarmZoneMap } from './FarmZoneMap.jsx';
 import { LogisticsWidget } from './LogisticsWidget.jsx';
@@ -14,7 +15,8 @@ import { ComplianceGuide } from './ComplianceGuide.jsx';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan }) => {
+export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) => {
+  const { t, lang } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
   const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
   const [logType, setLogType] = useState('Phân bón/Fertilizer');
@@ -52,7 +54,7 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
   };
 
   const handleDelete = (index) => {
-    if (!window.confirm(lang === 'vi' ? 'Bạn có chắc muốn xóa nhật ký này?' : 'Are you sure you want to delete this log?')) return;
+    if (!window.confirm(t('f_del_confirm'))) return;
     const updated = products.map(p => {
       if (p.id === selectedProduct) {
         const newLogs = p.logs.filter((_, i) => i !== index);
@@ -78,31 +80,31 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
             onClick={() => setFarmerTab('overview')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Activity className="w-4 h-4"/> Nông trại
+            <Activity className=\"w-4 h-4\"/> {t('nav_overview')}
           </button>
           <button 
             onClick={() => setFarmerTab('zones')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'zones' ? 'bg-brand-teal text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <MapIcon className="w-4 h-4"/> Phân khu (IoT)
+            <MapIcon className=\"w-4 h-4\"/> {t('nav_zones')}
           </button>
           <button 
             onClick={() => setFarmerTab('logistics')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'logistics' ? 'bg-orange-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Truck className="w-4 h-4"/> Logistics
+            <Truck className=\"w-4 h-4\"/> {t('nav_logistics')}
           </button>
           <button 
             onClick={() => setFarmerTab('finance')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'finance' ? 'bg-yellow-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <PiggyBank className="w-4 h-4"/> Tài chính
+            <PiggyBank className=\"w-4 h-4\"/> {t('nav_finance')}
           </button>
           <button 
             onClick={() => setFarmerTab('compliance')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'compliance' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <ShieldCheck className="w-4 h-4"/> VietGAP
+            <ShieldCheck className=\"w-4 h-4\"/> {t('nav_compliance')}
           </button>
         </div>
       </div>
@@ -113,11 +115,11 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
           <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
           <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
-          {lang === 'vi' ? 'Nhật ký Canh tác' : 'Farming Logbook'}
+          {t('f_log_title')}
         </h3>
         <form onSubmit={handleAddLog} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Sản phẩm' : 'Product'}</label>
+            <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_prod')}</label>
             <select value={selectedProduct} onChange={e => {
               setSelectedProduct(parseInt(e.target.value));
               setEditingIndex(null);
@@ -127,32 +129,32 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
             </select>
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Ngày thực hiện' : 'Date'}</label>
+            <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_date')}</label>
             <input type="date" value={logDate} onChange={e => setLogDate(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Loại vật tư/Hoạt động' : 'Type'}</label>
+            <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_type')}</label>
             <select value={logType} onChange={e => setLogType(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green">
-              <option value="Phân bón/Fertilizer">{lang === 'vi' ? 'Phân bón' : 'Fertilizer'}</option>
-              <option value="Thuốc BVTV/Pesticide">{lang === 'vi' ? 'Thuốc bảo vệ thực vật' : 'Pesticide'}</option>
-              <option value="Tưới nước/Watering">{lang === 'vi' ? 'Tưới tiêu' : 'Watering'}</option>
-              <option value="Thu hoạch/Harvest">{lang === 'vi' ? 'Thu hoạch' : 'Harvest'}</option>
+              <option value="Phân bón/Fertilizer">{t('f_type_fert')}</option>
+              <option value="Thuốc BVTV/Pesticide">{t('f_type_pest')}</option>
+              <option value="Tưới nước/Watering">{t('f_type_water')}</option>
+              <option value="Thu hoạch/Harvest">{t('f_type_harv')}</option>
             </select>
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-gray-600 mb-1">{lang === 'vi' ? 'Tên vật tư, quy cách, liều lượng' : 'Details'}</label>
-            <input type="text" value={logDetails} onChange={e => setLogDetails(e.target.value)} placeholder={lang === 'vi' ? 'VD: Phân Đầu Trâu NPK, 50kg/ha' : 'e.g. NPK Fertilizer, 50kg/ha'} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
+            <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_details')}</label>
+            <input type="text" value={logDetails} onChange={e => setLogDetails(e.target.value)} placeholder={t('f_ph_details')} className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green" required />
           </div>
           <div className="md:col-span-2">
             <button type="submit" className="w-full sm:w-auto px-6 py-3 bg-brand-green text-white font-bold rounded-xl hover:bg-green-700 transition flex items-center justify-center">
               {editingIndex !== null ? <Edit2 className="w-5 h-5 mr-2" /> : <Plus className="w-5 h-5 mr-2" />}
               {editingIndex !== null 
-                ? (lang === 'vi' ? 'Cập Nhật Lịch Sử' : 'Update Log')
-                : (lang === 'vi' ? 'Thêm Lịch Sử Cập Nhật' : 'Add History Event')}
+                ? (t('f_update'))
+                : (t('f_add'))}
             </button>
             {editingIndex !== null && (
               <button type="button" onClick={() => { setEditingIndex(null); setLogDetails(''); }} className="mt-2 text-sm text-gray-500 hover:text-gray-700 underline w-full sm:w-auto text-center sm:ml-4">
-                {lang === 'vi' ? 'Hủy sửa' : 'Cancel Edit'}
+                {t('f_cancel')}
               </button>
             )}
           </div>
@@ -163,17 +165,17 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
       <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
           <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
-          {lang === 'vi' ? 'Quản lý Nhật ký: ' : 'Log Management: '} {activeProduct.name[lang]}
+          {t('f_manage')} {activeProduct.name[lang]}
         </h3>
         {activeProduct.logs && activeProduct.logs.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left whitespace-nowrap">
               <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm font-bold">
                 <tr>
-                  <th className="p-4 rounded-tl-xl">{lang === 'vi' ? 'Ngày' : 'Date'}</th>
-                  <th className="p-4">{lang === 'vi' ? 'Loại vật tư' : 'Type'}</th>
-                  <th className="p-4">{lang === 'vi' ? 'Chi tiết' : 'Details'}</th>
-                  <th className="p-4 rounded-tr-xl text-right">{lang === 'vi' ? 'Hành động' : 'Actions'}</th>
+                  <th className="p-4 rounded-tl-xl">{t('f_date')}</th>
+                  <th className="p-4">{t('f_type')}</th>
+                  <th className="p-4">{t('f_details')}</th>
+                  <th className="p-4 rounded-tr-xl text-right">{t('f_action')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100/50">
@@ -183,10 +185,10 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
                     <td className="p-4 font-bold text-brand-teal text-sm">{log.type}</td>
                     <td className="p-4 text-sm text-gray-600"><span className="whitespace-normal break-words max-w-[200px] md:max-w-xs line-clamp-2">{log.details}</span></td>
                     <td className="p-4 text-right space-x-2">
-                      <button onClick={() => handleEdit(index, log)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title={lang === 'vi' ? 'Chỉnh sửa' : 'Edit'}>
+                      <button onClick={() => handleEdit(index, log)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title={t('f_edit')}>
                         <Edit2 className="w-4 h-4" />
                       </button>
-                      <button onClick={() => handleDelete(index)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title={lang === 'vi' ? 'Xóa' : 'Delete'}>
+                      <button onClick={() => handleDelete(index)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title={t('f_delete')}>
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </td>
@@ -197,7 +199,7 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
           </div>
         ) : (
           <p className="text-gray-500 text-center py-6 border-2 border-dashed border-gray-200 rounded-xl">
-            {lang === 'vi' ? 'Chưa có nhật ký nào cho sản phẩm này.' : 'No logs available for this product yet.'}
+            {t('f_empty')}
           </p>
         )}
       </div>
