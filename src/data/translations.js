@@ -36,7 +36,7 @@ export const translations = {
     c_title: "Compliance Map:", c_cert: "Select standard", c_progress: "progress",
     c_pending: "Pending", c_done: "Approved", c_alert: "Missing documents.",
     
-    # Financial 
+    // Financial 
     fi_total_impact: "Total Economic Impact (2026)",
     fi_impact_desc: "Optimized savings from precision fertilizer usage and direct D2C platform margins.",
     fi_input_cost: "Input Costs", fi_avg_price: "Average Selling Price", fi_fert_cost: "Fertilizer & Supply Costs",
@@ -46,15 +46,15 @@ export const translations = {
 
     prod_rice: "OCOP Rice", prod_cab: "VietGAP Cabbage", prod_straw: "Premium Strawberry",
     
-    # Map
+    // Map
     fz_title: "Farm Map (IoT & Zoning)", fz_zoneA: "Zone A (OCOP Rice)", fz_zoneB: "Zone B (Orchard)", fz_zoneC: "Zone C (VietGAP Veggies)", fz_zoneD: "Storage Hub",
     fz_realtime: "Real-time Metrics", fz_status: "Operation Status", fz_normal: "Normal", fz_alert_moist: "Alert: Critically low moisture",
     fz_logs: "Recent IoT Logs", fz_no_logs: "No IoT logs available.",
 
-    # Logistics
+    // Logistics
     lw_title: "Logistics & Trade Scheduling", lw_manage: "Shipment Management",
 
-    # Guide
+    // Guide
     cg_title: "VietGAP / OCOP Roadmap", cg_subtitle: "Your profile is being completed on the Blockchain.", cg_completed: "Completed", cg_step: "Step",
     cg_s1: "Soil & Water Assessment", cg_s1_1: "Soil Sampling", cg_s1_2: "Water Sampling", cg_s1_3: "Heavy Metal Check",
     cg_s2: "Seed & Supply Management", cg_s2_1: "Seed Origin Update", cg_s2_2: "Organic Fertilizer Invoices", cg_s2_3: "Equipment Log",
