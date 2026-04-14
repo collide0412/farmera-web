@@ -69,8 +69,7 @@ export const translations = {
     cg_s5: "VietGAP Certification", cg_s5_1: "Online Application", cg_s5_2: "Blockchain Minting"
   },
   vi: {
-    lw_title: 'Tổng Quan Kho Vận', lw_est_harvest: 'Dự Kiến Thu:
-Hoạch: ', lw_days_left: 'Số Ngày Còn Lại', lw_book: 'Đặt Xe Vận Chuyển',
+    lw_title: 'Tổng Quan Kho Vận', lw_est_harvest: 'Dự Kiến Thu:\\nHoạch: ', lw_days_left: 'Số Ngày Còn Lại', lw_book: 'Đặt Xe Vận Chuyển',
     lw_manage: 'Quản Lý Chuyến Đi', lw_trip: 'Chuyến', lw_route: 'Lộ trình: Nông Trại → TP.HCM', lw_in_transit: 'Đang Di Chuyển',
     lw_eta: 'Thời gian tới: 48 giờ', lw_est_cost: 'Ước Tính Chi Phí', lw_payload: 'Tổng Tải Trọng (kg)', lw_placeholder: 'VD: 5000',
     lw_dest: 'Nơi Đến', lw_hcm: 'TP. Hồ Chí Minh', lw_hanoi: 'Trung Tâm Hà Nội', lw_type: 'Loại Xe',
