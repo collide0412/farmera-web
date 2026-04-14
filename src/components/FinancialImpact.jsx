@@ -9,8 +9,8 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-export const FinancialImpact = () => {
-  const { t, currency } = useTranslation();
+export const FinancialImpact = ({ currency }) => {
+  const { t } = useTranslation();
 
   const fertilizerData = {
     labels: [t('fi_q1'), t('fi_q2'), t('fi_q3'), t('fi_q4')],

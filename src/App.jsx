@@ -130,7 +130,7 @@ export const App = () => {
           )}
           {activeTab === 'farmer' && ( 
             <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> 
-              <FarmerDashboard products={products} setProducts={setProducts} lang={lang} setShowActionPlan={setShowActionPlan} /> 
+              <FarmerDashboard products={products} setProducts={setProducts} lang={lang} currency={currency} setShowActionPlan={setShowActionPlan} /> 
             </motion.div> 
           )}
           {activeTab === 'admin' && ( 

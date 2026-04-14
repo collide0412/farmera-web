@@ -15,7 +15,7 @@ import { ComplianceGuide } from './ComplianceGuide.jsx';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) => {
+export const FarmerDashboard = ({ products, setProducts, currency, setShowActionPlan }) => {
   const { t, lang } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
   const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
@@ -234,7 +234,7 @@ export const FarmerDashboard = ({ products, setProducts, setShowActionPlan }) =>
       {farmerTab === 'zones' && <FarmZoneMap />}
       {farmerTab === 'compliance' && <ComplianceGuide />}
       {farmerTab === 'logistics' && <LogisticsWidget />}
-      {farmerTab === 'finance' && <FinancialImpact />}
+      {farmerTab === 'finance' && <FinancialImpact currency={currency} />}
 
     </div>
   );

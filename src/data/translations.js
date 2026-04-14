@@ -49,7 +49,7 @@ export const translations = {
     // Map
     fz_title: "Farm Map (IoT & Zoning)", fz_zoneA: "Zone A (OCOP Rice)", fz_zoneB: "Zone B (Orchard)", fz_zoneC: "Zone C (VietGAP Veggies)", fz_zoneD: "Storage Hub",
     fz_realtime: "Real-time Metrics", fz_status: "Operation Status", fz_normal: "Normal", fz_alert_moist: "Alert: Critically low moisture",
-    fz_logs: "Recent IoT Logs", fz_no_logs: "No IoT logs available.",
+    fz_logs: "Recent IoT Logs", fz_no_logs: "No IoT logs available.", fz_water: "Water", fz_temp: "Temp",
 
     // Logistics
     lw_title: "Logistics & Trade Scheduling", lw_manage: "Shipment Management",
@@ -108,7 +108,7 @@ export const translations = {
 
     fz_title: "Bản đồ Nông trại (IoT & Chuyên canh)", fz_zoneA: "Khu A (Lúa OCOP)", fz_zoneB: "Khu B (Cây ăn quả)", fz_zoneC: "Khu C (Rau màu VietGAP)", fz_zoneD: "Nhà kho (Storage)",
     fz_realtime: "Thông số Thời gian thực", fz_status: "Trạng thái Hoạt động", fz_normal: "Bình thường", fz_alert_moist: "Cảnh báo: Độ ẩm cực thấp",
-    fz_logs: "Nhật ký chăm sóc gần đây", fz_no_logs: "Chưa có lịch sử IoT cho khu vực này",
+    fz_logs: "Nhật ký chăm sóc gần đây", fz_no_logs: "Chưa có lịch sử IoT cho khu vực này", fz_water: "Nước", fz_temp: "Nhiệt",
 
     lw_title: "Lên lịch Vận chuyển & Giao thương", lw_manage: "Quản lý Chuyến hàng",
 
@@ -162,7 +162,7 @@ export const translations = {
 
     fz_title: "농장 구역 맵 (IoT & 작물)", fz_zoneA: "구역 A (OCOP 쌀)", fz_zoneB: "구역 B (과수원)", fz_zoneC: "구역 C (채소)", fz_zoneD: "자재 창고",
     fz_realtime: "실시간 지표", fz_status: "운영 상태", fz_normal: "정상", fz_alert_moist: "경고: 수분 부족",
-    fz_logs: "최근 IoT 로그", fz_no_logs: "해당 구역의 IoT 기록이 없습니다.",
+    fz_logs: "최근 IoT 로그", fz_no_logs: "해당 구역의 IoT 기록이 없습니다.", fz_water: "수분", fz_temp: "온도",
 
     lw_title: "배송 및 유통 일정", lw_manage: "출하 관리",
 
