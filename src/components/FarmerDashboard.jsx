@@ -225,6 +225,7 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
             </button>
           </div>
         </div>
+      </div>
       </>
       )}
 
