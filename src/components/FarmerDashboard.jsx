@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf } from 'lucide-react';
+import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
   LineElement, Title, Tooltip, Legend, Filler
@@ -7,6 +7,10 @@ import {
 import { Line } from 'react-chartjs-2';
 import { t, CHART_DATA, CHART_OPTIONS } from '../data/constants.js';
 import { DashboardCard } from './Shared.jsx';
+import { FarmZoneMap } from './FarmZoneMap.jsx';
+import { LogisticsWidget } from './LogisticsWidget.jsx';
+import { FinancialImpact } from './FinancialImpact.jsx';
+import { ComplianceGuide } from './ComplianceGuide.jsx';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -16,6 +20,7 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
   const [logType, setLogType] = useState('Phân bón/Fertilizer');
   const [logDetails, setLogDetails] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
+  const [farmerTab, setFarmerTab] = useState('overview'); // overview | zones | compliance | logistics | finance
 
   const activeProduct = products.find(p => p.id === selectedProduct) || products[0];
 
@@ -64,10 +69,48 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
 
   return (
     <div className="space-y-8 mt-4 pb-24">
-      <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+        
+        {/* Farmer Navigation Tabs */}
+        <div className="flex overflow-x-auto gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-gray-100">
+          <button 
+            onClick={() => setFarmerTab('overview')} 
+            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+          >
+            <Activity className="w-4 h-4"/> Nông trại
+          </button>
+          <button 
+            onClick={() => setFarmerTab('zones')} 
+            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'zones' ? 'bg-brand-teal text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+          >
+            <MapIcon className="w-4 h-4"/> Phân khu (IoT)
+          </button>
+          <button 
+            onClick={() => setFarmerTab('logistics')} 
+            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'logistics' ? 'bg-orange-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+          >
+            <Truck className="w-4 h-4"/> Logistics
+          </button>
+          <button 
+            onClick={() => setFarmerTab('finance')} 
+            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'finance' ? 'bg-yellow-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+          >
+            <PiggyBank className="w-4 h-4"/> Tài chính
+          </button>
+          <button 
+            onClick={() => setFarmerTab('compliance')} 
+            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'compliance' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+          >
+            <ShieldCheck className="w-4 h-4"/> VietGAP
+          </button>
+        </div>
+      </div>
 
-      {/* Input Form for Actions */}
-      <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+      {farmerTab === 'overview' && (
+        <>
+          {/* Input Form for Actions */}
+          <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
           <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
           {lang === 'vi' ? 'Nhật ký Canh tác' : 'Farming Logbook'}
@@ -182,7 +225,14 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
             </button>
           </div>
         </div>
-      </div>
+      </>
+      )}
+
+      {farmerTab === 'zones' && <FarmZoneMap />}
+      {farmerTab === 'compliance' && <ComplianceGuide />}
+      {farmerTab === 'logistics' && <LogisticsWidget />}
+      {farmerTab === 'finance' && <FinancialImpact />}
+
     </div>
   );
 };

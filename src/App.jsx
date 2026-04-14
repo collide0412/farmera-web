@@ -3,8 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ScanLine, ShieldCheck, Activity, Fingerprint, 
   X, Sprout, PackageCheck, Store, Globe,
-  ClipboardCheck, CheckCircle2, Leaf, Coins
+  ClipboardCheck, CheckCircle2, Leaf, Coins,
+  Thermometer, Droplets
 } from 'lucide-react';
+import {
+  Chart as ChartJS, CategoryScale, LinearScale, PointElement,
+  LineElement, Title, Tooltip, Legend, Filler
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 import { t, INITIAL_PRODUCTS } from './data/constants.js';
 import { ConsumerMarketplace } from './components/ConsumerMarketplace.jsx';
@@ -22,6 +30,7 @@ export const App = () => {
   const [currency, setCurrency] = useState('VND');
   const [showTrace, setShowTrace] = useState(false);
   const [showActionPlan, setShowActionPlan] = useState(false);
+  const [traceTab, setTraceTab] = useState('lifecycle');
 
   const handleScan = (product) => { 
     setIsScanning(true); 
@@ -190,24 +199,68 @@ export const App = () => {
                   </div>
                 )}
 
-                <h4 className="font-bold text-lg mb-4 text-brand-teal">{t[lang].lifecycle}</h4>
-                <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
-                  <JourneyStep icon={<Sprout />} title={t[lang].seed} desc={t[lang].seed_desc} time="Mar 01, 2026" />
-                  
-                  {selectedProduct.logs && selectedProduct.logs.map((log, index) => (
-                    <JourneyStep 
-                      key={index} 
-                      icon={<ClipboardCheck className="w-5 h-5" />} 
-                      title={log.type} 
-                      desc={log.details} 
-                      time={log.date} 
-                    />
-                  ))}
-
-                  <JourneyStep icon={<Activity />} title={t[lang].iot} desc={t[lang].iot_desc} time="Mar - Apr, 2026" />
-                  <JourneyStep icon={<Leaf />} title={t[lang].harvest} desc={t[lang].harvest_desc} time="Apr 12, 2026" />
-                  <JourneyStep icon={<PackageCheck />} title={t[lang].pack} desc={t[lang].pack_desc} time="Apr 12, 2026" isLast />
+                <div className="flex bg-gray-100 p-1 mb-6 rounded-xl relative">
+                  <button onClick={() => setTraceTab('lifecycle')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'lifecycle' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}>
+                    Hành trình
+                  </button>
+                  <button onClick={() => setTraceTab('environment')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'environment' ? 'bg-white shadow text-brand-green' : 'text-gray-500 hover:text-gray-700'}`}>
+                    Nhật ký Môi trường IoT
+                  </button>
                 </div>
+
+                {traceTab === 'lifecycle' ? (
+                  <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
+                    <JourneyStep icon={<Sprout />} title={t[lang].seed} desc={t[lang].seed_desc} time="Mar 01, 2026" />
+                    
+                    {selectedProduct.logs && selectedProduct.logs.map((log, index) => (
+                      <JourneyStep 
+                        key={index} 
+                        icon={<ClipboardCheck className="w-5 h-5" />} 
+                        title={log.type} 
+                        desc={log.details} 
+                        time={log.date} 
+                      />
+                    ))}
+
+                    <JourneyStep icon={<Activity />} title={t[lang].iot} desc={t[lang].iot_desc} time="Mar - Apr, 2026" />
+                    <JourneyStep icon={<Leaf />} title={t[lang].harvest} desc={t[lang].harvest_desc} time="Apr 12, 2026" />
+                    <JourneyStep icon={<PackageCheck />} title={t[lang].pack} desc={t[lang].pack_desc} time="Apr 12, 2026" isLast />
+                  </div>
+                ) : (
+                  <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="bg-green-50 border border-green-200 p-4 rounded-xl mb-6 flex items-start gap-3">
+                      <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-bold text-green-800 text-sm">Dữ liệu được xác thực tự động từ cảm biến</h4>
+                        <p className="text-xs text-green-700 mt-1">Thông số được thu thập trực tiếp, mã hóa hash (SHA-256) và đưa lên Blockchain mỗi 1 giờ. KHÔNG thể can thiệp.</p>
+                      </div>
+                    </div>
+                    
+                    <h4 className="font-bold text-gray-700 text-sm mb-3">Biến động 7 ngày gần nhất</h4>
+                    <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
+                      <Line 
+                        data={{
+                          labels: ['1P', '2P', '3P', '4P', '5P', '6P', '7P'],
+                          datasets: [
+                            { label: 'Nhiệt độ (°C)', data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
+                            { label: 'Độ ẩm đất (%)', data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
+                          ]
+                        }} 
+                        options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="bg-orange-50 p-3 rounded-lg flex items-center gap-2 border border-orange-100">
+                        <Thermometer className="w-5 h-5 text-orange-500" />
+                        <div><p className="text-xs text-orange-600 font-bold">Nhiệt độ TB</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
+                      </div>
+                      <div className="bg-blue-50 p-3 rounded-lg flex items-center gap-2 border border-blue-100">
+                        <Droplets className="w-5 h-5 text-blue-500" />
+                        <div><p className="text-xs text-blue-600 font-bold">Độ ẩm TB</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
                 <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-gray-200">
                   <img src="https://images.unsplash.com/photo-1595825833444-94e4fbd604f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Farmer" className="w-full h-48 object-cover" />
