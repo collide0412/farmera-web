@@ -1,9 +1,12 @@
 import React from 'react';
-import { t, LEDGER_LOGS } from '../data/constants.js';
+import { LEDGER_LOGS } from '../data/constants.js';
+import { useTranslation } from '../contexts/LanguageContext.jsx';
 
-export const AdminLedger = ({ lang }) => (
-  <div className="mt-4">
-    <h2 className="text-3xl font-black text-brand-teal mb-8">{t('nav_ledger')}</h2>
+export const AdminLedger = ({ lang }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="mt-4">
+      <h2 className="text-3xl font-black text-brand-teal mb-8">{t('nav_ledger')}</h2>
     <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden overflow-x-auto">
       <table className="w-full text-left whitespace-nowrap">
         <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm">
@@ -31,4 +34,5 @@ export const AdminLedger = ({ lang }) => (
       </table>
     </div>
   </div>
-);
+  );
+};
