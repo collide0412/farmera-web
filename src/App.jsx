@@ -207,8 +207,6 @@ export const App = () => {
                   <button onClick={() => setTraceTab('environment')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'environment' ? 'bg-white shadow text-brand-green' : 'text-gray-500 hover:text-gray-700'}`}>
                     {t('trace_environment')}
                   </button>
-                    Nhật ký Môi trường IoT
-                  </button>
                 </div>
 
                 {traceTab === 'lifecycle' ? (
@@ -235,11 +233,11 @@ export const App = () => {
                       <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
                       <div>
                         <h4 className="font-bold text-green-800 text-sm">{t('trace_verified_data')}</h4>
-                        <p className=\"text-xs text-green-700 mt-1\">{t('trace_verified_desc')}</p>
+                        <p className="text-xs text-green-700 mt-1">{t('trace_verified_desc')}</p>
                       </div>
                     </div>
                     
-                    <h4 className=\"font-bold text-gray-700 text-sm mb-3\">{t('trace_7_days')}</h4>
+                    <h4 className="font-bold text-gray-700 text-sm mb-3">{t('trace_7_days')}</h4>
                     <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
                       <Line 
                         data={{

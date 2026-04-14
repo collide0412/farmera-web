@@ -44,47 +44,47 @@ export const translations = {
     fi_tip: "AI insight: Switch to organic supplier Z to save 12% next month."
   },
   vi: {
-    nav_market: "Chợ DCSA", nav_farm: "Nông Trại Số", nav_ledger: "Sổ Cái Phân Tán", nav_trace: "Truy Xuất Quyền",
-    nav_overview: "Tổng quan", nav_zones: "Phân khu IoT", nav_logistics: "Xe & Logistics", nav_finance: "Tài chính", nav_compliance: "Chứng nhận VietGAP",
-    title: "Minh Bạch Tuyệt Đối.",
-    subtitle: "Kết nối Nông sản chuẩn OCOP/VietGAP đến gia đình. Khởi tạo niềm tin bằng sức mạnh phân tán.",
-    verified: "Đã Thẩm Định", scan: "Quét Nguồn Gốc", store: "Mua sắm", farm: "Bảng quản lý", ledger: "Sổ cái",
-    soil_moist: "Độ ẩm đất", soil_ph: "Bảng đo pH", pest_alert: "AI Rà Soát Sâu",
-    demand: "Biểu đồ Nhu Cầu", ai_rec: "Machine Learning Đề Xuất", ai_desc: "Giá củ cải đạt mốc kháng cự. Thu hoạch tối ưu trong 2 ngày tới. Cần chuẩn bị xe lạnh.",
-    view_plan: "Xem Lộ Trình", tx_id: "Mã Giao Dịch", event_status: "Trạng Thái", time: "Thời Gian", hash: "Mã Hash",
-    reading: "Đang đọc khối Genesis...", auth_ver: "Đã Xác Thực", contract: "Smart Contract", lifecycle: "Chu kỳ Nông", 
-    meet_farmer: "Chủ Nông Trại:", farmer_quote: '"Kết hợp kinh nghiệm truyền thống và dữ liệu công nghệ."',
-    seed: "Gieo Hạt & Ươm", seed_desc: "Dùng hạt F1, cấy tại tọa độ an toàn.", iot: "Cảm biến Canh Phòng", iot_desc: "Duy trì phổ sinh học bằng tự động hóa.",
-    harvest: "Rút Vườn", harvest_desc: "Hái lượm đúng thời điểm vitamin cao nhất.", pack: "Bảo Quản & Giao", pack_desc: "Chạy kho lạnh vận tải đến trung tâm.",
-    demo_desc: "Trình diễn Sandbox. Dữ liệu chạy thực trên Polygon.", prod_scanned: "Sản phẩm", harvest_date: "Ngày tạo", days_ago: "2 ngày trước",
-    close_demo: "Đóng Mô Phỏng", market_opp: "Bắt Mạch Thị Trường", today: "Hôm nay", today_desc: "Bật bơm nhỏ giọt 30 phút.", tomorrow: "Ngày mai",
-    tomorrow_desc: "Chuẩn bị nhân lực thu hoạch thô.", day_3: "Ngày 3", day_3_desc: "Đóng gói, đúc Hash vào Smart Contract.", understood: "Xác nhận Lệnh",
+    nav_market: "Chợ Nông Sản", nav_farm: "Nông Trại Thông Minh", nav_ledger: "Sổ Cái Tin Cậy", nav_trace: "Truy Xuất Nguồn Gốc",
+    nav_overview: "Tổng Quan", nav_zones: "Phân Khu (IoT)", nav_logistics: "Vận Tải", nav_finance: "Tài Chính", nav_compliance: "VietGAP / OCOP",
+    title: "Từ Nông Trại Đến Bàn Ăn.",
+    subtitle: "Khám phá nông sản cao cấp, được minh bạch 100% bằng công nghệ blockchain.",
+    verified: "Đã Xác Minh", scan: "Quét Mã QR", store: "Cửa Hàng", farm: "Nông Trại", ledger: "Sổ Cái",
+    soil_moist: "Độ Ẩm Đất", soil_ph: "Độ pH Đất", pest_alert: "Cảnh Báo Sâu Bệnh (AI)",
+    demand: "Nhu Cầu Thị Trường", ai_rec: "AI Khuyến Nghị", ai_desc: "Giá thị trường đang đạt đỉnh. Giai đoạn thu hoạch tối ưu vào 2 ngày tới. Cần chuẩn bị đóng gói.",
+    view_plan: "Xem Kế Hoạch", tx_id: "Mã Giao Dịch", event_status: "Trạng Thái", time: "Thời Gian", hash: "Mã Hash",
+    reading: "Đang Đọc Dữ Liệu Khối...", auth_ver: "Đã Xác Minh Nguồn Gốc", contract: "Hợp Đồng Thông Minh", lifecycle: "Hành Trình Sinh Trưởng", 
+    meet_farmer: "Thông Tin Nông Dân:", farmer_quote: '"Chúng tôi chăm sóc cây trồng bằng sự tận tâm và công nghệ."',
+    seed: "Đã Gieo Hạt", seed_desc: "Hạt giống năng suất cao được gieo trồng trên đất thông minh.", iot: "Giám Sát IoT", iot_desc: "Độ ẩm và pH của đất được tự động duy trì ở mức tối ưu.",
+    harvest: "Đã Thu Hoạch", harvest_desc: "Thu hoạch đúng thời điểm đạt chất lượng tốt nhất.", pack: "Đóng Gói & Phân Phối", pack_desc: "Vận chuyển trong tiêu chuẩn kiểm soát nhiệt độ.",
+    demo_desc: "Bản xem trước tóm tắt. Dữ liệu được bảo mật trên mạng lưới Polygon.", prod_scanned: "Thông Tin Sản Phẩm", harvest_date: "Ngày Thu Hoạch", days_ago: "2 ngày trước",
+    close_demo: "Đóng Cửa Sổ", market_opp: "Phát Hiện Cơ Hội Thị Trường", today: "Hôm Nay", today_desc: "Kiểm tra độ ẩm đất và chuẩn bị dụng cụ thu hoạch.", tomorrow: "Ngày Mai",
+    tomorrow_desc: "Bắt đầu thu hoạch sơ bộ.", day_3: "Ngày 3", day_3_desc: "Tạo và đẩy mã băm sản phẩm lên Hợp Đồng Thông Minh.", understood: "Đã Hiểu",
     
     // Traceability Specific
-    trace_lifecycle: "Hành trình", trace_environment: "Nhật ký Môi trường IoT",
-    trace_verified_data: "Dữ liệu được xác thực tự động từ cảm biến", trace_verified_desc: "Thông số được thu thập trực tiếp, mã hóa hash (SHA-256) và đưa lên Blockchain mỗi 1 giờ. KHÔNG thể can thiệp.",
-    trace_7_days: "Biến động 7 ngày gần nhất", trace_temp: "Nhiệt độ", trace_humid: "Độ ẩm đất",
-    trace_avg_temp: "Nhiệt độ TB", trace_avg_humid: "Độ ẩm TB",
+    trace_lifecycle: "Hành Trình", trace_environment: "Nhật Ký Môi Trường IoT",
+    trace_verified_data: "Dữ Liệu Xác Thực Từ Cảm Biến", trace_verified_desc: "Các thông số được thu thập trực tiếp, mã hóa băm (SHA-256) và đồng bộ lên chuỗi khối Blockchain mỗi giờ. Đảm bảo không thể bị can thiệp.",
+    trace_7_days: "Biểu Đồ Biến Động 7 Ngày Qua", trace_temp: "Nhiệt Độ", trace_humid: "Độ Ẩm Đất",
+    trace_avg_temp: "Nhiệt Độ TB", trace_avg_humid: "Độ Ẩm TB",
 
     // Farm Zoning
-    z_temp: "Nhiệt độ", z_ph: "Độ Axit", z_log: "Log khối:",
+    z_temp: "Nhiệt Độ Bề Mặt", z_ph: "Độ Axit/Kiềm", z_log: "Giao Dịch Hệ Thống:",
     
     // Ledger/Logs
-    f_log_title: "Canh Tác Số & Sổ Vật Tư", f_prod: "Chọn Luống giống", f_date: "Khởi tạo vào", f_type: "Kiểu Canh Tác", f_details: "Trọng lượng / Nhãn hàng / Tình trạng", 
-    f_add: "Thêm Vô Sổ Cái", f_update: "Cập nhật Hash", f_cancel: "Hủy",
-    f_del_confirm: "Bạn có chắc muốn xóa nhật ký này?", f_empty: "Chưa có dữ liệu lô này.", f_manage: "Quản lý Nhật ký: ", f_action: "Hành động", f_edit: "Chỉnh sửa", f_delete: "Xóa", f_type_fert: "Phân bón", f_type_pest: "Thuốc bảo vệ thực vật", f_type_water: "Tưới tiêu", f_type_harv: "Thu hoạch", f_ph_details: "VD: Phân Đầu Trâu NPK, 50kg/ha",
+    f_log_title: "Nhật Ký Nông Nghiệp Số", f_prod: "Chọn Sản Phẩm", f_date: "Ngày Thực Hiện", f_type: "Loại Hoạt Động", f_details: "Chi Tiết / Số Lượng / Ghi Chú", 
+    f_add: "Thêm Vào Sổ Cái", f_update: "Cập Nhật Mã Băm", f_cancel: "Hủy",
+    f_del_confirm: "Bạn có chắc chắn muốn xóa nhật ký này không?", f_empty: "Chưa có dữ liệu nhật ký cho sản phẩm này.", f_manage: "Quản Lý Nhật Ký: ", f_action: "Thao Tác", f_edit: "Sửa", f_delete: "Xóa", f_type_fert: "Phân Bón", f_type_pest: "Thuốc Bảo Vệ Thực Vật", f_type_water: "Tưới Tiêu", f_type_harv: "Thu Hoạch", f_ph_details: "VD: Phân NPK, 50kg/ha",
 
     // Compliance
-    c_title: "Bản Đồ Đạt Chuẩn:", c_cert: "Bộ tiêu chí", c_progress: "tiến độ",
-    c_pending: "Đang chờ", c_done: "Đạt", c_alert: "Thiếu chứng từ đất.",
+    c_title: "Kế Hoạch Đạt Chuẩn:", c_cert: "Chọn Tiêu Chuẩn", c_progress: "Tiến Độ",
+    c_pending: "Đang Chờ", c_done: "Đã Duyệt", c_alert: "Thiếu giấy tờ minh chứng. Cần kiểm tra lại.",
 
     // Logistics
-    l_active: "Chuyến Hàng Đang Chạy", l_status: "Báo Cáo", l_eta: "Giờ Cập Bến", l_dist: "Khoảng cách",
-    l_driver: "Tài xế", l_temp: "Nhiệt Thùng", l_transit: "Đang Lăn Bánh", l_delivered: "Hoàn Tất",
+    l_active: "Chuyến Hàng Đang Giao", l_status: "Trạng Thái", l_eta: "Dự Kiến Đến", l_dist: "Khoảng Cách Đo Được",
+    l_driver: "Tài Xế", l_temp: "Nhiệt Độ Thùng Chứa", l_transit: "Đang Vận Chuyển", l_delivered: "Đã Giao Hàng",
 
     // Finance
-    fi_rev: "Doanh Thu Ước Tính", fi_cost: "Chi Phí Phân Bổ", fi_margin: "Biên Lợi Nhuận", fi_proj: "Dự Phóng 30 Ngày",
-    fi_tip: "Gợi ý AI: Chuyển qua dùng phân bón hữu cơ ABC tháng sau để giảm 12% chi phí."
+    fi_rev: "Doanh Thu Ước Tính", fi_cost: "Chi Phí Vận Hành", fi_margin: "Lợi Nhuận Ròng", fi_proj: "Dự Phóng 30 Ngày",
+    fi_tip: "AI Đề Xuất: Chuyển sang dùng nhà cung cấp vật tư hữu cơ Z vào tháng sau có thể giúp tiết kiệm 12% chi phí."
   },
   ko: {
     nav_market: "DCSA 마켓", nav_farm: "스마트 팜 뷰", nav_ledger: "신뢰 원장", nav_trace: "이력 추적 데모",
