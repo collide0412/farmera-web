@@ -3,15 +3,15 @@ import { t, LEDGER_LOGS } from '../data/constants.js';
 
 export const AdminLedger = ({ lang }) => (
   <div className="mt-4">
-    <h2 className="text-3xl font-black text-brand-teal mb-8">{t[lang].nav_ledger}</h2>
+    <h2 className="text-3xl font-black text-brand-teal mb-8">{t('nav_ledger')}</h2>
     <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden overflow-x-auto">
       <table className="w-full text-left whitespace-nowrap">
         <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm">
           <tr>
-            <th className="p-4">{t[lang].tx_id}</th>
-            <th className="p-4">{t[lang].event_status}</th>
-            <th className="p-4">{t[lang].time}</th>
-            <th className="p-4">{t[lang].hash}</th>
+            <th className="p-4">{t('tx_id')}</th>
+            <th className="p-4">{t('event_status')}</th>
+            <th className="p-4">{t('time')}</th>
+            <th className="p-4">{t('hash')}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-50">

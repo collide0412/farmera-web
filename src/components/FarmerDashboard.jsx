@@ -70,7 +70,7 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
   return (
     <div className="space-y-8 mt-4 pb-24">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h2 className="text-3xl font-black text-brand-teal">{t[lang].nav_farm}</h2>
+        <h2 className="text-3xl font-black text-brand-teal">{t('nav_farm')}</h2>
         
         {/* Farmer Navigation Tabs */}
         <div className="flex overflow-x-auto gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-gray-100">
@@ -203,25 +203,25 @@ export const FarmerDashboard = ({ products, setProducts, lang, setShowActionPlan
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <DashboardCard title={t[lang].soil_moist} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2% today" status="optimal" />
-        <DashboardCard title={t[lang].soil_ph} value="6.5" icon={<Activity className="text-purple-500" />} trend="Stable" status="optimal" />
-        <DashboardCard title={t[lang].pest_alert} value="Zero Detected" icon={<Bug className="text-red-500" />} trend="Safe" status="safe" alert={false} />
+        <DashboardCard title={t('soil_moist')} value="68%" icon={<Droplets className="text-blue-500" />} trend="+2% today" status="optimal" />
+        <DashboardCard title={t('soil_ph')} value="6.5" icon={<Activity className="text-purple-500" />} trend="Stable" status="optimal" />
+        <DashboardCard title={t('pest_alert')} value="Zero Detected" icon={<Bug className="text-red-500" />} trend="Safe" status="safe" alert={false} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2">
-          <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><TrendingUp className="text-brand-green" /> {t[lang].demand}</h3>
+          <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><TrendingUp className="text-brand-green" /> {t('demand')}</h3>
           <div className="h-64"><Line data={CHART_DATA} options={CHART_OPTIONS} /></div>
         </div>
         <div className="bg-gradient-to-br from-brand-teal to-teal-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col justify-center">
           <Leaf className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />
-          <h3 className="font-bold text-xl mb-2 relative z-10">{t[lang].ai_rec}</h3>
-          <p className="text-teal-50 leading-relaxed mb-6 relative z-10 text-sm md:text-base">{t[lang].ai_desc}</p>
+          <h3 className="font-bold text-xl mb-2 relative z-10">{t('ai_rec')}</h3>
+          <p className="text-teal-50 leading-relaxed mb-6 relative z-10 text-sm md:text-base">{t('ai_desc')}</p>
           <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
             <button 
               onClick={() => setShowActionPlan(true)} 
               className="bg-brand-green text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-emerald-400 transition transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-2">
               <Activity className="w-5 h-5" />
-              {t[lang].view_plan}
+              {t('view_plan')}
             </button>
           </div>
         </div>
