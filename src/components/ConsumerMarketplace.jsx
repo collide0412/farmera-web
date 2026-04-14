@@ -39,3 +39,4 @@ export const ConsumerMarketplace = ({ products, currency, onScan }) => { const {
     </div>
   </div>
 );
+};
