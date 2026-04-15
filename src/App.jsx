@@ -264,7 +264,7 @@ export const App = () => {
                 )}
                 
                 <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                  <img src="./images/do_mixi.png" alt="Farmer" className="w-full h-48 object-cover" />
+                    <img src={`./images/do_mixi.png?v=${Date.now()}`} alt="Farmer" className="w-full h-48 object-cover" />
                   <div className="p-4 bg-white">
                     <p className="font-bold">{t('meet_farmer')} Phùng Văn A</p>
                     <p className="text-sm text-gray-500">{t('farmer_quote')}</p>
