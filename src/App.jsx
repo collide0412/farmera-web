@@ -294,32 +294,33 @@ export const App = () => {
         )}
 
         {showTrace && (
-          <motion.div className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div className="fixed inset-0 z-50 flex flex-col items-center justify-end md:justify-center p-0 md:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-brand-teal/80 backdrop-blur-sm" onClick={() => setShowTrace(false)} />
-            <motion.div className="bg-white max-w-lg w-full rounded-2xl shadow-2xl relative overflow-hidden z-10" initial={{ scale: 0.9, y: 30 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 30 }} transition={{ type: 'spring', damping: 25 }}>
-              <div className="bg-brand-teal p-6 text-white text-center">
-                <Fingerprint className="w-16 h-16 mx-auto mb-4 text-brand-green mix-blend-screen" />
-                <h2 className="text-2xl font-bold">{t('nav_trace')}</h2>
-                <p className="text-white/80 mt-2 text-sm">{t('demo_desc')}</p>
+            <motion.div className="bg-white max-w-lg w-full rounded-t-3xl md:rounded-2xl shadow-2xl relative flex flex-col z-10 max-h-[90vh]" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}>
+              <div className="bg-brand-teal p-5 md:p-6 text-white text-center shrink-0 rounded-t-3xl md:rounded-t-none">
+                <div className="w-12 h-1.5 bg-white/30 rounded-full mx-auto mb-4 md:hidden" />
+                <Fingerprint className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 text-brand-green mix-blend-screen" />
+                <h2 className="text-xl md:text-2xl font-bold">{t('nav_trace')}</h2>
+                <p className="text-white/80 mt-1 md:mt-2 text-xs md:text-sm">{t('demo_desc')}</p>
               </div>
-              <div className="p-6 space-y-4">
+              <div className="p-4 md:p-6 space-y-3 md:space-y-4 overflow-y-auto">
                 <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase">{t('prod_scanned')}</p>
-                    <p className="font-bold text-brand-teal">Premium Organic Rice</p>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">{t('prod_scanned')}</p>
+                    <p className="font-bold text-sm md:text-base text-brand-teal">Premium Organic Rice</p>
                   </div>
-                  <ShieldCheck className="w-6 h-6 text-brand-green" />
+                  <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-brand-green" />
                 </div>
                 <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase">{t('harvest_date')}</p>
-                    <p className="font-bold text-brand-teal">{t('days_ago')}</p>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">{t('harvest_date')}</p>
+                    <p className="font-bold text-sm md:text-base text-brand-teal">{t('days_ago')}</p>
                   </div>
-                  <Activity className="w-6 h-6 text-blue-500" />
+                  <Activity className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
                 </div>
               </div>
-              <div className="p-6 bg-gray-50 border-t border-gray-100 text-center">
-                <button onClick={() => setShowTrace(false)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 w-full">
+              <div className="p-4 md:p-6 bg-gray-50 border-t border-gray-100 text-center shrink-0">
+                <button onClick={() => setShowTrace(false)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 md:py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 w-full text-sm md:text-base">
                   {t('close_demo')}
                 </button>
               </div>
@@ -328,29 +329,31 @@ export const App = () => {
         )}
         
         {showActionPlan && (
-          <motion.div className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div className="fixed inset-0 z-50 flex flex-col items-center justify-end md:justify-center p-0 md:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-teal-900/80 backdrop-blur-sm" onClick={() => setShowActionPlan(false)} />
-            <motion.div className="bg-white max-w-lg w-full rounded-2xl shadow-2xl relative overflow-hidden z-10" initial={{ scale: 0.9, y: 30 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 30 }} transition={{ type: 'spring', damping: 25 }}>
-              <div className="bg-gradient-to-r from-brand-teal to-teal-700 p-6 text-white flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white/20 rounded-lg"><Activity className="w-6 h-6" /></div>
-                  <h2 className="text-xl font-bold">{t('ai_rec')}</h2>
+            <motion.div className="bg-white max-w-lg w-full rounded-t-3xl md:rounded-2xl shadow-2xl relative flex flex-col z-10 max-h-[90vh]" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}>
+              <div className="bg-gradient-to-r from-brand-teal to-teal-700 p-5 md:p-6 text-white flex flex-col md:flex-row items-center md:justify-between shrink-0 rounded-t-3xl md:rounded-t-none relative">
+                <div className="w-12 h-1.5 bg-white/30 rounded-full mb-4 md:hidden" />
+                <div className="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
+                  <div className="p-2 bg-white/20 rounded-lg"><Activity className="w-5 h-5 md:w-6 md:h-6" /></div>
+                  <h2 className="text-lg md:text-xl font-bold flex-1">{t('ai_rec')}</h2>
+                  <button onClick={() => setShowActionPlan(false)} className="text-white/70 hover:text-white md:hidden"><X className="w-5 h-5 md:w-6 md:h-6" /></button>
                 </div>
-                <button onClick={() => setShowActionPlan(false)} className="text-white/70 hover:text-white"><X className="w-6 h-6" /></button>
+                <button onClick={() => setShowActionPlan(false)} className="text-white/70 hover:text-white hidden md:block"><X className="w-6 h-6" /></button>
               </div>
-              <div className="p-6 space-y-6">
-                <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-xl">
-                  <h4 className="font-bold text-orange-800 mb-1">{t('market_opp')}</h4>
-                  <p className="text-sm text-orange-700">{t('ai_desc')}</p>
+              <div className="p-5 md:p-6 space-y-4 md:space-y-6 overflow-y-auto">
+                <div className="bg-orange-50 border-l-4 border-orange-500 p-3 md:p-4 rounded-r-xl">
+                  <h4 className="font-bold text-orange-800 mb-1 text-sm md:text-base">{t('market_opp')}</h4>
+                  <p className="text-xs md:text-sm text-orange-700">{t('ai_desc')}</p>
                 </div>
-                <div className="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200">
-                  <JourneyStep icon={<Activity className="w-5 h-5"/>} title={t('today')} desc={t('today_desc')} time={t('now')} />
-                  <JourneyStep icon={<Leaf className="w-5 h-5"/>} title={t('tomorrow')} desc={t('tomorrow_desc')} time={t('in_1_day')} />
-                  <JourneyStep icon={<PackageCheck className="w-5 h-5"/>} title={t('day_3')} desc={t('day_3_desc')} time={t('in_2_days')} isLast />
+                <div className="space-y-3 md:space-y-4 relative before:absolute before:inset-0 before:ml-4 md:before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200">
+                  <JourneyStep icon={<Activity className="w-4 h-4 md:w-5 md:h-5"/>} title={t('today')} desc={t('today_desc')} time={t('now')} />
+                  <JourneyStep icon={<Leaf className="w-4 h-4 md:w-5 md:h-5"/>} title={t('tomorrow')} desc={t('tomorrow_desc')} time={t('in_1_day')} />
+                  <JourneyStep icon={<PackageCheck className="w-4 h-4 md:w-5 md:h-5"/>} title={t('day_3')} desc={t('day_3_desc')} time={t('in_2_days')} isLast />
                 </div>
               </div>
-              <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end">
-                <button onClick={() => setShowActionPlan(false)} className="bg-brand-teal hover:bg-teal-800 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+              <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end shrink-0">
+                <button onClick={() => setShowActionPlan(false)} className="bg-brand-teal w-full md:w-auto hover:bg-teal-800 text-white font-bold py-3 md:py-2 px-6 rounded-xl md:rounded-lg transition-colors text-sm md:text-base">
                   {t('understood')}
                 </button>
               </div>
