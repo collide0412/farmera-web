@@ -85,41 +85,41 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
   };
 
   return (
-    <div className="space-y-8 mt-4 pb-24">
+    <div className="space-y-6 md:space-y-8 mt-2 md:mt-4 pb-28 md:pb-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h2 className="text-3xl font-black text-brand-teal">{t('nav_farm')}</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-brand-teal">{t('nav_farm')}</h2>
         
         {/* Farmer Navigation Tabs */}
-        <div className="flex overflow-x-auto gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-gray-100">
+        <div className="flex overflow-x-auto gap-1 md:gap-2 bg-white p-1 md:p-1.5 rounded-2xl shadow-sm border border-gray-100 no-scrollbar">
           <button 
             onClick={() => setFarmerTab('overview')} 
-            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Activity className="w-4 h-4"/> {t('nav_overview')}
+            <Activity className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_overview')}
           </button>
           <button 
             onClick={() => setFarmerTab('zones')} 
-            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'zones' ? 'bg-brand-teal text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'zones' ? 'bg-brand-teal text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <MapIcon className="w-4 h-4"/> {t('nav_zones')}
+            <MapIcon className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_zones')}
           </button>
           <button 
             onClick={() => setFarmerTab('logistics')} 
-            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'logistics' ? 'bg-orange-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'logistics' ? 'bg-orange-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <Truck className="w-4 h-4"/> {t('nav_logistics')}
+            <Truck className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_logistics')}
           </button>
           <button 
             onClick={() => setFarmerTab('finance')} 
-            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'finance' ? 'bg-yellow-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'finance' ? 'bg-yellow-500 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <PiggyBank className="w-4 h-4"/> {t('nav_finance')}
+            <PiggyBank className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_finance')}
           </button>
           <button 
             onClick={() => setFarmerTab('compliance')} 
-            className={`flex flex-col md:flex-row items-center justify-center gap-1.5 px-4 py-2 rounded-xl transition-all whitespace-nowrap text-sm font-bold ${farmerTab === 'compliance' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'compliance' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
           >
-            <ShieldCheck className="w-4 h-4"/> {t('nav_compliance')}
+            <ShieldCheck className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_compliance')}
           </button>
         </div>
       </div>
@@ -127,12 +127,12 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
       {farmerTab === 'overview' && (
         <>
           {/* Input Form for Actions */}
-          <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
-        <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-          <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+        <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4 flex items-center">
+          <ClipboardCheck className="w-5 h-5 md:w-6 md:h-6 mr-2 text-brand-green" />
           {t('f_log_title')}
         </h3>
-        <form onSubmit={handleAddLog} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form onSubmit={handleAddLog} className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           <div>
             <label className="block text-sm font-bold text-gray-600 mb-1">{t('f_prod')}</label>
             <select value={selectedProduct} onChange={e => {
@@ -177,9 +177,9 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
       </div>
 
       {/* Log Management Table */}
-      <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
-        <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-          <ClipboardCheck className="w-6 h-6 mr-2 text-brand-green" />
+      <div className="bg-white p-4 md:p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+        <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4 flex items-center">
+          <ClipboardCheck className="w-5 h-5 md:w-6 md:h-6 mr-2 text-brand-green" />
           {t('f_manage')} {activeProduct.name[lang]}
         </h3>
         {activeProduct.logs && activeProduct.logs.length > 0 ? (

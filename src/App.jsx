@@ -51,10 +51,17 @@ export const App = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
       <header className={`text-white sticky top-0 z-40 shadow-xl transition-all duration-500 ${isPremium ? "bg-emerald-900 border-b-2 border-yellow-500" : "bg-brand-teal"}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 shrink-0">
-            <img src="./images/farmera_logo.png" alt="FARMERA Logo" className="h-10 md:h-12 lg:h-14 object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
-            <span className="text-2xl font-bold tracking-tight" style={{display: 'none'}}>FARMERA</span>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 py-3 md:py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-2">
+          
+          <div className="flex items-center justify-between w-full md:w-auto">
+            <div className="flex items-center gap-2 shrink-0">
+              <img src="./images/farmera_logo.png" alt="FARMERA Logo" className="h-10 md:h-12 lg:h-14 object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
+              <span className="text-2xl font-bold tracking-tight" style={{display: 'none'}}>FARMERA</span>
+            </div>
+            
+            <button onClick={()=>setShowTrace(true)} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
+              <Fingerprint className="w-4 h-4 shrink-0" /> Trace
+            </button>
           </div>
           
           <nav className="hidden md:flex gap-4 lg:gap-6 items-center justify-center flex-1">
@@ -83,52 +90,56 @@ export const App = () => {
             )}
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline px-2 hover:text-brand-green transition-colors">
-              {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
-            </button>
-              {role === 'farmer' && (
-                <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-xs transition-colors ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
-                  <Crown className="w-3.5 h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
+          <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 md:gap-3 shrink-0 w-full md:w-auto mt-1 md:mt-0 pb-1 md:pb-0 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-2">
+              <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors whitespace-nowrap">
+                {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
+              </button>
+                {role === 'farmer' && (
+                  <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
+                    <Crown className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
+                  </button>
+                )}
+            </div>
+
+            <div className="flex items-center justify-end gap-1 md:gap-3">
+              {/* Currency Switcher */}
+              <div className="relative group h-full flex items-center cursor-pointer">
+                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base">
+                  <Coins className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5"/> <span className="uppercase">{currency}</span>
                 </button>
-              )}
-
-            {/* Currency Switcher */}
-            <div className="relative group h-full flex items-center cursor-pointer">
-              <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-2 text-sm md:text-base">
-                <Coins className="w-5 h-5"/> <span className="uppercase">{currency}</span>
-              </button>
-              <div className="absolute right-0 top-full pt-4 w-24 hidden group-hover:block z-50">
-                <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
-                  <button onClick={()=>setCurrency('VND')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">VND</button>
-                  <button onClick={()=>setCurrency('USD')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">USD</button>
-                  <button onClick={()=>setCurrency('KRW')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">KRW</button>
+                <div className="absolute right-0 top-full pt-2 md:pt-4 w-24 hidden group-hover:block z-50">
+                  <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
+                    <button onClick={()=>setCurrency('VND')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">VND</button>
+                    <button onClick={()=>setCurrency('USD')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">USD</button>
+                    <button onClick={()=>setCurrency('KRW')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">KRW</button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Language Switcher */}
-            <div className="relative group h-full flex items-center cursor-pointer">
-              <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-2 text-sm md:text-base">
-                <Globe className="w-5 h-5"/> <span className="uppercase">{lang}</span>
-              </button>
-              <div className="absolute right-0 top-full pt-4 w-32 hidden group-hover:block z-50">
-                <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
-                  <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">English (EN)</button>
-                  <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">Tiếng Việt (VI)</button>
-                  <button onClick={()=>setLang('ko')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">한국어 (KO)</button>
+              {/* Language Switcher */}
+              <div className="relative group h-full flex items-center cursor-pointer ml-1 md:ml-0">
+                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base">
+                  <Globe className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5"/> <span className="uppercase">{lang}</span>
+                </button>
+                <div className="absolute right-0 top-full pt-2 md:pt-4 w-32 hidden group-hover:block z-50">
+                  <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
+                    <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">English (EN)</button>
+                    <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">Tiếng Việt (VI)</button>
+                    <button onClick={()=>setLang('ko')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">한국어 (KO)</button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <button onClick={()=>setShowTrace(true)} className="bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
-              <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span className="hidden sm:inline">{t('nav_trace')}</span><span className="sm:hidden text-xs">Trace</span>
-            </button>
+              <button onClick={()=>setShowTrace(true)} className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
+                <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span>{t('nav_trace')}</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-8">
+      <main className="flex-1 w-full max-w-7xl mx-auto p-3 sm:p-4 md:p-8">
         <AnimatePresence mode="wait">
           {activeTab === 'consumer' && ( 
             <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> 
@@ -148,18 +159,18 @@ export const App = () => {
         </AnimatePresence>
       </main>
 
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex justify-around p-3 z-40 border-t border-gray-100">
+      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex justify-around p-2 pb-6 z-40 border-t border-gray-100">
         {role === 'consumer' ? (
-          <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-            <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t('store')}</span>
+          <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+            <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('store')}</span>
           </button>
         ) : (
           <>
-            <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-              <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t('farm')}</span>
+            <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+              <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('farm')}</span>
             </button>
-            <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-lg flex-1 ${activeTab === 'admin' ? 'text-brand-green bg-brand-light' : 'text-gray-500'}`}>
-              <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-semibold">{t('ledger')}</span>
+            <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'admin' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+              <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('ledger')}</span>
             </button>
           </>
         )}
