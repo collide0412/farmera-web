@@ -1,5 +1,9 @@
 export const translations = {
   en: {
+
+    day_mon: "Mon", day_tue: "Tue", day_wed: "Wed", day_thu: "Thu", day_fri: "Fri", day_sat: "Sat", day_sun: "Sun",
+    trace_day_1: "Day 1", trace_day_2: "Day 2", trace_day_3: "Day 3", trace_day_4: "Day 4", trace_day_5: "Day 5", trace_day_6: "Day 6", trace_day_7: "Day 7",
+
     lw_title: 'Logistics Overview', lw_est_harvest: 'Est. Harvest:', lw_days_left: 'Days Left', lw_book: 'Book Transport',
     lw_manage: 'Manage Fleet & Routes', lw_trip: 'Trip', lw_route: 'Route: Farm → HCM City', lw_in_transit: 'In Transit',
     lw_eta: 'ETA: 48 hours', lw_est_cost: 'Estimate Cost', lw_payload: 'Total Payload (kg)', lw_placeholder: 'e.g. 5000',
@@ -69,7 +73,11 @@ export const translations = {
     cg_s5: "VietGAP Certification", cg_s5_1: "Online Application", cg_s5_2: "Blockchain Minting"
   },
   vi: {
-    lw_title: 'Tổng Quan Kho Vận', lw_est_harvest: 'Dự Kiến Thu:\\nHoạch: ', lw_days_left: 'Số Ngày Còn Lại', lw_book: 'Đặt Xe Vận Chuyển',
+
+    day_mon: "Th 2", day_tue: "Th 3", day_wed: "Th 4", day_thu: "Th 5", day_fri: "Th 6", day_sat: "Th 7", day_sun: "CN",
+    trace_day_1: "Ngày 1", trace_day_2: "Ngày 2", trace_day_3: "Ngày 3", trace_day_4: "Ngày 4", trace_day_5: "Ngày 5", trace_day_6: "Ngày 6", trace_day_7: "Ngày 7",
+
+    lw_title: 'Tổng Quan Kho Vận', lw_est_harvest: 'Dự Kiến Thu Hoạch: ', lw_days_left: 'Số Ngày Còn Lại', lw_book: 'Đặt Xe Vận Chuyển',
     lw_manage: 'Quản Lý Chuyến Đi', lw_trip: 'Chuyến', lw_route: 'Lộ trình: Nông Trại → TP.HCM', lw_in_transit: 'Đang Di Chuyển',
     lw_eta: 'Thời gian tới: 48 giờ', lw_est_cost: 'Ước Tính Chi Phí', lw_payload: 'Tổng Tải Trọng (kg)', lw_placeholder: 'VD: 5000',
     lw_dest: 'Nơi Đến', lw_hcm: 'TP. Hồ Chí Minh', lw_hanoi: 'Trung Tâm Hà Nội', lw_type: 'Loại Xe',
@@ -132,6 +140,10 @@ export const translations = {
     cg_s5: "Cấp chứng nhận VietGAP", cg_s5_1: "Nộp hồ sơ trực tuyến", cg_s5_2: "Tạo bằng chứng Hash trên Blockchain"
   },
   ko: {
+
+    day_mon: "월", day_tue: "화", day_wed: "수", day_thu: "목", day_fri: "금", day_sat: "토", day_sun: "일",
+    trace_day_1: "1일차", trace_day_2: "2일차", trace_day_3: "3일차", trace_day_4: "4일차", trace_day_5: "5일차", trace_day_6: "6일차", trace_day_7: "7일차",
+
     lw_title: '물류 및 운송', lw_est_harvest: '예상 수확일:', lw_days_left: '남은 일수', lw_book: '운송 예약',
     lw_manage: '차량 및 경로 관리', lw_trip: '일련번호', lw_route: '경로: 농장 → 호치민시', lw_in_transit: '운송 중',
     lw_eta: '예상 도착: 48시간', lw_est_cost: '비용 계산', lw_payload: '화물 중량 (kg)', lw_placeholder: '예: 5000',

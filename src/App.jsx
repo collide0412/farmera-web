@@ -240,7 +240,7 @@ export const App = () => {
                     <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
                       <Line 
                         data={{
-                          labels: ['1P', '2P', '3P', '4P', '5P', '6P', '7P'],
+                          labels: [t('trace_day_1'), t('trace_day_2'), t('trace_day_3'), t('trace_day_4'), t('trace_day_5'), t('trace_day_6'), t('trace_day_7')],
                           datasets: [
                             { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
                             { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
