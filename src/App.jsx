@@ -211,7 +211,7 @@ export const App = () => {
 
                 {traceTab === 'lifecycle' ? (
                   <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
-                    <JourneyStep icon={<Sprout />} title={t('seed')} desc={t('seed_desc')} time="Mar 01, 2026" />
+                    <JourneyStep icon={<Sprout />} title={t('seed')} desc={t('seed_desc')} time={t('date_mar_1')} />
                     
                     {selectedProduct.logs && selectedProduct.logs.map((log, index) => (
                       <JourneyStep 
@@ -223,9 +223,9 @@ export const App = () => {
                       />
                     ))}
 
-                    <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time="Mar - Apr, 2026" />
-                    <JourneyStep icon={<Leaf />} title={t('harvest')} desc={t('harvest_desc')} time="Apr 12, 2026" />
-                    <JourneyStep icon={<PackageCheck />} title={t('pack')} desc={t('pack_desc')} time="Apr 12, 2026" isLast />
+                    <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time={t('date_mar_apr')} />
+                    <JourneyStep icon={<Leaf />} title={t('harvest')} desc={t('harvest_desc')} time={t('date_apr_12')} />
+                    <JourneyStep icon={<PackageCheck />} title={t('pack')} desc={t('pack_desc')} time={t('date_apr_12')} isLast />
                   </div>
                 ) : (
                   <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
