@@ -8,7 +8,7 @@ export const translations = {
 
     // Nav & Shell
     nav_market: "Marketplace", nav_farm: "Smart Farm View", nav_ledger: "Trust Ledger", nav_trace: "Trace Demo",
-    nav_overview: "Overview", nav_zones: "Zoning (IoT)", nav_logistics: "Logistics", nav_finance: "Finance", nav_compliance: "VietGAP / OCOP", certifications: "인증 마크", date_mar_1: "2026년 3월 1일", date_mar_apr: "2026년 3월 - 4월", date_apr_12: "2026년 4월 12일", certifications: "Chứng nhận chất lượng", date_mar_1: "01 Th03, 2026", date_mar_apr: "Th03 - Th04, 2026", date_apr_12: "12 Th04, 2026", certifications: "Certifications", date_mar_1: "Mar 01, 2026", date_mar_apr: "Mar - Apr, 2026", date_apr_12: "Apr 12, 2026", certifications: "인증 마크", date_mar_1: "2026년 3월 1일", date_mar_apr: "2026년 3월 - 4월", date_apr_12: "2026년 4월 12일", certifications: "Chứng nhận chất lượng", date_mar_1: "01 Th03, 2026", date_mar_apr: "Th03 - Th04, 2026", date_apr_12: "12 Th04, 2026", certifications: "Certifications", date_mar_1: "Mar 01, 2026", date_mar_apr: "Mar - Apr, 2026", date_apr_12: "Apr 12, 2026", certifications: "인증 마크", date_mar_1: "2026년 3월 1일", date_mar_apr: "2026년 3월 - 4월", date_apr_12: "2026년 4월 12일", certifications: "Chứng nhận chất lượng", date_mar_1: "01 Th03, 2026", date_mar_apr: "Th03 - Th04, 2026", date_apr_12: "12 Th04, 2026", certifications: "Certifications", date_mar_1: "Mar 01, 2026", date_mar_apr: "Mar - Apr, 2026", date_apr_12: "Apr 12, 2026",
+    nav_overview: "Overview", nav_zones: "Zoning (IoT)", nav_logistics: "Logistics", nav_finance: "Finance", nav_compliance: "VietGAP / OCOP", certifications: "Certifications", date_mar_1: "Mar 01, 2026", date_mar_apr: "Mar - Apr, 2026", date_apr_12: "Apr 12, 2026",
     title: "Direct from Farm to Table.",
     subtitle: "Discover premium, blockchain-verified agricultural produce. 100% transparency.",
     verified: "Verified", scan: "View Origin", store: "Store", farm: "Farm", ledger: "Ledger",
@@ -76,7 +76,7 @@ export const translations = {
     lw_standard: 'Thùng Kín Thường', lw_cold: 'Khoang Lạnh', lw_total: 'Tổng Ước Tính:', lw_confirm: 'Xác Nhận Đặt Chuyến',
 
     nav_market: "Chợ Nông Sản", nav_farm: "Nông Trại Thông Minh", nav_ledger: "Sổ Cái Tin Cậy", nav_trace: "Truy Xuất Nguồn Gốc",
-    nav_overview: "Tổng Quan", nav_zones: "Phân Khu (IoT)", nav_logistics: "Vận Tải", nav_finance: "Tài Chính", nav_compliance: "VietGAP / OCOP",
+    nav_overview: "Tổng Quan", nav_zones: "Phân Khu (IoT)", nav_logistics: "Vận Tải", nav_finance: "Tài Chính", nav_compliance: "VietGAP / OCOP", certifications: "Chứng nhận chất lượng", date_mar_1: "01 Th03, 2026", date_mar_apr: "Th03 - Th04, 2026", date_apr_12: "12 Th04, 2026",
     title: "Từ Nông Trại Đến Bàn Ăn.",
     subtitle: "Khám phá nông sản cao cấp, minh bạch 100% bằng công nghệ blockchain.",
     verified: "Đã Xác Minh", scan: "Xem Nguồn Gốc", store: "Cửa Hàng", farm: "Nông Trại", ledger: "Sổ Cái",
@@ -139,7 +139,7 @@ export const translations = {
     lw_standard: '일반 트럭 (건식)', lw_cold: '냉동 탑차', lw_total: '예상 총액:', lw_confirm: '예약 확인',
 
     nav_market: "농산물 마켓플레이스", nav_farm: "스마트 팜 대시보드", nav_ledger: "블록체인 원장", nav_trace: "이력 추적 데모",
-    nav_overview: "개요", nav_zones: "구역 (IoT)", nav_logistics: "물류", nav_finance: "재무", nav_compliance: "VietGAP 인증",
+    nav_overview: "개요", nav_zones: "구역 (IoT)", nav_logistics: "물류", nav_finance: "재무", nav_compliance: "VietGAP 인증", certifications: "인증 마크", date_mar_1: "2026년 3월 1일", date_mar_apr: "2026년 3월 ~ 4월", date_apr_12: "2026년 4월 12일",
     title: "농장에서 식탁까지, 투명하게.",
     subtitle: "블록체인으로 검증된 100% 투명한 프리미엄 농산물을 만나보세요.",
     verified: "검증 완료", scan: "원산지 보기", store: "상점", farm: "농장", ledger: "원장",

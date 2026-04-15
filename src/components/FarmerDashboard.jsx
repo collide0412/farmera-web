@@ -20,6 +20,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
   
   const chartDataVariant = {
     ...CHART_DATA,
+    labels: [t('day_mon'), t('day_tue'), t('day_wed'), t('day_thu'), t('day_fri'), t('day_sat'), t('day_sun')],
     datasets: [{
       ...CHART_DATA.datasets[0],
       label: `${t('demand')} (${currency}/kg)`,
@@ -195,7 +196,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
               <tbody className="divide-y divide-gray-100/50">
                 {activeProduct.logs.map((log, index) => (
                   <tr key={index} className={`hover:bg-brand-light/30 transition-colors ${editingIndex === index ? 'bg-brand-light/50 border-l-4 border-brand-green' : ''}`}>
-                    <td className="p-4 text-sm font-mono text-gray-600">{log.date}</td>
+                      <td className="p-4 text-sm font-mono text-gray-600">{new Date(log.date).toLocaleDateString(lang === 'vi' ? 'vi-VN' : lang === 'ko' ? 'ko-KR' : 'en-US')}</td>
                     <td className="p-4 font-bold text-brand-teal text-sm">{t(log.type) || log.type}</td>
                     <td className="p-4 text-sm text-gray-600"><span className="whitespace-normal break-words max-w-[200px] md:max-w-xs line-clamp-2">{log.details}</span></td>
                     <td className="p-4 text-right space-x-2">

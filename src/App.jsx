@@ -219,10 +219,9 @@ export const App = () => {
                         icon={<ClipboardCheck className="w-5 h-5" />} 
                         title={log.type} 
                         desc={log.details} 
-                        time={log.date} 
+                        time={new Date(log.date).toLocaleDateString(lang === 'vi' ? 'vi-VN' : lang === 'ko' ? 'ko-KR' : 'en-US', {month: 'short', day: 'numeric', year: 'numeric'})} 
                       />
                     ))}
-
                     <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time={t('date_mar_apr')} />
                     <JourneyStep icon={<Leaf />} title={t('harvest')} desc={t('harvest_desc')} time={t('date_apr_12')} />
                     <JourneyStep icon={<PackageCheck />} title={t('pack')} desc={t('pack_desc')} time={t('date_apr_12')} isLast />
