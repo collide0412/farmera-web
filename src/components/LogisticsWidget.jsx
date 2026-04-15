@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
-import { Truck, CalendarDays, Package, MapPin, Calculator, Snowflake, ArrowRight } from 'lucide-react';
+import { Truck, CalendarDays, Package, MapPin, Calculator, Snowflake, ArrowRight, Map, CheckCircle2, TrendingDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export const LogisticsWidget = () => {
+export const LogisticsWidget = ({ isPremium }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [truckType, setTruckType] = useState('normal'); 
@@ -45,6 +45,26 @@ export const LogisticsWidget = () => {
         </div>
       </div>
 
+      {isPremium && (
+        <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl shadow-md border border-orange-200 animate-in slide-in-from-bottom-4 duration-500 relative overflow-hidden">
+          <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+          <div className="flex items-start gap-4">
+            <div className="bg-orange-100 p-3 rounded-2xl shrink-0"><Truck className="w-8 h-8 text-orange-600" /></div>
+            <div>
+              <h3 className="text-lg font-bold text-orange-900 mb-1 flex items-center gap-2">AI Logistics Smart Match <TrendingDown className="w-4 h-4 text-green-600" /></h3>
+              <p className="text-orange-800 text-sm mb-4 leading-relaxed">Phát hiện 3 hộ nông dân lân cận đang có chuyến xe lên Hà Nội ngày 15/4. Bạn có muốn tham gia ghép chuyến để giảm <strong className="text-green-700 bg-green-100 px-1 rounded">40% chi phí</strong> vận chuyển?</p>
+              <div className="flex gap-3">
+                <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-colors flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4"/> Xác nhận ghép chuyến
+                </button>
+                <button className="bg-white text-orange-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:bg-orange-50 transition-colors border border-orange-200">
+                  Xem chi tiết lịch trình
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
           <MapPin className="text-brand-green" /> {t('lw_manage')}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
-import { Leaf, Warehouse, Sprout, Apple, Droplets, Thermometer, Activity, AlertTriangle } from 'lucide-react';
+import { Leaf, Warehouse, Sprout, Apple, Droplets, Thermometer, Activity, AlertTriangle, Lock } from 'lucide-react';
 import { DashboardCard } from './Shared.jsx';
+import { Map as MapIcon } from 'lucide-react';
 
-export const FarmZoneMap = () => {
+export const FarmZoneMap = ({ isPremium }) => {
   const { t } = useTranslation();
 
   const ZONES = [
@@ -20,6 +21,27 @@ export const FarmZoneMap = () => {
       <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
         <Activity className="w-6 h-6 text-brand-green" /> {t('fz_title')}
       </h3>
+      {isPremium && <p className="text-sm font-bold text-brand-green mb-4 flex items-center gap-2 animate-pulse"><Activity className="w-4 h-4"/> Dữ liệu được lấy trực tiếp từ Gateway IoT mỗi 30 giây</p>}
+      
+      {!isPremium ? (
+        <div className="bg-gray-50 rounded-2xl p-8 text-center border-2 border-dashed border-gray-200">
+           <MapIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+           <h4 className="text-xl font-bold text-gray-700 mb-2">Bản Đồ Nông Trại Tiêu Chuẩn</h4>
+           <p className="text-gray-500 mb-6 max-w-md mx-auto">Chế độ Standard hiển thị thông số tổng quan của nông trại và được cập nhật 1 lần/ngày. Nâng cấp Premium để xem lưới từng khu vực với dữ liệu IoT Real-time.</p>
+           <div className="flex justify-center gap-6">
+             <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm w-32">
+               <Thermometer className="w-8 h-8 text-orange-500 mx-auto mb-2" />
+               <p className="font-black text-xl text-gray-800">29°C</p>
+               <p className="text-xs font-bold text-gray-400">TRUNG BÌNH</p>
+             </div>
+             <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm w-32">
+               <Droplets className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+               <p className="font-black text-xl text-gray-800">65%</p>
+               <p className="text-xs font-bold text-gray-400">ĐỘ ẨM</p>
+             </div>
+           </div>
+        </div>
+      ) : (
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 grid grid-cols-2 gap-4">
           {ZONES.map(z => {
@@ -104,6 +126,8 @@ export const FarmZoneMap = () => {
           </div>
         </div>
       </div>
+      </div>
+      )}
     </div>
   );
 };

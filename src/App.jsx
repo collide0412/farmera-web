@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ScanLine, ShieldCheck, Activity, Fingerprint, 
   X, Sprout, PackageCheck, Store, Globe,
   ClipboardCheck, CheckCircle2, Leaf, Coins,
-  Thermometer, Droplets
+  Thermometer, Droplets, Crown, Lock, Star
 } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
@@ -28,6 +28,10 @@ export const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const { lang, setLang, t } = useTranslation();
+  const [isPremium, setIsPremium] = useState(() => localStorage.getItem('premium') === 'true');
+  useEffect(() => { localStorage.setItem('premium', isPremium); }, [isPremium]);
+  const [isPremium, setIsPremium] = useState(() => localStorage.getItem('premium') === 'true');
+  useEffect(() => { localStorage.setItem('premium', isPremium); }, [isPremium]);
   const [currency, setCurrency] = useState('VND');
   const [showTrace, setShowTrace] = useState(false);
   const [showActionPlan, setShowActionPlan] = useState(false);
@@ -48,7 +52,7 @@ export const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
-      <header className="bg-brand-teal text-white sticky top-0 z-40 shadow-xl">
+      <header className={`text-white sticky top-0 z-40 shadow-xl transition-all duration-500 ${isPremium ? "bg-emerald-900 border-b-2 border-yellow-500" : "bg-brand-teal"}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 shrink-0">
             <img src="./images/farmera_logo.png" alt="FARMERA Logo" className="h-10 md:h-12 lg:h-14 object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
@@ -84,6 +88,12 @@ export const App = () => {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline px-2 hover:text-brand-green transition-colors">
               {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
+            </button>
+            <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-xs transition-colors ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
+              <Crown className="w-3.5 h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
+            </button>
+            <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-xs transition-colors ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
+              <Crown className="w-3.5 h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
             </button>
 
             {/* Currency Switcher */}
@@ -125,12 +135,12 @@ export const App = () => {
         <AnimatePresence mode="wait">
           {activeTab === 'consumer' && ( 
             <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> 
-              <ConsumerMarketplace products={products} lang={lang} currency={currency} onScan={handleScan} /> 
+              <ConsumerMarketplace products={products} lang={lang} currency={currency} onScan={handleScan} isPremium={isPremium} /> 
             </motion.div> 
           )}
           {activeTab === 'farmer' && ( 
             <motion.div key="farmer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> 
-              <FarmerDashboard products={products} setProducts={setProducts} lang={lang} currency={currency} setShowActionPlan={setShowActionPlan} /> 
+              <FarmerDashboard products={products} setProducts={setProducts} lang={lang} currency={currency} setShowActionPlan={setShowActionPlan} isPremium={isPremium} /> 
             </motion.div> 
           )}
           {activeTab === 'admin' && ( 
@@ -228,28 +238,30 @@ export const App = () => {
                   </div>
                 ) : (
                   <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div className="bg-green-50 border border-green-200 p-4 rounded-xl mb-6 flex items-start gap-3">
-                      <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
-                      <div>
-                        <h4 className="font-bold text-green-800 text-sm">{t('trace_verified_data')}</h4>
-                        <p className="text-xs text-green-700 mt-1">{t('trace_verified_desc')}</p>
+                    {isPremium ? (
+                      <>
+                        <div className="bg-green-50 border border-green-500 p-4 rounded-xl mb-6 flex items-start gap-3 relative overflow-hidden">
+                          <Crown className="absolute right-[-10px] top-[-10px] w-12 h-12 text-yellow-200/50" />
+                          <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="font-bold text-green-800 text-sm flex items-center gap-2">{t('trace_verified_data')} <span className="bg-yellow-400 text-yellow-900 text-[10px] px-1.5 py-0.5 rounded-sm uppercase tracking-wider font-black">Verified by Block & IoT</span></h4>
+                            <p className="text-xs text-green-700 mt-1">{t('trace_verified_desc')}</p>
+                          </div>
+                        </div>
+                      <h4 className="font-bold text-gray-700 text-sm mb-3">{t('trace_7_days')}</h4>
+                      <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
+                        <Line 
+                          data={{
+                            labels: [t('trace_day_1'), t('trace_day_2'), t('trace_day_3'), t('trace_day_4'), t('trace_day_5'), t('trace_day_6'), t('trace_day_7')],
+                            datasets: [
+                              { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
+                              { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
+                            ]
+                          }} 
+                          options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
+                        />
                       </div>
-                    </div>
-                    
-                    <h4 className="font-bold text-gray-700 text-sm mb-3">{t('trace_7_days')}</h4>
-                    <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
-                      <Line 
-                        data={{
-                          labels: [t('trace_day_1'), t('trace_day_2'), t('trace_day_3'), t('trace_day_4'), t('trace_day_5'), t('trace_day_6'), t('trace_day_7')],
-                          datasets: [
-                            { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
-                            { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
-                          ]
-                        }} 
-                        options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="grid grid-cols-2 gap-4 mt-4">
                       <div className="bg-orange-50 p-3 rounded-lg flex items-center gap-2 border border-orange-100">
                         <Thermometer className="w-5 h-5 text-orange-500" />
                         <div><p className="text-xs text-orange-600 font-bold">{t('trace_avg_temp')}</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
@@ -259,10 +271,22 @@ export const App = () => {
                         <div><p className="text-xs text-blue-600 font-bold">{t('trace_avg_humid')}</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
                       </div>
                     </div>
+                  </>
+                  ) : (
+                    <div className="bg-gray-100 rounded-2xl p-6 lg:p-10 flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-300 mb-6 relative hover:border-brand-green/50 transition-colors">
+                      <div className="absolute inset-0 bg-white/40 blur-[2px] z-0"></div>
+                      <Lock className="w-12 h-12 text-gray-400 mb-3 z-10" />
+                      <h4 className="font-bold text-gray-700 z-10 text-lg mb-2">Dữ liệu không khả dụng</h4>
+                      <p className="text-gray-500 text-sm z-10 mb-5 max-w-[250px]">Nâng cấp lên gói Premium để xem biểu đồ môi trường IoT thực tế 24/7 của sản phẩm này.</p>
+                      <button onClick={() => setIsPremium(true)} className="z-10 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 border border-emerald-400/50">
+                        <Crown className="w-4 h-4" /> Upgrade to Premium
+                      </button>
+                    </div>
+                  )}
                   </div>
                 )}
                 
-                <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                <div className={`mt-10 rounded-xl overflow-hidden shadow-lg border ${isPremium ? 'border-yellow-400 shadow-yellow-100/50' : 'border-gray-200'}`}>
                     <img src={`./images/do_mixi.png?v=${Date.now()}`} alt="Farmer" className="w-full h-48 object-cover" />
                   <div className="p-4 bg-white">
                     <p className="font-bold">{t('meet_farmer')} Phùng Văn A</p>

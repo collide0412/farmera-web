@@ -9,7 +9,7 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-export const FinancialImpact = ({ currency }) => {
+export const FinancialImpact = ({ currency, isPremium }) => {
   const { t } = useTranslation();
 
   const fertilizerData = {

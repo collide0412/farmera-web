@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck } from 'lucide-react';
+import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
   LineElement, Title, Tooltip, Legend, Filler
@@ -15,7 +15,7 @@ import { ComplianceGuide } from './ComplianceGuide.jsx';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-export const FarmerDashboard = ({ products, setProducts, currency, setShowActionPlan }) => {
+export const FarmerDashboard = ({ products, setProducts, currency, setShowActionPlan, isPremium }) => {
   const { t, lang } = useTranslation();
   
   const chartDataVariant = {
@@ -246,10 +246,10 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
       </>
       )}
 
-      {farmerTab === 'zones' && <FarmZoneMap />}
-      {farmerTab === 'compliance' && <ComplianceGuide />}
-      {farmerTab === 'logistics' && <LogisticsWidget />}
-      {farmerTab === 'finance' && <FinancialImpact currency={currency} />}
+      {farmerTab === 'zones' && <FarmZoneMap isPremium={isPremium} />}
+      {farmerTab === 'compliance' && <ComplianceGuide isPremium={isPremium} />}
+      {farmerTab === 'logistics' && <LogisticsWidget isPremium={isPremium} />}
+      {farmerTab === 'finance' && <FinancialImpact currency={currency} isPremium={isPremium} />}
 
     </div>
   );
