@@ -235,37 +235,47 @@ export const App = () => {
                   </div>
                 ) : (
                   <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div className="bg-green-50 border border-green-500 p-4 rounded-xl mb-6 flex items-start gap-3 relative overflow-hidden">
-                          <Crown className="absolute right-[-10px] top-[-10px] w-12 h-12 text-yellow-200/50" />
-                          <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
-                          <div>
-                            <h4 className="font-bold text-green-800 text-sm flex items-center gap-2">{t('trace_verified_data')} <span className="bg-yellow-400 text-yellow-900 text-[10px] px-1.5 py-0.5 rounded-sm uppercase tracking-wider font-black">Verified by Block & IoT</span></h4>
-                            <p className="text-xs text-green-700 mt-1">{t('trace_verified_desc')}</p>
+                    {selectedProduct.id === 2 ? (
+                      <div className="flex flex-col items-center justify-center p-8 bg-gray-50 border border-dashed border-gray-300 rounded-xl text-center mt-4">
+                        <Lock className="w-12 h-12 text-gray-400 mb-3" />
+                        <h4 className="font-bold text-gray-600 mb-1">Dữ liệu môi trường không khả dụng</h4>
+                        <p className="text-sm text-gray-500 max-w-xs leading-relaxed">Nông trại này chưa được trang bị gói Premium IoT. Không thể trích xuất dữ liệu cảm biến độ ẩm, nhiệt độ theo thời gian thực.</p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="bg-green-50 border border-green-500 p-4 rounded-xl mb-6 flex items-start gap-3 relative overflow-hidden">
+                              <Crown className="absolute right-[-10px] top-[-10px] w-12 h-12 text-yellow-200/50" />
+                              <ShieldCheck className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
+                              <div>
+                                <h4 className="font-bold text-green-800 text-sm flex items-center gap-2">{t('trace_verified_data')} <span className="bg-yellow-400 text-yellow-900 text-[10px] px-1.5 py-0.5 rounded-sm uppercase tracking-wider font-black">Verified by Block & IoT</span></h4>
+                                <p className="text-xs text-green-700 mt-1">{t('trace_verified_desc')}</p>
+                              </div>
+                            </div>
+                          <h4 className="font-bold text-gray-700 text-sm mb-3">{t('trace_7_days')}</h4>
+                          <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
+                            <Line 
+                              data={{
+                                labels: [t('trace_day_1'), t('trace_day_2'), t('trace_day_3'), t('trace_day_4'), t('trace_day_5'), t('trace_day_6'), t('trace_day_7')],
+                                datasets: [
+                                  { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
+                                  { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
+                                ]
+                              }} 
+                              options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
+                            />
+                          </div>
+                          <div className="grid grid-cols-2 gap-4 mt-4">
+                          <div className="bg-orange-50 p-3 rounded-lg flex items-center gap-2 border border-orange-100">
+                            <Thermometer className="w-5 h-5 text-orange-500" />
+                            <div><p className="text-xs text-orange-600 font-bold">{t('trace_avg_temp')}</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
+                          </div>
+                          <div className="bg-blue-50 p-3 rounded-lg flex items-center gap-2 border border-blue-100">
+                            <Droplets className="w-5 h-5 text-blue-500" />
+                            <div><p className="text-xs text-blue-600 font-bold">{t('trace_avg_humid')}</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
                           </div>
                         </div>
-                      <h4 className="font-bold text-gray-700 text-sm mb-3">{t('trace_7_days')}</h4>
-                      <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64">
-                        <Line 
-                          data={{
-                            labels: [t('trace_day_1'), t('trace_day_2'), t('trace_day_3'), t('trace_day_4'), t('trace_day_5'), t('trace_day_6'), t('trace_day_7')],
-                            datasets: [
-                              { label: t('trace_temp'), data: [28, 29, 27, 26, 30, 28, 27], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.1)', tension: 0.4, yAxisID: 'y' },
-                              { label: t('trace_humid'), data: [65, 62, 60, 68, 70, 72, 68], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', tension: 0.4, yAxisID: 'y1' }
-                            ]
-                          }} 
-                          options={{ responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left' }, y1: { type: 'linear', position: 'right' } } }} 
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 mt-4">
-                      <div className="bg-orange-50 p-3 rounded-lg flex items-center gap-2 border border-orange-100">
-                        <Thermometer className="w-5 h-5 text-orange-500" />
-                        <div><p className="text-xs text-orange-600 font-bold">{t('trace_avg_temp')}</p><p className="font-black text-orange-700 text-lg">27.8°C</p></div>
-                      </div>
-                      <div className="bg-blue-50 p-3 rounded-lg flex items-center gap-2 border border-blue-100">
-                        <Droplets className="w-5 h-5 text-blue-500" />
-                        <div><p className="text-xs text-blue-600 font-bold">{t('trace_avg_humid')}</p><p className="font-black text-blue-700 text-lg">66.4%</p></div>
-                      </div>
-                    </div>
+                      </>
+                    )}
                   </div>
                 )}
                 
