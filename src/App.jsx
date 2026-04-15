@@ -229,7 +229,9 @@ export const App = () => {
                         time={new Date(log.date).toLocaleDateString(lang === 'vi' ? 'vi-VN' : lang === 'ko' ? 'ko-KR' : 'en-US', {month: 'short', day: 'numeric', year: 'numeric'})} 
                       />
                     ))}
-                    <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time={t('date_mar_apr')} />
+                    {selectedProduct.id !== 2 && (
+                      <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time={t('date_mar_apr')} />
+                    )}
                     <JourneyStep icon={<Leaf />} title={t('harvest')} desc={t('harvest_desc')} time={t('date_apr_12')} />
                     <JourneyStep icon={<PackageCheck />} title={t('pack')} desc={t('pack_desc')} time={t('date_apr_12')} isLast />
                   </div>
@@ -238,8 +240,8 @@ export const App = () => {
                     {selectedProduct.id === 2 ? (
                       <div className="flex flex-col items-center justify-center p-8 bg-gray-50 border border-dashed border-gray-300 rounded-xl text-center mt-4">
                         <Lock className="w-12 h-12 text-gray-400 mb-3" />
-                        <h4 className="font-bold text-gray-600 mb-1">Dữ liệu môi trường không khả dụng</h4>
-                        <p className="text-sm text-gray-500 max-w-xs leading-relaxed">Nông trại này chưa được trang bị gói Premium IoT. Không thể trích xuất dữ liệu cảm biến độ ẩm, nhiệt độ theo thời gian thực.</p>
+                        <h4 className="font-bold text-gray-600 mb-1">Dữ liệu đang được cập nhật</h4>
+                        <p className="text-sm text-gray-500 max-w-xs leading-relaxed">Nông trại đang trong quá trình số hóa và sẽ sớm triển khai hệ thống cảm biến thông minh.</p>
                       </div>
                     ) : (
                       <>
