@@ -17,6 +17,20 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 export const FarmerDashboard = ({ products, setProducts, currency, setShowActionPlan }) => {
   const { t, lang } = useTranslation();
+  
+  const chartDataVariant = {
+    ...CHART_DATA,
+    datasets: [{
+      ...CHART_DATA.datasets[0],
+      label: `${t('demand')} (${currency}/kg)`,
+      data: CHART_DATA.datasets[0].data.map(val => 
+        currency === 'KRW' ? Math.round(val / 18.75) :
+        currency === 'USD' ? parseFloat((val / 25000).toFixed(2)) :
+        val
+      )
+    }]
+  };
+
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
   const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
   const [logType, setLogType] = useState('f_type_fert');
@@ -212,7 +226,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2">
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><TrendingUp className="text-brand-green" /> {t('demand')}</h3>
-          <div className="h-64"><Line data={CHART_DATA} options={CHART_OPTIONS} /></div>
+            <div className="h-64"><Line data={chartDataVariant} options={CHART_OPTIONS} /></div>
         </div>
         <div className="bg-gradient-to-br from-brand-teal to-teal-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col justify-center">
           <Leaf className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />

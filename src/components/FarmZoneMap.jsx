@@ -57,12 +57,12 @@ export const FarmZoneMap = () => {
             {selected.stats.moist ? (
               <div className="grid grid-cols-2 gap-2">
                 <div className={`p-3 rounded-xl border flex items-center justify-between ${selected.stats.moist < 30 ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-100 text-gray-700'}`}>
-                  <span className="flex items-center gap-1 text-sm font-bold"><Droplets className="w-4 h-4"/> Nước</span>
-                  <span className="font-black">{selected.stats.moist}%</span>
-                </div>
-                <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700">
-                  <span className="flex items-center gap-1 text-sm font-bold"><Thermometer className="w-4 h-4"/> Nhiệt</span>
-                  <span className="font-black">{selected.stats.temp}°C</span>
+                    <span className="flex items-center gap-1 text-sm font-bold"><Droplets className="w-4 h-4"/> {t('fz_water')}</span>
+                    <span className="font-black">{selected.stats.moist}%</span>
+                  </div>
+                  <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700">
+                    <span className="flex items-center gap-1 text-sm font-bold"><Thermometer className="w-4 h-4"/> {t('fz_temp')}</span>
+                    <span className="font-black">{selected.stats.temp}°C</span>
                 </div>
                 <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700 col-span-2">
                   <span className="flex items-center gap-1 text-sm font-bold"><Activity className="w-4 h-4"/> pH</span>

@@ -77,7 +77,7 @@ export const LogisticsWidget = () => {
               <div className="space-y-4 mb-8">
                  <div>
                    <label className="block text-sm font-bold text-gray-600 mb-1">{t('lw_payload')}</label>
-                   <input type="number" value={weight} onChange={e => setWeight(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl" placeholder="{t('lw_placeholder')}" />
+                   <input type="number" value={weight} onChange={e => setWeight(e.target.value)} className="w-full p-3 border border-gray-200 rounded-xl" placeholder={t('lw_placeholder')} />
                  </div>
                  <div>
                    <label className="block text-sm font-bold text-gray-600 mb-1">{t('lw_dest')}</label>
