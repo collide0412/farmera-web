@@ -126,7 +126,6 @@ export const FarmZoneMap = ({ isPremium }) => {
           </div>
         </div>
       </div>
-      </div>
       )}
     </div>
   );
