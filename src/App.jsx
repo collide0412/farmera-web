@@ -30,8 +30,6 @@ export const App = () => {
   const { lang, setLang, t } = useTranslation();
   const [isPremium, setIsPremium] = useState(() => localStorage.getItem('premium') === 'true');
   useEffect(() => { localStorage.setItem('premium', isPremium); }, [isPremium]);
-  const [isPremium, setIsPremium] = useState(() => localStorage.getItem('premium') === 'true');
-  useEffect(() => { localStorage.setItem('premium', isPremium); }, [isPremium]);
   const [currency, setCurrency] = useState('VND');
   const [showTrace, setShowTrace] = useState(false);
   const [showActionPlan, setShowActionPlan] = useState(false);
