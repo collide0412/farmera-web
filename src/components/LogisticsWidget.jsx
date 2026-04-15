@@ -10,6 +10,16 @@ export const LogisticsWidget = ({ isPremium }) => {
   const [weight, setWeight] = useState('');
   const [destination, setDestination] = useState('hanoi');
 
+  const [aiMatchConfirmed, setAiMatchConfirmed] = useState(false);
+  const [showScheduleResult, setShowScheduleResult] = useState(false);
+  const [showScheduleDetails, setShowScheduleDetails] = useState(false);
+
+  const handleConfirmAiMatch = () => {
+    setAiMatchConfirmed(true);
+    setShowScheduleResult(true);
+    setTimeout(() => setShowScheduleResult(false), 3000);
+  };
+
   const seedDate = new Date('2026-03-01');
   const harvestDate = new Date(seedDate);
   harvestDate.setDate(harvestDate.getDate() + 90);
@@ -46,18 +56,26 @@ export const LogisticsWidget = ({ isPremium }) => {
       </div>
 
       {isPremium && (
-        <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl shadow-md border border-orange-200 animate-in slide-in-from-bottom-4 duration-500 relative overflow-hidden">
-          <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+        <div className={`p-6 rounded-2xl shadow-md animate-in slide-in-from-bottom-4 duration-500 relative overflow-hidden transition-all ${aiMatchConfirmed ? 'bg-green-50 border border-green-200' : 'bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200'}`}>
+          {!aiMatchConfirmed && <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>}
           <div className="flex items-start gap-4">
-            <div className="bg-orange-100 p-3 rounded-2xl shrink-0"><Truck className="w-8 h-8 text-orange-600" /></div>
+            <div className={`p-3 rounded-2xl shrink-0 ${aiMatchConfirmed ? 'bg-green-100' : 'bg-orange-100'}`}><Truck className={`w-8 h-8 ${aiMatchConfirmed ? 'text-green-600' : 'text-orange-600'}`} /></div>
             <div>
-              <h3 className="text-lg font-bold text-orange-900 mb-1 flex items-center gap-2">AI Logistics Smart Match <TrendingDown className="w-4 h-4 text-green-600" /></h3>
+              <h3 className={`text-lg font-bold mb-1 flex items-center gap-2 ${aiMatchConfirmed ? 'text-green-900' : 'text-orange-900'}`}>
+                AI Logistics Smart Match {aiMatchConfirmed ? <CheckCircle2 className="w-5 h-5 text-green-500" /> : <TrendingDown className="w-4 h-4 text-green-600" />}
+              </h3>
+              {aiMatchConfirmed ? (
+                <p className="text-green-800 text-sm mb-4 leading-relaxed font-medium">Đã xác nhận ghép đơn hàng thành công! Đơn vị vận chuyển sẽ liên hệ với bạn trong vòng 30 phút.</p>
+              ) : (
                 <p className="text-orange-800 text-sm mb-4 leading-relaxed">Phát hiện xe tải của HTX X đang còn trống 40% tải trọng, khởi hành lúc 5h sáng mai. Bạn có muốn ghép đơn hàng 200kg vải thiều vào không?</p>
+              )}
               <div className="flex gap-3">
-                <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-colors flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4"/> Xác nhận ghép chuyến
-                </button>
-                <button className="bg-white text-orange-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:bg-orange-50 transition-colors border border-orange-200">
+                {!aiMatchConfirmed && (
+                  <button onClick={handleConfirmAiMatch} className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-colors flex items-center gap-2 active:scale-95">
+                    <CheckCircle2 className="w-4 h-4"/> Xác nhận ghép chuyến
+                  </button>
+                )}
+                <button onClick={() => setShowScheduleDetails(true)} className={`bg-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors border active:scale-95 ${aiMatchConfirmed ? 'text-green-700 hover:bg-green-50 border-green-200' : 'text-orange-700 hover:bg-orange-50 border-orange-200'}`}>
                   Xem chi tiết lịch trình
                 </button>
               </div>
@@ -126,6 +144,72 @@ export const LogisticsWidget = ({ isPremium }) => {
               
               <button onClick={() => setShowModal(false)} className="w-full py-4 bg-brand-green text-white font-bold rounded-xl hover:bg-green-700 shadow-lg">{t('lw_confirm')}</button>
             </motion.div>
+          </motion.div>
+        )}
+
+        {/* Schedule Details Modal */}
+        {showScheduleDetails && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-2xl relative">
+              <button onClick={() => setShowScheduleDetails(false)} className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-gray-200 transition-colors">✕</button>
+              
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-orange-100 p-2.5 rounded-xl"><Truck className="w-6 h-6 text-orange-600" /></div>
+                <div>
+                  <h2 className="text-xl font-black text-gray-800">Chi tiết lịch trình AI</h2>
+                  <p className="text-sm text-gray-500">Mã chuyến: AI-TRK-9902</p>
+                </div>
+              </div>
+
+              <div className="relative border-l-2 border-dashed border-gray-200 ml-4 space-y-6 pb-4">
+                <div className="relative pl-6">
+                  <div className="absolute -left-[9px] top-1 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow-sm"></div>
+                  <h4 className="font-bold text-gray-800">1. Lấy hàng tại vườn bạn</h4>
+                  <p className="text-sm text-gray-500">Dự kiến: 05:00 Sáng mai</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">200kg vải thiều - Thanh Hà</p>
+                </div>
+                <div className="relative pl-6">
+                  <div className="absolute -left-[9px] top-1 w-4 h-4 bg-orange-400 rounded-full border-4 border-white shadow-sm"></div>
+                  <h4 className="font-bold text-gray-800">2. Lấy hàng tại HTX X</h4>
+                  <p className="text-sm text-gray-500">Dự kiến: 06:30 Sáng mai</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">800kg thanh long - Lục Ngạn</p>
+                </div>
+                <div className="relative pl-6">
+                  <div className="absolute -left-[9px] top-1 w-4 h-4 bg-brand-teal rounded-full border-4 border-white shadow-sm"></div>
+                  <h4 className="font-bold text-gray-800">3. Giao hàng tại chợ đầu mối</h4>
+                  <p className="text-sm text-gray-500">Dự kiến: 09:00 Sáng mai</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">Chợ đầu mối Long Biên, Hà Nội</p>
+                </div>
+              </div>
+
+              <div className="mt-6 bg-orange-50 p-4 rounded-xl border border-orange-100 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-bold text-orange-900">Chi phí ước tính (Tiết kiệm 40%)</p>
+                  <p className="text-xs text-orange-700">Giá ghép: 450,000 VND</p>
+                </div>
+                <span className="text-xl font-black text-orange-600">450k</span>
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <button onClick={() => setShowScheduleDetails(false)} className="flex-1 py-3.5 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">Đóng</button>
+                {!aiMatchConfirmed && (
+                  <button onClick={() => { handleConfirmAiMatch(); setShowScheduleDetails(false); }} className="flex-1 py-3.5 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 shadow-md transition-colors flex items-center justify-center gap-2">
+                    <CheckCircle2 className="w-5 h-5"/> Xác nhận ghép
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Success Toast / Notification for Confirm */}
+        {showScheduleResult && (
+          <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.9 }} className="fixed bottom-20 left-4 right-4 md:left-auto md:right-8 md:bottom-8 md:w-96 z-[70] bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-4 flex items-start gap-4">
+            <div className="bg-green-100 p-2 rounded-full shrink-0"><CheckCircle2 className="w-6 h-6 text-green-600" /></div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Ghép chuyến thành công!</h4>
+              <p className="text-sm text-gray-600">Đơn hàng của bạn đã được thêm vào lộ trình AI-TRK-9902. Tài xế sẽ liên hệ xác nhận trong 30 phút.</p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

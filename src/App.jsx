@@ -90,13 +90,13 @@ export const App = () => {
             )}
           </nav>
 
-          <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 md:gap-3 shrink-0 w-full md:w-auto mt-1 md:mt-0 pb-1 md:pb-0 overflow-x-auto no-scrollbar">
+          <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 md:gap-3 shrink-0 w-full md:w-auto mt-2 md:mt-0 pb-1 md:pb-0">
             <div className="flex items-center gap-2">
               <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors whitespace-nowrap">
                 {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
               </button>
                 {role === 'farmer' && (
-                  <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
+                  <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
                     <Crown className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
                   </button>
                 )}
@@ -104,11 +104,11 @@ export const App = () => {
 
             <div className="flex items-center justify-end gap-1 md:gap-3">
               {/* Currency Switcher */}
-              <div className="relative group h-full flex items-center cursor-pointer">
-                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base">
+              <div className="relative group h-full flex items-center cursor-pointer" tabIndex="0">
+                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base focus:text-brand-green">
                   <Coins className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5"/> <span className="uppercase">{currency}</span>
                 </button>
-                <div className="absolute right-0 top-full pt-2 md:pt-4 w-24 hidden group-hover:block z-50">
+                <div className="absolute right-0 top-full pt-2 md:pt-4 w-24 hidden group-hover:block group-focus-within:block focus-within:block z-50">
                   <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
                     <button onClick={()=>setCurrency('VND')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">VND</button>
                     <button onClick={()=>setCurrency('USD')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">USD</button>
@@ -118,11 +118,11 @@ export const App = () => {
               </div>
 
               {/* Language Switcher */}
-              <div className="relative group h-full flex items-center cursor-pointer ml-1 md:ml-0">
-                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base">
+              <div className="relative group h-full flex items-center cursor-pointer ml-1 md:ml-0" tabIndex="0">
+                <button className="flex items-center gap-1 font-medium hover:text-brand-green outline-none py-1 md:py-2 text-[10px] md:text-sm lg:text-base focus:text-brand-green">
                   <Globe className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5"/> <span className="uppercase">{lang}</span>
                 </button>
-                <div className="absolute right-0 top-full pt-2 md:pt-4 w-32 hidden group-hover:block z-50">
+                <div className="absolute right-0 top-full pt-2 md:pt-4 w-32 hidden group-hover:block group-focus-within:block focus-within:block z-50">
                   <div className="bg-white rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.1)] text-gray-800 border overflow-hidden">
                     <button onClick={()=>setLang('en')} className="block w-full text-left px-4 py-3 hover:bg-brand-light font-medium text-sm transition-colors text-gray-800">English (EN)</button>
                     <button onClick={()=>setLang('vi')} className="block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-medium text-sm transition-colors text-gray-800">Tiếng Việt (VI)</button>
