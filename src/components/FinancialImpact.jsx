@@ -1,7 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
 import { formatCurrency } from '../utils/formatters.js';
-import { Coins, TrendingUp, PiggyBank, ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { Coins, TrendingUp, PiggyBank, ArrowDownRight, ArrowUpRight, Lock } from 'lucide-react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement
@@ -29,7 +29,18 @@ export const FinancialImpact = ({ currency, isPremium }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
+      {!isPremium && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-white/40 backdrop-blur-md rounded-3xl min-h-[400px]">
+          <div className="bg-white p-8 rounded-2xl shadow-xl text-center max-w-sm border border-gray-100">
+            <PiggyBank className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="font-black text-xl text-gray-800 mb-2">Báo Cáo Tài Chính Premium</h3>
+            <p className="text-gray-500 mb-6">Mở khóa công cụ phân tích dòng tiền giúp bạn tối ưu lợi nhuận lưu vết sổ cái.</p>
+            <button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-950 font-bold px-6 py-2.5 rounded-full shadow-md w-full">Nâng Cấp Premium</button>
+          </div>
+        </div>
+      )}
+      <div className={`space-y-6 ${!isPremium ? 'opacity-20 pointer-events-none' : ''}`}>
       <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 rounded-3xl shadow-lg border border-brand-green relative overflow-hidden text-white flex flex-col md:flex-row items-center justify-between">
         <PiggyBank className="absolute -left-6 -bottom-6 w-48 h-48 text-white/10" />
         <div className="relative z-10 w-full md:w-2/3 mb-6 md:mb-0">
@@ -72,6 +83,7 @@ export const FinancialImpact = ({ currency, isPremium }) => {
             <Bar data={revenueData} options={{ responsive: true, maintainAspectRatio: false }} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

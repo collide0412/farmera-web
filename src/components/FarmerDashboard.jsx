@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
@@ -232,15 +232,27 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
         <div className="bg-gradient-to-br from-brand-teal to-teal-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col justify-center">
           <Leaf className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10" />
           <h3 className="font-bold text-xl mb-2 relative z-10">{t('ai_rec')}</h3>
-          <p className="text-teal-50 leading-relaxed mb-6 relative z-10 text-sm md:text-base">{t('ai_desc')}</p>
-          <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
-            <button 
-              onClick={() => setShowActionPlan(true)} 
-              className="bg-brand-green text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-emerald-400 transition transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-2">
-              <Activity className="w-5 h-5" />
-              {t('view_plan')}
-            </button>
-          </div>
+          {isPremium ? (
+            <>
+              <p className="text-white font-medium bg-black/20 p-3 rounded-lg border border-teal-500/30 leading-relaxed mb-6 relative z-10 text-sm md:text-base">
+                "Dự báo đêm nay sương muối tại Sơn La, hãy kích hoạt hệ thống phun sương ấm lúc 2h sáng."
+              </p>
+              <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
+                <button 
+                  onClick={() => setShowActionPlan(true)} 
+                  className="bg-brand-green text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-emerald-400 transition transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-2">
+                  <Activity className="w-5 h-5" />
+                  {t('view_plan')}
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="relative z-10 flex flex-col items-center justify-center p-4 bg-teal-950/60 backdrop-blur-md rounded-xl mt-2 text-center border border-teal-500/30">
+              <Lock className="w-8 h-8 text-yellow-400 mb-2" />
+              <p className="font-bold text-sm text-yellow-100">Tính năng Premium</p>
+              <p className="text-xs text-teal-100 mt-1">Nâng cấp để nhận Dự báo rủi ro sâu bệnh và kế hoạch tự động hóa bằng AI.</p>
+            </div>
+          )}
         </div>
       </div>
       </>

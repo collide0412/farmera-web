@@ -27,7 +27,7 @@ export const FarmZoneMap = ({ isPremium }) => {
         <div className="bg-gray-50 rounded-2xl p-8 text-center border-2 border-dashed border-gray-200">
            <MapIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
            <h4 className="text-xl font-bold text-gray-700 mb-2">Bản Đồ Nông Trại Tiêu Chuẩn</h4>
-           <p className="text-gray-500 mb-6 max-w-md mx-auto">Chế độ Standard hiển thị thông số tổng quan của nông trại và được cập nhật 1 lần/ngày. Nâng cấp Premium để xem lưới từng khu vực với dữ liệu IoT Real-time.</p>
+           <p className="text-gray-500 mb-6 max-w-md mx-auto">Chế độ Standard hiển thị thông số tổng quan theo dự báo thời tiết (API), không có thiết bị IoT cục bộ. Nâng cấp Premium kết hợp lắp đặt gateway IoT để quan trắc từng khu vực Real-time.</p>
            <div className="flex justify-center gap-6">
              <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm w-32">
                <Thermometer className="w-8 h-8 text-orange-500 mx-auto mb-2" />
@@ -55,7 +55,17 @@ export const FarmZoneMap = ({ isPremium }) => {
                   ${isSelected ? 'border-brand-green bg-brand-light/30 shadow-md' : 'border-gray-100 hover:border-brand-green/30 hover:bg-gray-50'}
                 `}
               >
-                {hasWarning && <span className="absolute top-2 right-2 w-3 h-3 rounded-full bg-red-500 animate-ping"></span>}
+                  {hasWarning ? (
+                    <span className="absolute top-3 right-3 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                  ) : (
+                    <span className="absolute top-3 right-3 flex h-3 w-3" title="Live Connection">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                  )}
                 <div className={`mb-3 ${isSelected ? 'text-brand-green' : 'text-gray-400 group-hover:text-brand-green/70'}`}>
                   {z.icon}
                 </div>

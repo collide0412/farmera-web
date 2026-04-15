@@ -52,7 +52,7 @@ export const LogisticsWidget = ({ isPremium }) => {
             <div className="bg-orange-100 p-3 rounded-2xl shrink-0"><Truck className="w-8 h-8 text-orange-600" /></div>
             <div>
               <h3 className="text-lg font-bold text-orange-900 mb-1 flex items-center gap-2">AI Logistics Smart Match <TrendingDown className="w-4 h-4 text-green-600" /></h3>
-              <p className="text-orange-800 text-sm mb-4 leading-relaxed">Phát hiện 3 hộ nông dân lân cận đang có chuyến xe lên Hà Nội ngày 15/4. Bạn có muốn tham gia ghép chuyến để giảm <strong className="text-green-700 bg-green-100 px-1 rounded">40% chi phí</strong> vận chuyển?</p>
+                <p className="text-orange-800 text-sm mb-4 leading-relaxed">Phát hiện xe tải của HTX X đang còn trống 40% tải trọng, khởi hành lúc 5h sáng mai. Bạn có muốn ghép đơn hàng 200kg vải thiều vào không?</p>
               <div className="flex gap-3">
                 <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-colors flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4"/> Xác nhận ghép chuyến
