@@ -4,7 +4,8 @@ import {
   ScanLine, ShieldCheck, Activity, Fingerprint, 
   X, Sprout, PackageCheck, Store, Globe,
   ClipboardCheck, CheckCircle2, Leaf, Coins,
-  Thermometer, Droplets, Crown, Lock, Star
+  Thermometer, Droplets, Crown, Lock, Star,
+  MapPin, Phone, Mail, MessageCircle
 } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
@@ -182,6 +183,60 @@ export const App = () => {
           )}
         </AnimatePresence>
       </main>
+
+      {/* FOOTER - Platform info and team contact */}
+      <footer className="bg-gray-900 text-gray-300 py-12 mt-12 border-t-4 border-brand-green relative z-10 pb-24 md:pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <img src="./images/farmera_logo.png" alt="FARMERA Logo" className="h-10 object-contain bg-white rounded p-1" />
+                <span className="text-xl font-bold text-white tracking-tight" style={{display: 'none'}}>FARMERA</span>
+              </div>
+              <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                {lang === 'vi' ? 'Nền tảng số hóa Nông nghiệp thông minh, kết nối trực tiếp Nông dân, Hợp tác xã và Người tiêu dùng thông qua Blockchain & IoT.' : 'Smart Agriculture digitization platform connecting Farmers, Cooperatives, and Consumers through Blockchain & IoT.'}
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors"><MessageCircle className="w-5 h-5"/></a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Mail className="w-5 h-5"/></a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Phone className="w-5 h-5"/></a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{lang === 'vi' ? 'Liên Hệ Đội Ngũ' : 'Contact Our Team'}</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-brand-green shrink-0" />
+                  <span>{lang === 'vi' ? 'Hà Nội, Việt Nam' : 'Hanoi, Vietnam'}</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-brand-green shrink-0" />
+                  <span>+84 (0) 123 456 789</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-brand-green shrink-0" />
+                  <span>hello@farmera.vn</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{lang === 'vi' ? 'Hỗ trợ' : 'Support'}</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Hướng dẫn Đăng ký Tiêu chuẩn' : 'Standard Registration Guide'}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Chính sách bảo mật' : 'Privacy Policy'}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Điều khoản sử dụng' : 'Terms of Service'}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Báo cáo sự cố' : 'Report an Issue'}</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-10 pt-6 text-sm text-center text-gray-500">
+            <p>&copy; {new Date().getFullYear()} FARMERA. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
 
       {role !== 'coop' && (
         <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex justify-around p-2 pb-6 z-40 border-t border-gray-100">

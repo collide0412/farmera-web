@@ -98,11 +98,25 @@ export const FarmZoneMap = ({ isPremium }) => {
                 </div>
                 <div className="p-3 bg-white rounded-xl border border-gray-100 flex items-center justify-between text-gray-700 col-span-2">
                   <span className="flex items-center gap-1 text-sm font-bold"><Activity className="w-4 h-4"/> pH</span>
-                  <span className="font-black">{selected.stats.ph}</span>
+                  <span className="font-black">{selected.stats.ph || '-'}</span>
+                </div>
+                <div className="p-3 bg-yellow-50 rounded-xl border border-yellow-100 flex items-center justify-between text-yellow-700 col-span-2">
+                  <span className="flex items-center gap-1 text-sm font-bold">Ánh sáng (Lux)</span>
+                  <span className="font-black">65,000 Lux</span>
+                </div>
+                <div className="p-3 bg-blue-50 rounded-xl border border-blue-100 flex flex-col gap-1 text-blue-900 col-span-2 mt-2 shadow-sm">
+                  <div className="flex items-center gap-1 text-sm font-bold border-b border-blue-200 pb-2 mb-1"><MapIcon className="w-4 h-4"/> Thông tin Tọa độ & Thổ nhưỡng</div>
+                  <span className="text-xs block"><span className="font-bold">Vị trí:</span> 21.0285° N, 105.8542° E</span>
+                  <span className="text-xs block"><span className="font-bold">Đất:</span> Đất phù sa, giữ nước tốt (Phù hợp {selected.name})</span>
+                  <span className="text-xs block"><span className="font-bold">Khí hậu:</span> Nhiệt đới gió mùa, độ ẩm TB 75-85%</span>
+                  <button className="mt-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg self-start transition-colors">Sửa Thông Tin Nông Trại</button>
                 </div>
               </div>
             ) : (
-               <div className="p-4 bg-white rounded-xl border border-gray-100 text-gray-500 italic text-sm">IoT N/A</div>
+              <div className="flex flex-col items-center justify-center h-48 bg-gray-100/50 rounded-xl border-2 border-dashed border-gray-200 text-gray-400">
+                <Warehouse className="w-10 h-10 mb-2 opacity-50" />
+                <p className="text-xs font-bold px-4 text-center">Kho lạnh không trang bị đủ Cảm biến IoT.</p>
+              </div>
             )}
           </div>
 

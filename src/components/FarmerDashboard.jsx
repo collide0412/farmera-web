@@ -89,8 +89,13 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h2 className="text-2xl md:text-3xl font-black text-brand-teal">{t('nav_farm')}</h2>
         
-        {/* Farmer Navigation Tabs */}
-        <div className="flex overflow-x-auto gap-1 md:gap-2 bg-white p-1 md:p-1.5 rounded-2xl shadow-sm border border-gray-100 no-scrollbar">
+        {/* Nút Đăng bán NS mới */}
+        <button className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-2 md:py-2.5 px-4 md:px-5 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+          <Plus className="w-5 h-5"/> {lang === 'vi' ? 'Đăng bán Nông sản mới' : 'List New Product'}
+        </button>
+      </div>
+
+      <div className="flex overflow-x-auto gap-1 md:gap-2 bg-white p-1 md:p-1.5 rounded-2xl shadow-sm border border-gray-100 no-scrollbar">
           <button 
             onClick={() => setFarmerTab('overview')} 
             className={`flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-all whitespace-nowrap text-xs md:text-sm font-bold ${farmerTab === 'overview' ? 'bg-brand-green text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
@@ -122,7 +127,6 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
             <ShieldCheck className="w-3.5 h-3.5 md:w-4 md:h-4"/> {t('nav_compliance')}
           </button>
         </div>
-      </div>
 
       {farmerTab === 'overview' && (
         <>

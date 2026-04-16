@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
 import { motion } from 'framer-motion';
-import { Upload, CheckCircle2, Circle, Clock, ClipboardList, ShieldCheck } from 'lucide-react';
+import { Upload, CheckCircle2, Circle, Clock, ClipboardList, ShieldCheck, FileText, Info, Award, Phone } from 'lucide-react';
 
 export const ComplianceGuide = () => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const [stepStatuses, setStepStatuses] = useState([
     'completed', 'in_progress', 'pending', 'pending', 'pending'
@@ -44,6 +44,46 @@ export const ComplianceGuide = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-6">
+      
+      {/* THÔNG TIN HƯỚNG DẪN TIÊU CHUẨN */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4 hover:shadow-md transition">
+          <div className="flex items-center gap-3">
+            <div className="bg-blue-100 p-3 rounded-xl"><FileText className="text-blue-600 w-6 h-6"/></div>
+            <h3 className="font-black text-lg text-gray-800">{lang === 'vi' ? 'Hồ sơ pháp lý & Chi phí' : 'Required Docs & Fees'}</h3>
+          </div>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            {lang === 'vi' 
+              ? 'Chi phí đánh giá chứng nhận VietGAP dao động từ 15 - 20 triệu VNĐ, GlobalGAP từ 50 - 100 triệu VNĐ. Nông dân cần chuẩn bị Giấy đăng ký kinh doanh, sổ nhật ký canh tác.' 
+              : 'VietGAP certification fees range from 15-20M VND, GlobalGAP from 50-100M VND. Requires Business Registration and farming logbooks.'}
+          </p>
+          <a href="#" className="text-blue-600 font-bold text-sm hover:underline mt-auto">→ {lang === 'vi' ? 'Đọc tài liệu hướng dẫn chi tiết' : 'Read detailed documentation'}</a>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4 hover:shadow-md transition">
+          <div className="flex items-center gap-3">
+            <div className="bg-emerald-100 p-3 rounded-xl"><Award className="text-emerald-700 w-6 h-6"/></div>
+            <h3 className="font-black text-lg text-gray-800">{lang === 'vi' ? 'Lợi ích khi đăng ký' : 'Key Benefits'}</h3>
+          </div>
+          <ul className="text-sm text-gray-600 space-y-2">
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Tăng 30% giá bán ra thị trường' : 'Increase market price by 30%'}</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Dễ dàng xuất khẩu sang các thị trường khó tính' : 'Easier export to strict markets'}</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Được ưu tiên tham gia các chương trình hỗ trợ của HTX' : 'Priority for Coop support programs'}</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* LIÊN HỆ ĐỘI NGŨ CHUYÊN GIA */}
+      <div className="bg-gradient-to-r from-brand-teal to-brand-green p-6 rounded-2xl shadow-lg mb-12 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 className="font-black text-xl mb-2 flex items-center gap-2"><Info className="w-5 h-5"/> {lang === 'vi' ? 'Cần hỗ trợ chuyển đổi Tiêu chuẩn?' : 'Need Compliance Support?'}</h3>
+          <p className="text-sm text-emerald-50 max-w-xl">{lang === 'vi' ? 'Đội ngũ Kỹ sư Nông nghiệp của FARMERA luôn sẵn sàng đồng hành, tư vấn miễn phí quy trình và hồ sơ lấy chứng nhận.' : 'Our Agri-engineers are ready to provide free consultation on the certification process and paperwork.'}</p>
+        </div>
+        <button className="bg-white text-brand-green hover:bg-gray-50 px-6 py-3 rounded-xl font-bold flex items-center gap-2 whitespace-nowrap shadow-md transition-transform active:scale-95 shrink-0">
+          <Phone className="w-4 h-4"/> {lang === 'vi' ? 'Liên hệ Chuyên gia ngay' : 'Contact Experts'}
+        </button>
+      </div>
+
       <div className="bg-white p-8 rounded-3xl shadow-xl mb-12 border border-gray-100 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
         <ShieldCheck className="absolute -right-8 -top-8 w-48 h-48 text-brand-green/10" />
         <div className="w-full md:w-2/3 shrink-0 relative z-10">
