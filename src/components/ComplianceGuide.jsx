@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
 import { motion } from 'framer-motion';
-import { Upload, CheckCircle2, Circle, Clock, ClipboardList, ShieldCheck, FileText, Info, Award, Phone } from 'lucide-react';
+import { Upload, CheckCircle2, Circle, Clock, ClipboardList, ShieldCheck, FileText, Info, Award, Phone, X } from 'lucide-react';
 
 export const ComplianceGuide = () => {
   const { t, lang } = useTranslation();
@@ -9,6 +9,7 @@ export const ComplianceGuide = () => {
   const [stepStatuses, setStepStatuses] = useState([
     'completed', 'in_progress', 'pending', 'pending', 'pending'
   ]);
+  const [showDocDialog, setShowDocDialog] = useState(false);
   
   const steps = [
     { id: 1, title: t('cg_s1'), status: stepStatuses[0], tasks: [t('cg_s1_1'), t('cg_s1_2'), t('cg_s1_3')] },
@@ -57,7 +58,9 @@ export const ComplianceGuide = () => {
               ? 'Chi phí đánh giá chứng nhận VietGAP dao động từ 15 - 20 triệu VNĐ, GlobalGAP từ 50 - 100 triệu VNĐ. Nông dân cần chuẩn bị Giấy đăng ký kinh doanh, sổ nhật ký canh tác.' 
               : 'VietGAP certification fees range from 15-20M VND, GlobalGAP from 50-100M VND. Requires Business Registration and farming logbooks.'}
           </p>
-          <a href="#" className="text-blue-600 font-bold text-sm hover:underline mt-auto">→ {lang === 'vi' ? 'Đọc tài liệu hướng dẫn chi tiết' : 'Read detailed documentation'}</a>
+          <button onClick={(e) => { e.preventDefault(); setShowDocDialog(true); }} className="text-blue-600 font-bold text-sm hover:underline mt-auto text-left">
+            → {lang === 'vi' ? 'Đọc tài liệu hướng dẫn chi tiết' : 'Read detailed documentation'}
+          </button>
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4 hover:shadow-md transition">
@@ -159,6 +162,54 @@ export const ComplianceGuide = () => {
           );
         })}
       </div>
+
+      {/* Docs Dialog */}
+      {showDocDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+              <h3 className="font-black text-xl text-brand-teal flex items-center gap-2">
+                <FileText className="w-5 h-5"/>
+                {lang === 'vi' ? 'Tài Liệu Hướng Dẫn Chi Tiết' : 'Detailed Documentation'}
+              </h3>
+              <button onClick={() => setShowDocDialog(false)} className="text-gray-400 hover:text-red-500 transition-colors">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6 max-h-[60vh] overflow-y-auto space-y-4 text-gray-700 text-sm leading-relaxed">
+              <h4 className="font-bold text-lg text-gray-900">{lang === 'vi' ? '1. Quy trình cấp chứng nhận VietGAP' : '1. VietGAP Certification Process'}</h4>
+              <p>
+                {lang === 'vi' 
+                ? 'VietGAP (Vietnamese Good Agricultural Practices) là bộ tiêu chuẩn thực hành nông nghiệp tốt tại Việt Nam, bao gồm những nguyên tắc, trình tự, thủ tục hướng dẫn tổ chức, cá nhân sản xuất, thu hoạch, xử lý sau thu hoạch nhằm đảm bảo an toàn, nâng cao chất lượng sản phẩm, đảm bảo phúc lợi xã hội, sức khỏe người sản xuất và người tiêu dùng; đồng thời bảo vệ môi trường và truy xuất nguồn gốc sản xuất.' 
+                : 'VietGAP (Vietnamese Good Agricultural Practices) is a set of good agricultural practice standards in Vietnam, including principles, procedures, and procedures guiding organizations and individuals to produce, harvest, and process after harvest to ensure safety, improve product quality, ensure social welfare, health of producers and consumers; at the same time protect the environment and trace the origin of production.'}
+              </p>
+              
+              <h4 className="font-bold text-lg text-gray-900 mt-6">{lang === 'vi' ? '2. Hồ sơ cần chuẩn bị (Cơ bản)' : '2. Required Documents (Basic)'}</h4>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>{lang === 'vi' ? 'Giấy chứng nhận đăng ký kinh doanh' : 'Business Registration Certificate'}</li>
+                <li>{lang === 'vi' ? 'Sơ đồ mặt bằng khu vực sản xuất' : 'Site plan of the production area'}</li>
+                <li>{lang === 'vi' ? 'Sổ nhật ký ghi chép quá trình canh tác' : 'Farming logbook'}</li>
+                <li>{lang === 'vi' ? 'Kết quả kiểm tra mẫu đất, nước (nếu có)' : 'Test results of soil and water samples (if any)'}</li>
+              </ul>
+              
+              <h4 className="font-bold text-lg text-gray-900 mt-6">{lang === 'vi' ? '3. Chi phí dự kiến' : '3. Estimated Costs'}</h4>
+              <p>
+                {lang === 'vi' 
+                ? 'Tùy thuộc vào quy mô, diện tích và loại cây trồng, chi phí chứng nhận VietGAP thường dao động từ 15.000.000 VNĐ đến 20.000.000 VNĐ. Với tiêu chuẩn GlobalGAP, chi phí có thể từ 50.000.000 VNĐ đến 100.000.000 VNĐ cho chu kỳ 1 năm.' 
+                : 'Depending on the scale, area, and type of crop, the cost of VietGAP certification usually ranges from 15,000,000 VND to 20,000,000 VND. For GlobalGAP standards, the cost can range from 50,000,000 VND to 100,000,000 VND for a 1-year cycle.'}
+              </p>
+            </div>
+            <div className="p-6 border-t border-gray-100 flex justify-end bg-gray-50">
+               <button 
+                onClick={() => setShowDocDialog(false)} 
+                className="px-6 py-2.5 font-bold text-white bg-brand-teal hover:bg-teal-700 rounded-xl shadow-md transition-transform active:scale-95"
+              >
+                {lang === 'vi' ? 'Đã hiểu' : 'Understood'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

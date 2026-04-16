@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star } from 'lucide-react';
+import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star, X } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
   LineElement, Title, Tooltip, Legend, Filler
@@ -38,6 +38,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
   const [logDetails, setLogDetails] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
   const [farmerTab, setFarmerTab] = useState('overview'); // overview | zones | compliance | logistics | finance
+  const [showNewProductDialog, setShowNewProductDialog] = useState(false);
 
   const activeProduct = products.find(p => p.id === selectedProduct) || products[0];
 
@@ -90,10 +91,62 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
         <h2 className="text-2xl md:text-3xl font-black text-brand-teal">{t('nav_farm')}</h2>
         
         {/* Nút Đăng bán NS mới */}
-        <button className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-2 md:py-2.5 px-4 md:px-5 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+        <button onClick={() => setShowNewProductDialog(true)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-2 md:py-2.5 px-4 md:px-5 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
           <Plus className="w-5 h-5"/> {lang === 'vi' ? 'Đăng bán Nông sản mới' : 'List New Product'}
         </button>
       </div>
+
+      {showNewProductDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+              <h3 className="font-black text-xl text-brand-teal">{lang === 'vi' ? 'Đăng Bán Nông Sản Mới' : 'List New Product'}</h3>
+              <button onClick={() => setShowNewProductDialog(false)} className="text-gray-400 hover:text-red-500 transition-colors">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Tên sản phẩm' : 'Product Name'}</label>
+                <input type="text" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder={lang === 'vi' ? 'VD: Vải thiều Lục Ngạn' : 'Ex: Luc Ngan Lychee'} />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Số lượng dự kiến' : 'Est. Quantity'}</label>
+                  <input type="number" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="1000" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Đơn vị' : 'Unit'}</label>
+                  <select className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none">
+                    <option>Kg</option>
+                    <option>{lang === 'vi' ? 'Tấn' : 'Tons'}</option>
+                  </select>
+                </div>
+              </div>
+               <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Giá dự kiến (VND/kg)' : 'Expected Price (VND/kg)'}</label>
+                <input type="number" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="25000" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Thời gian Thu hoạch dự kiến' : 'Est. Harvest Date'}</label>
+                <input type="date" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" />
+              </div>
+            </div>
+            <div className="p-6 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
+              <button onClick={() => setShowNewProductDialog(false)} className="px-5 py-2.5 font-bold text-gray-600 hover:bg-gray-200 rounded-xl transition-colors">{lang === 'vi' ? 'Hủy' : 'Cancel'}</button>
+              <button 
+                onClick={() => {
+                  alert(lang === 'vi' ? 'Đã tạo nháp thành công!' : 'Draft created successfully!');
+                  setShowNewProductDialog(false);
+                }} 
+                className="px-5 py-2.5 font-bold text-white bg-brand-green hover:bg-emerald-600 rounded-xl shadow-md transition-transform active:scale-95"
+              >
+                {lang === 'vi' ? 'Đăng Bán' : 'Submit'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex overflow-x-auto gap-1 md:gap-2 bg-white p-1 md:p-1.5 rounded-2xl shadow-sm border border-gray-100 no-scrollbar">
           <button 
