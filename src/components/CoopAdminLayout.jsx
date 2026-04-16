@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Line } from 'react-chartjs-2';
 import {
   LayoutDashboard, Users, Map, Truck, ShieldCheck, Download, AlertTriangle, AlertCircle,
   Leaf, Info, Share2, Printer, Factory, MessageCircle, FileText, CheckCircle2, Factory as Store
@@ -70,9 +70,19 @@ export const CoopAdminLayout = ({ isPremium = false }) => {
 // ====================== Sub Components ====================== 
 
 const HTXDashboard = () => {
-  const chartData = [
-    { name: 'T1', val: 120 }, { name: 'T2', val: 135 }, { name: 'T3', val: 150 }, { name: 'T4', val: 180 }, { name: 'T5', val: 195 }
-  ];
+  const chartData = {
+    labels: ['T1', 'T2', 'T3', 'T4', 'T5'],
+    datasets: [{
+      fill: true,
+      label: 'Diện tích (ha)',
+      data: [120, 135, 150, 180, 195],
+      borderColor: '#059669',
+      backgroundColor: 'rgba(5, 150, 105, 0.2)',
+      tension: 0.4
+    }]
+  };
+  const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } };
+
   return (
     <div className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4">
       <div>
@@ -91,22 +101,8 @@ const HTXDashboard = () => {
         {/* Chart */}
         <div className="lg:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-emerald-100 flex flex-col">
           <h3 className="font-bold text-gray-800 mb-6 text-lg">Diện tích gieo trồng (ha)</h3>
-          <div className="flex-1 w-full h-full min-h-[250px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartData}>
-                <defs>
-                  <linearGradient id="colorArea" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#059669" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#059669" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280'}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#6b7280'}} />
-                <RechartsTooltip contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'}}/>
-                <Area type="monotone" dataKey="val" stroke="#059669" strokeWidth={3} fillOpacity={1} fill="url(#colorArea)" />
-              </AreaChart>
-            </ResponsiveContainer>
+          <div className="flex-1 w-full h-full min-h-[250px] relative">
+            <Line data={chartData} options={chartOptions} />
           </div>
         </div>
 
