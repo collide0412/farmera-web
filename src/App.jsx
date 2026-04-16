@@ -177,7 +177,7 @@ export const App = () => {
           )}
           {activeTab === 'coop' && (
             <motion.div key="coop" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="h-full min-h-[85vh]"> 
-              <CoopAdminLayout isPremium={isPremium} /> 
+              <CoopAdminLayout isPremium={isPremium} lang={lang} currency={currency} /> 
             </motion.div>
           )}
         </AnimatePresence>
