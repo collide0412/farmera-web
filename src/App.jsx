@@ -292,10 +292,10 @@ export const App = () => {
                   </div>
                 )}
                 
-                <div className={`mt-10 rounded-xl overflow-hidden shadow-lg border ${isPremium ? 'border-yellow-400 shadow-yellow-100/50' : 'border-gray-200'}`}>
-                    <img src={`./images/do_mixi.png?v=${Date.now()}`} alt="Farmer" className="w-full h-48 object-cover" />
+                <div className={`mt-10 rounded-xl overflow-hidden shadow-lg border ${(isPremium && selectedProduct.id !== 2) ? 'border-yellow-400 shadow-yellow-100/50' : 'border-gray-200'}`}>
+                    <img src={`./images/${selectedProduct.id === 2 ? 'do_mixi_1.png' : 'do_mixi.png'}?v=${Date.now()}`} alt="Farmer" className="w-full h-48 object-cover" />
                   <div className="p-4 bg-white">
-                    <p className="font-bold">{t('meet_farmer')} Phùng Văn A</p>
+                    <p className="font-bold">{t('meet_farmer')} {selectedProduct.id === 2 ? 'Phùng Văn B' : 'Phùng Văn A'}</p>
                     <p className="text-sm text-gray-500">{t('farmer_quote')}</p>
                   </div>
                 </div>
