@@ -61,7 +61,7 @@ export const App = () => {
             </div>
             
             <button onClick={()=>setShowTrace(true)} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
-              <Fingerprint className="w-4 h-4 shrink-0" /> Trace
+              <Fingerprint className="w-4 h-4 shrink-0" /> {t('nav_trace')}
             </button>
           </div>
           
@@ -101,11 +101,11 @@ export const App = () => {
                 <button className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors text-yellow-300 outline-none focus:text-yellow-400">
                   {role === 'consumer' ? 'Client Mode' : role === 'farmer' ? 'Farmer Mode' : 'HTX Mode'}
                 </button>
-                <div className="absolute right-0 top-full pt-2 md:pt-4 w-36 hidden group-hover:block group-focus-within:block focus-within:block z-50">
+                <div className="absolute left-0 md:left-auto md:right-0 top-full pt-2 md:pt-4 w-36 hidden group-hover:block group-focus-within:block focus-within:block z-50">
                   <div className="bg-white rounded-md shadow-2xl text-gray-800 border overflow-hidden">
-                    <button onClick={() => setRoleAndTab('consumer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'consumer' ? 'text-brand-teal bg-gray-50' : 'text-gray-600'}`}>🚀 Client Mode</button>
-                    <button onClick={() => setRoleAndTab('farmer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-bold text-sm transition-colors ${role === 'farmer' ? 'text-brand-green bg-gray-50' : 'text-gray-600'}`}>👨‍🌾 Farmer Mode</button>
-                    <button onClick={() => setRoleAndTab('coop')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'coop' ? 'text-emerald-900 bg-emerald-50' : 'text-gray-600'}`}>🏭 HTX Mode</button>
+                    <button onClick={() => setRoleAndTab('consumer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'consumer' ? 'text-brand-teal bg-gray-50' : 'text-gray-600'}`}>Client Mode</button>
+                    <button onClick={() => setRoleAndTab('farmer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-bold text-sm transition-colors ${role === 'farmer' ? 'text-brand-green bg-gray-50' : 'text-gray-600'}`}>Farmer Mode</button>
+                    <button onClick={() => setRoleAndTab('coop')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'coop' ? 'text-emerald-900 bg-emerald-50' : 'text-gray-600'}`}>HTX Mode</button>
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ export const App = () => {
                 )}
                 {role === 'coop' && (
                   <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-emerald-700 text-yellow-400 shadow-md ring-2 ring-yellow-400/50' : 'bg-emerald-900 text-gray-300 border border-emerald-700'}`}>
-                    <Lock className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'HTX Premium' : 'Guest'}
+                    <Lock className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'HTX Admin' : 'Guest'}
                   </button>
                 )}
             </div>
