@@ -194,7 +194,7 @@ export const App = () => {
                 <span className="text-xl font-bold text-white tracking-tight" style={{display: 'none'}}>FARMERA</span>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed mb-4">
-                {lang === 'vi' ? 'Nền tảng số hóa Nông nghiệp thông minh, kết nối trực tiếp Nông dân, Hợp tác xã và Người tiêu dùng thông qua Blockchain & IoT.' : 'Smart Agriculture digitization platform connecting Farmers, Cooperatives, and Consumers through Blockchain & IoT.'}
+                {t('app_desc')}
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors"><MessageCircle className="w-5 h-5"/></a>
@@ -204,11 +204,11 @@ export const App = () => {
             </div>
             
             <div>
-              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{lang === 'vi' ? 'Liên Hệ Đội Ngũ' : 'Contact Our Team'}</h3>
+              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{t('contact_team')}</h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-brand-green shrink-0" />
-                  <span>{lang === 'vi' ? 'Hà Nội, Việt Nam' : 'Hanoi, Vietnam'}</span>
+                  <span>{t('location')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-brand-green shrink-0" />
@@ -222,12 +222,12 @@ export const App = () => {
             </div>
 
             <div>
-              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{lang === 'vi' ? 'Hỗ trợ' : 'Support'}</h3>
+              <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">{t('support_team')}</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Hướng dẫn Đăng ký Tiêu chuẩn' : 'Standard Registration Guide'}</a></li>
-                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Chính sách bảo mật' : 'Privacy Policy'}</a></li>
-                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Điều khoản sử dụng' : 'Terms of Service'}</a></li>
-                <li><a href="#" className="hover:text-brand-green transition-colors">{lang === 'vi' ? 'Báo cáo sự cố' : 'Report an Issue'}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{t('guide_reg')}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{t('privacy')}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{t('terms')}</a></li>
+                <li><a href="#" className="hover:text-brand-green transition-colors">{t('report_issue')}</a></li>
               </ul>
             </div>
           </div>
@@ -318,7 +318,7 @@ export const App = () => {
                         icon={<ClipboardCheck className="w-5 h-5" />} 
                         title={log.type} 
                         desc={log.details} 
-                        time={new Date(log.date).toLocaleDateString(lang === 'vi' ? 'vi-VN' : lang === 'ko' ? 'ko-KR' : 'en-US', {month: 'short', day: 'numeric', year: 'numeric'})} 
+                        time={new Date(log.date).toLocaleDateString(t('date_format'), {month: 'short', day: 'numeric', year: 'numeric'})} 
                       />
                     ))}
                     {selectedProduct.id !== 2 && (

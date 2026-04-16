@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star, X } from 'lucide-react';
+import { ClipboardCheck, Edit2, Plus, Trash2, Droplets, Activity, Bug, TrendingUp, Leaf, Map as MapIcon, Truck, PiggyBank, ShieldCheck, Crown, Lock, Star, X, ImagePlus } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
   LineElement, Title, Tooltip, Legend, Filler
@@ -92,7 +92,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
         
         {/* Nút Đăng bán NS mới */}
         <button onClick={() => setShowNewProductDialog(true)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-2 md:py-2.5 px-4 md:px-5 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
-          <Plus className="w-5 h-5"/> {lang === 'vi' ? 'Đăng bán Nông sản mới' : 'List New Product'}
+          <Plus className="w-5 h-5"/> {t('np_btn')}
         </button>
       </div>
 
@@ -100,48 +100,64 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-              <h3 className="font-black text-xl text-brand-teal">{lang === 'vi' ? 'Đăng Bán Nông Sản Mới' : 'List New Product'}</h3>
+              <h3 className="font-black text-xl text-brand-teal">{t('np_title')}</h3>
               <button onClick={() => setShowNewProductDialog(false)} className="text-gray-400 hover:text-red-500 transition-colors">
                 <X className="w-6 h-6" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Tên sản phẩm' : 'Product Name'}</label>
-                <input type="text" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder={lang === 'vi' ? 'VD: Vải thiều Lục Ngạn' : 'Ex: Luc Ngan Lychee'} />
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_name')}</label>
+                <input type="text" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder={t('np_name_ph')} />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Số lượng dự kiến' : 'Est. Quantity'}</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_qty')}</label>
                   <input type="number" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="1000" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Đơn vị' : 'Unit'}</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_unit')}</label>
                   <select className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none">
-                    <option>Kg</option>
-                    <option>{lang === 'vi' ? 'Tấn' : 'Tons'}</option>
+                    <option>{t('np_unit_kg')}</option>
+                    <option>{t('np_unit_ton')}</option>
                   </select>
                 </div>
               </div>
                <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Giá dự kiến (VND/kg)' : 'Expected Price (VND/kg)'}</label>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_price')}</label>
                 <input type="number" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="25000" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">{lang === 'vi' ? 'Thời gian Thu hoạch dự kiến' : 'Est. Harvest Date'}</label>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_date')}</label>
                 <input type="date" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_img')}</label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-brand-green transition-colors cursor-pointer group">
+                  <div className="space-y-1 text-center">
+                    <ImagePlus className="mx-auto h-10 w-10 text-gray-400 group-hover:text-brand-green transition-colors" />
+                    <div className="flex text-sm text-gray-600 justify-center">
+                      <span className="relative cursor-pointer bg-white rounded-md font-bold text-brand-teal hover:text-brand-green focus-within:outline-none">
+                        {t('np_img_upload')}
+                      </span>
+                      <p className="pl-1">{t('np_img_drop')}</p>
+                    </div>
+                    <p className="text-xs text-gray-500">PNG, JPG, WEBP {t('np_img_limit')}</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="p-6 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
-              <button onClick={() => setShowNewProductDialog(false)} className="px-5 py-2.5 font-bold text-gray-600 hover:bg-gray-200 rounded-xl transition-colors">{lang === 'vi' ? 'Hủy' : 'Cancel'}</button>
+              <button onClick={() => setShowNewProductDialog(false)} className="px-5 py-2.5 font-bold text-gray-600 hover:bg-gray-200 rounded-xl transition-colors">{t('np_cancel')}</button>
               <button 
                 onClick={() => {
-                  alert(lang === 'vi' ? 'Đã tạo nháp thành công!' : 'Draft created successfully!');
+                  alert(t('np_draft_ok'));
                   setShowNewProductDialog(false);
                 }} 
                 className="px-5 py-2.5 font-bold text-white bg-brand-green hover:bg-emerald-600 rounded-xl shadow-md transition-transform active:scale-95"
               >
-                {lang === 'vi' ? 'Đăng Bán' : 'Submit'}
+                {t('np_submit')}
               </button>
             </div>
           </div>
@@ -253,7 +269,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
               <tbody className="divide-y divide-gray-100/50">
                 {activeProduct.logs.map((log, index) => (
                   <tr key={index} className={`hover:bg-brand-light/30 transition-colors ${editingIndex === index ? 'bg-brand-light/50 border-l-4 border-brand-green' : ''}`}>
-                      <td className="p-4 text-sm font-mono text-gray-600">{new Date(log.date).toLocaleDateString(lang === 'vi' ? 'vi-VN' : lang === 'ko' ? 'ko-KR' : 'en-US')}</td>
+                      <td className="p-4 text-sm font-mono text-gray-600">{new Date(log.date).toLocaleDateString(t('date_format'))}</td>
                     <td className="p-4 font-bold text-brand-teal text-sm">{t(log.type) || log.type}</td>
                     <td className="p-4 text-sm text-gray-600"><span className="whitespace-normal break-words max-w-[200px] md:max-w-xs line-clamp-2">{log.details}</span></td>
                     <td className="p-4 text-right space-x-2">

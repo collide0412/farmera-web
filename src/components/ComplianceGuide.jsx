@@ -16,19 +16,19 @@ export const ComplianceGuide = () => {
     switch (selectedStandard) {
       case 'GlobalGAP':
         return [
-          { id: 1, title: lang === 'vi' ? 'Đánh giá rủi ro & Kế hoạch' : 'Risk Assessment & Plan', status: stepStatuses[0], tasks: [lang === 'vi' ? 'Đánh giá rủi ro đất nền, nguồn nước' : 'Soil and water risk assessment', lang === 'vi' ? 'Khảo sát môi trường và sinh thái' : 'Environmental survey'] },
-          { id: 2, title: lang === 'vi' ? 'Quản lý Hóa chất & Dư lượng' : 'Chemical & Residue Mgmt', status: stepStatuses[1], tasks: [lang === 'vi' ? 'Phân tích thuốc BVTV theo tiêu chuẩn EU' : 'Pesticide testing to EU standards', lang === 'vi' ? 'Huấn luyện an toàn lao động & kho bãi' : 'Training & storage safety'] },
-          { id: 3, title: lang === 'vi' ? 'Ghi chép & Truy xuất nguồn gốc' : 'Records & Traceability', status: stepStatuses[2], tasks: [lang === 'vi' ? 'Thiết lập hệ thống truy xuất (Traceability)' : 'Setup traceability system', lang === 'vi' ? 'Sổ tay canh tác phiên bản GlobalGAP' : 'GlobalGAP farming logbook'] },
-          { id: 4, title: lang === 'vi' ? 'Đánh giá nội bộ & Khắc phục' : 'Internal Audit & Correction', status: stepStatuses[3], tasks: [lang === 'vi' ? 'Tự đánh giá qua Check-list GlobalGAP' : 'Self-assessment by GlobalGAP checklist', lang === 'vi' ? 'Khắc phục các rủi ro, lỗi cấp độ Major/Minor' : 'Corrective actions for Major/Minor risks'] },
-          { id: 5, title: lang === 'vi' ? 'Được cấp chứng nhận GlobalGAP' : 'GlobalGAP Certified', status: stepStatuses[4], tasks: [lang === 'vi' ? 'Thanh tra từ bên thứ 3 (Control Union, SGS...)' : 'Third-party inspection (Control Union, SGS...)', lang === 'vi' ? 'Nhận mã số GGN toàn cầu' : 'Receive GGN number'] },
+          { id: 1, title: t('cg_g_s1'), status: stepStatuses[0], tasks: [t('cg_g_s1_1'), t('cg_g_s1_2')] },
+          { id: 2, title: t('cg_g_s2'), status: stepStatuses[1], tasks: [t('cg_g_s2_1'), t('cg_g_s2_2')] },
+          { id: 3, title: t('cg_g_s3'), status: stepStatuses[2], tasks: [t('cg_g_s3_1'), t('cg_g_s3_2')] },
+          { id: 4, title: t('cg_g_s4'), status: stepStatuses[3], tasks: [t('cg_g_s4_1'), t('cg_g_s4_2')] },
+          { id: 5, title: t('cg_g_s5'), status: stepStatuses[4], tasks: [t('cg_g_s5_1'), t('cg_g_s5_2')] },
         ];
       case 'Organic':
         return [
-          { id: 1, title: lang === 'vi' ? 'Thời gian chuyển đổi' : 'Transition Period', status: stepStatuses[0], tasks: [lang === 'vi' ? 'Ngừng sử dụng hóa chất từ 1-3 năm' : 'Stop chemicals for 1-3 years', lang === 'vi' ? 'Thiết lập vùng đệm cách ly với xung quanh' : 'Setup buffer zone isolation'] },
-          { id: 2, title: lang === 'vi' ? 'Quản lý đất & Nguồn nước' : 'Soil & Water Mgmt', status: stepStatuses[1], tasks: [lang === 'vi' ? 'Cải tạo đất bằng phân hữu cơ sinh học' : 'Ameliorate soil with bio-organics', lang === 'vi' ? 'Kiểm tra chặt chẽ vi sinh và kim loại nặng' : 'Testing for microbes and heavy metals'] },
-          { id: 3, title: lang === 'vi' ? 'Phòng trừ Sâu bệnh sinh học' : 'Bio Pest Control', status: stepStatuses[2], tasks: [lang === 'vi' ? 'Sử dụng thiên địch, rào chắn tự nhiên' : 'Use natural enemies, barriers', lang === 'vi' ? 'Bảo tồn đa dạng sinh học trong vườn' : 'Preserve farm biodiversity'] },
-          { id: 4, title: lang === 'vi' ? 'Hồ sơ & Thanh tra hữu cơ' : 'Logs & Inspection', status: stepStatuses[3], tasks: [lang === 'vi' ? 'Kế hoạch quản lý OSP minh bạch 100%' : '100% transparent Organic System Plan', lang === 'vi' ? 'Các đoàn đánh giá kiểm tra đột xuất' : 'Unannounced organic inspections'] },
-          { id: 5, title: lang === 'vi' ? 'Chứng nhận Hữu cơ Quốc tế' : 'Intl Organic Certified', status: stepStatuses[4], tasks: [lang === 'vi' ? 'Tuân thủ các chuẩn USDA/EU Organic' : 'Compliance with USDA/EU Organic', lang === 'vi' ? 'Được cấp chứng nhận & dán nhãn Hữu cơ' : 'Certified & Organic labeling'] },
+          { id: 1, title: t('cg_o_s1'), status: stepStatuses[0], tasks: [t('cg_o_s1_1'), t('cg_o_s1_2')] },
+          { id: 2, title: t('cg_o_s2'), status: stepStatuses[1], tasks: [t('cg_o_s2_1'), t('cg_o_s2_2')] },
+          { id: 3, title: t('cg_o_s3'), status: stepStatuses[2], tasks: [t('cg_o_s3_1'), t('cg_o_s3_2')] },
+          { id: 4, title: t('cg_o_s4'), status: stepStatuses[3], tasks: [t('cg_o_s4_1'), t('cg_o_s4_2')] },
+          { id: 5, title: t('cg_o_s5'), status: stepStatuses[4], tasks: [t('cg_o_s5_1'), t('cg_o_s5_2')] },
         ];
       case 'VietGAP':
       default:
@@ -46,34 +46,34 @@ export const ComplianceGuide = () => {
     switch (selectedStandard) {
       case 'GlobalGAP':
         return {
-          fees: lang === 'vi' ? 'Chi phí cấp chứng nhận GlobalGAP dao động từ 50 - 100 triệu VNĐ. Yêu cầu khắt khe về đánh giá rủi ro an toàn và môi trường, kiểm tra dư lượng thuốc bảo vệ thực vật cấp độ cao.' : 'GlobalGAP certification fees range from 50-100M VND. Strict requirements on safety/environmental risk assessment and high-level pesticide residue testing.',
-          docTitle1: lang === 'vi' ? '1. Quy trình cấp chứng nhận GlobalGAP' : '1. GlobalGAP Certification Process',
-          docDesc1: lang === 'vi' ? 'GlobalGAP là tiêu chuẩn toàn cầu về Thực hành nông nghiệp tốt. Yêu cầu mức độ tuân thủ cao, truy xuất nguồn gốc tối đa và cam kết bảo vệ môi trường, sức khỏe người lao động.' : 'GlobalGAP is the global standard for Good Agricultural Practices. It requires high compliance, maximum traceability, and commitment to environmental and worker protection.',
-          docTitle2: lang === 'vi' ? '2. Hồ sơ cần chuẩn bị' : '2. Required Documents',
-          docItems2: lang === 'vi' ? ['Hệ thống quản lý chất lượng (QMS)', 'Sổ tay canh tác phiên bản GlobalGAP', 'Kết quả phân tích đất, nước đầy đủ', 'Đánh giá rủi ro vệ sinh, an toàn lao động'] : ['Quality Management System (QMS)', 'GlobalGAP version farming logbook', 'Comprehensive soil, water analysis results', 'Health and safety risk assessments'],
-          docTitle3: lang === 'vi' ? '3. Chi phí dự kiến' : '3. Estimated Costs',
-          docDesc3: lang === 'vi' ? 'Do quy mô và tính phức tạp quốc tế, chi phí chứng nhận và tái đánh giá thường dao động từ 50.000.000 đến 100.000.000 VNĐ.' : 'Due to scale and international complexity, certification and re-audit fees range from 50,000,000 to 100,000,000 VND.'
+          fees: t('cg_g_fees'),
+          docTitle1: t('cg_g_doc_t1'),
+          docDesc1: t('cg_g_doc_d1'),
+          docTitle2: t('cg_g_doc_t2'),
+          docItems2: [t('cg_g_doc_i2_1'), t('cg_g_doc_i2_2'), t('cg_g_doc_i2_3'), t('cg_g_doc_i2_4')],
+          docTitle3: t('cg_g_doc_t3'),
+          docDesc3: t('cg_g_doc_d3')
         };
       case 'Organic':
         return {
-          fees: lang === 'vi' ? 'Chi phí chứng nhận Hữu cơ (USDA, EU) từ 40 - 120 triệu VNĐ. Phải trải qua quá trình cách ly khỏi hóa chất từ 1-3 năm trước khi sản xuất.' : 'Organic certification fees (USDA, EU) range from 40-120M VND. Requires 1-3 years of transition period without chemical inputs.',
-          docTitle1: lang === 'vi' ? '1. Tiêu chuẩn Nông nghiệp Hữu cơ' : '1. Organic Farming Standards',
-          docDesc1: lang === 'vi' ? 'Nông nghiệp hữu cơ (Organic) nghiêm cấm sử dụng phân bón hóa học, thuốc trừ sâu độc hại, giống biến đổi gen. Ưu tiên thiên địch, luân canh tự nhiên.' : 'Organic farming strictly prohibits chemical fertilizers, toxic pesticides, and GMOs. It prioritizes natural enemies and crop rotation.',
-          docTitle2: lang === 'vi' ? '2. Hồ sơ & Khảo sát' : '2. Documents & Survey',
-          docItems2: lang === 'vi' ? ['Kế hoạch quản lý hệ thống hữu cơ (OSP)', 'Sổ ghi chép chuyển đổi (1-3 năm không dùng hóa chất)', 'Chứng từ chứng minh nguồn gốc hạt giống non-GMO', 'Kế hoạch bảo vệ vùng đệm sinh thái'] : ['Organic System Plan (OSP)', 'Transition logbook (1-3 years without chemicals)', 'Proof of non-GMO seed origins', 'Ecological buffer zone protection plan'],
-          docTitle3: lang === 'vi' ? '3. Chi phí dự kiến' : '3. Estimated Costs',
-          docDesc3: lang === 'vi' ? 'Trọn gói đánh giá và cấp nhãn Hữu cơ quốc tế (như USDA Organic, EU Organic, JAS) mất khoảng 40.000.000 - 120.000.000 VNĐ tùy tổ chức và diện tích.' : 'Full assessment and international Organic labeling (e.g. USDA, EU, JAS) costs around 40,000,000 - 120,000,000 VND depending on certifier and area.'
+          fees: t('cg_o_fees'),
+          docTitle1: t('cg_o_doc_t1'),
+          docDesc1: t('cg_o_doc_d1'),
+          docTitle2: t('cg_o_doc_t2'),
+          docItems2: [t('cg_o_doc_i2_1'), t('cg_o_doc_i2_2'), t('cg_o_doc_i2_3'), t('cg_o_doc_i2_4')],
+          docTitle3: t('cg_o_doc_t3'),
+          docDesc3: t('cg_o_doc_d3')
         };
       case 'VietGAP':
       default:
         return {
-          fees: lang === 'vi' ? 'Chi phí đánh giá chứng nhận VietGAP dao động từ 15 - 20 triệu VNĐ. Nông dân cần chuẩn bị Giấy đăng ký kinh doanh, sơ đồ mặt bằng và sổ nhật ký canh tác.' : 'VietGAP certification fees range from 15-20M VND. Requires Business Registration, site plan, and farming logbooks.',
-          docTitle1: lang === 'vi' ? '1. Quy trình cấp chứng nhận VietGAP' : '1. VietGAP Certification Process',
-          docDesc1: lang === 'vi' ? 'VietGAP (Vietnamese Good Agricultural Practices) là bộ tiêu chuẩn thực hành nông nghiệp tốt tại Việt Nam, nhằm đảm bảo an toàn, nâng cao chất lượng sản phẩm.' : 'VietGAP (Vietnamese Good Agricultural Practices) is a set of good agricultural practice standards in Vietnam, aiming to ensure safety and improve product quality.',
-          docTitle2: lang === 'vi' ? '2. Hồ sơ cần chuẩn bị (Cơ bản)' : '2. Required Documents (Basic)',
-          docItems2: lang === 'vi' ? ['Giấy chứng nhận đăng ký kinh doanh', 'Sơ đồ mặt bằng khu vực sản xuất', 'Sổ nhật ký ghi chép quá trình canh tác', 'Kết quả kiểm tra mẫu đất, nước (nếu có)'] : ['Business Registration Certificate', 'Site plan of the production area', 'Farming logbook', 'Test results of soil and water samples (if any)'],
-          docTitle3: lang === 'vi' ? '3. Chi phí dự kiến' : '3. Estimated Costs',
-          docDesc3: lang === 'vi' ? 'Tùy thuộc vào quy mô, diện tích và loại cây trồng, chi phí tư vấn chứng nhận VietGAP thường dao động từ 15.000.000 VNĐ đến 20.000.000 VNĐ.' : 'Depending on the scale, area, and type of crop, the cost of VietGAP certification usually ranges from 15,000,000 VND to 20,000,000 VND.'
+          fees: t('cg_v_fees'),
+          docTitle1: t('cg_v_doc_t1'),
+          docDesc1: t('cg_v_doc_d1'),
+          docTitle2: t('cg_v_doc_t2'),
+          docItems2: [t('cg_v_doc_i2_1'), t('cg_v_doc_i2_2'), t('cg_v_doc_i2_3'), t('cg_v_doc_i2_4')],
+          docTitle3: t('cg_v_doc_t3'),
+          docDesc3: t('cg_v_doc_d3')
         };
     }
   };
@@ -116,9 +116,9 @@ export const ComplianceGuide = () => {
           value={selectedStandard}
           onChange={(e) => setSelectedStandard(e.target.value)}
         >
-          <option value="VietGAP">VietGAP ({lang === 'vi' ? 'Tiêu chuẩn Việt Nam' : 'Vietnamese Std'})</option>
-          <option value="GlobalGAP">GlobalGAP ({lang === 'vi' ? 'Tiêu chuẩn Quốc tế' : 'International Std'})</option>
-          <option value="Organic">Organic ({lang === 'vi' ? 'Hữu cơ' : 'Organic/Bio'})</option>
+          <option value="VietGAP">VietGAP ({t('vietgap_desc')})</option>
+          <option value="GlobalGAP">GlobalGAP ({t('globalgap_desc')})</option>
+          <option value="Organic">Organic ({t('organic_desc')})</option>
         </select>
       </div>
 
@@ -127,25 +127,25 @@ export const ComplianceGuide = () => {
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4 hover:shadow-md transition">
           <div className="flex items-center gap-3">
             <div className="bg-blue-100 p-3 rounded-xl"><FileText className="text-blue-600 w-6 h-6"/></div>
-            <h3 className="font-black text-lg text-gray-800">{lang === 'vi' ? 'Hồ sơ & Chi phí' : 'Docs & Fees'} ({selectedStandard})</h3>
+            <h3 className="font-black text-lg text-gray-800">{t('docs_fees')} ({selectedStandard})</h3>
           </div>
           <p className="text-sm text-gray-600 leading-relaxed">
             {stdInfo.fees}
           </p>
           <button onClick={(e) => { e.preventDefault(); setShowDocDialog(true); }} className="text-blue-600 font-bold text-sm hover:underline mt-auto text-left">
-            → {lang === 'vi' ? 'Đọc tài liệu hướng dẫn chi tiết' : 'Read detailed documentation'}
+            → {t('read_docs')}
           </button>
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4 hover:shadow-md transition">
           <div className="flex items-center gap-3">
             <div className="bg-emerald-100 p-3 rounded-xl"><Award className="text-emerald-700 w-6 h-6"/></div>
-            <h3 className="font-black text-lg text-gray-800">{lang === 'vi' ? 'Lợi ích khi đăng ký' : 'Key Benefits'}</h3>
+            <h3 className="font-black text-lg text-gray-800">{t('key_benefits')}</h3>
           </div>
           <ul className="text-sm text-gray-600 space-y-2">
-            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Tăng 30% giá bán ra thị trường' : 'Increase market price by 30%'}</li>
-            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Dễ dàng xuất khẩu sang các thị trường khó tính' : 'Easier export to strict markets'}</li>
-            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {lang === 'vi' ? 'Được ưu tiên tham gia các chương trình hỗ trợ của HTX' : 'Priority for Coop support programs'}</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {t('benefit_1')}</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {t('benefit_2')}</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"/> {t('benefit_3')}</li>
           </ul>
         </div>
       </div>
@@ -153,11 +153,11 @@ export const ComplianceGuide = () => {
       {/* LIÊN HỆ ĐỘI NGŨ CHUYÊN GIA */}
       <div className="bg-gradient-to-r from-brand-teal to-brand-green p-6 rounded-2xl shadow-lg mb-12 text-white flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <h3 className="font-black text-xl mb-2 flex items-center gap-2"><Info className="w-5 h-5"/> {lang === 'vi' ? 'Cần hỗ trợ chuyển đổi Tiêu chuẩn?' : 'Need Compliance Support?'}</h3>
-          <p className="text-sm text-emerald-50 max-w-xl">{lang === 'vi' ? 'Đội ngũ Kỹ sư Nông nghiệp của FARMERA luôn sẵn sàng đồng hành, tư vấn miễn phí quy trình và hồ sơ lấy chứng nhận.' : 'Our Agri-engineers are ready to provide free consultation on the certification process and paperwork.'}</p>
+          <h3 className="font-black text-xl mb-2 flex items-center gap-2"><Info className="w-5 h-5"/> {t('need_support')}</h3>
+          <p className="text-sm text-emerald-50 max-w-xl">{t('support_desc')}</p>
         </div>
         <button className="bg-white text-brand-green hover:bg-gray-50 px-6 py-3 rounded-xl font-bold flex items-center gap-2 whitespace-nowrap shadow-md transition-transform active:scale-95 shrink-0">
-          <Phone className="w-4 h-4"/> {lang === 'vi' ? 'Liên hệ Chuyên gia ngay' : 'Contact Experts'}
+          <Phone className="w-4 h-4"/> {t('contact_experts')}
         </button>
       </div>
 
@@ -244,7 +244,7 @@ export const ComplianceGuide = () => {
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
               <h3 className="font-black text-xl text-brand-teal flex items-center gap-2">
                 <FileText className="w-5 h-5"/>
-                {lang === 'vi' ? 'Tài Liệu Hướng Dẫn Chi Tiết' : 'Detailed Documentation'}
+                {t('cg_detail_doc_title')}
               </h3>
               <button onClick={() => setShowDocDialog(false)} className="text-gray-400 hover:text-red-500 transition-colors">
                 <X className="w-6 h-6" />
@@ -269,7 +269,7 @@ export const ComplianceGuide = () => {
                 onClick={() => setShowDocDialog(false)} 
                 className="px-6 py-2.5 font-bold text-white bg-brand-teal hover:bg-teal-700 rounded-xl shadow-md transition-transform active:scale-95"
               >
-                {lang === 'vi' ? 'Đã hiểu' : 'Understood'}
+                {t('cg_understood')}
               </button>
             </div>
           </div>

@@ -29,7 +29,7 @@ export const ConsumerMarketplace = ({ products, currency, onScan }) => {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
         <input 
           type="text" 
-          placeholder={lang === 'vi' ? "Tìm kiếm nông sản..." : "Search products..."} 
+          placeholder={t('search_products')} 
           className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none"
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
@@ -42,10 +42,10 @@ export const ConsumerMarketplace = ({ products, currency, onScan }) => {
           value={categoryFilter}
           onChange={e => setCategoryFilter(e.target.value)}
         >
-          <option value="ALL">{lang === 'vi' ? "Tất cả danh mục" : "All Categories"}</option>
-          <option value="FRUIT">{lang === 'vi' ? "Trái cây" : "Fruits"}</option>
-          <option value="VEGETABLE">{lang === 'vi' ? "Rau củ" : "Vegetables"}</option>
-          <option value="RICE_GRAIN">{lang === 'vi' ? "Gạo & Ngũ cốc" : "Rice & Grains"}</option>
+          <option value="ALL">{t('cat_all')}</option>
+          <option value="FRUIT">{t('cat_fruit')}</option>
+          <option value="VEGETABLE">{t('cat_veg')}</option>
+          <option value="RICE_GRAIN">{t('cat_rice')}</option>
         </select>
 
         <select 
@@ -53,7 +53,7 @@ export const ConsumerMarketplace = ({ products, currency, onScan }) => {
           value={standardFilter}
           onChange={e => setStandardFilter(e.target.value)}
         >
-          <option value="ALL">{lang === 'vi' ? "Tất cả tiêu chuẩn" : "All Standards"}</option>
+          <option value="ALL">{t('std_all')}</option>
           <option value="VietGAP">VietGAP</option>
           <option value="GlobalGAP">GlobalGAP</option>
           <option value="OCOP">OCOP</option>
