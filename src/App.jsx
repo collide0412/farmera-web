@@ -19,6 +19,7 @@ import { useTranslation } from './contexts/LanguageContext.jsx';
 import { ConsumerMarketplace } from './components/ConsumerMarketplace.jsx';
 import { FarmerDashboard } from './components/FarmerDashboard.jsx';
 import { AdminLedger } from './components/AdminLedger.jsx';
+import { CoopAdminLayout } from './components/CoopAdminLayout.jsx';
 import { JourneyStep } from './components/Shared.jsx';
 
 export const App = () => {
@@ -43,14 +44,14 @@ export const App = () => {
     }, 1500); 
   };
   
-  const toggleRole = () => {
-    if (role === 'consumer') { setRole('farmer'); setActiveTab('farmer'); }
-    else { setRole('consumer'); setActiveTab('consumer'); }
+  const setRoleAndTab = (newRole) => {
+    setRole(newRole);
+    setActiveTab(newRole);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-20 md:pb-0 font-sans">
-      <header className={`text-white sticky top-0 z-40 shadow-xl transition-all duration-500 ${isPremium ? "bg-emerald-900 border-b-2 border-yellow-500" : "bg-brand-teal"}`}>
+      <header className={`text-white sticky top-0 z-40 shadow-xl transition-all duration-500 ${role === 'coop' ? 'bg-[#064e3b] border-b-4 border-yellow-500' : isPremium ? "bg-emerald-900 border-b-2 border-yellow-500" : "bg-brand-teal"}`}>
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 py-3 md:py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-2">
           
           <div className="flex items-center justify-between w-full md:w-auto">
@@ -65,14 +66,15 @@ export const App = () => {
           </div>
           
           <nav className="hidden md:flex gap-4 lg:gap-6 items-center justify-center flex-1">
-            {role === 'consumer' ? (
+            {role === 'consumer' && (
               <button 
                 onClick={() => setActiveTab('consumer')} 
                 className={`font-medium pb-1 ${activeTab === 'consumer' ? 'border-b-2 border-brand-green text-brand-green' : 'hover:text-brand-green'}`}
               >
                 {t('nav_market')}
               </button>
-            ) : (
+            )}
+            {role === 'farmer' && (
               <>
                 <button 
                   onClick={() => setActiveTab('farmer')} 
@@ -88,16 +90,33 @@ export const App = () => {
                 </button>
               </>
             )}
+            {role === 'coop' && (
+               <span className="font-bold text-emerald-200 uppercase tracking-widest text-sm">Trung tâm điều hành</span>
+            )}
           </nav>
 
           <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 md:gap-3 shrink-0 w-full md:w-auto mt-2 md:mt-0 pb-1 md:pb-0">
             <div className="flex items-center gap-2">
-              <button onClick={toggleRole} className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors whitespace-nowrap">
-                {role === 'consumer' ? 'Farmer Mode' : 'Client Mode'}
-              </button>
+              <div className="relative group h-full flex items-center cursor-pointer mr-1" tabIndex="0">
+                <button className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors text-yellow-300 outline-none focus:text-yellow-400">
+                  {role === 'consumer' ? 'Client Mode' : role === 'farmer' ? 'Farmer Mode' : 'HTX Mode'}
+                </button>
+                <div className="absolute right-0 top-full pt-2 md:pt-4 w-36 hidden group-hover:block group-focus-within:block focus-within:block z-50">
+                  <div className="bg-white rounded-md shadow-2xl text-gray-800 border overflow-hidden">
+                    <button onClick={() => setRoleAndTab('consumer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'consumer' ? 'text-brand-teal bg-gray-50' : 'text-gray-600'}`}>🚀 Client Mode</button>
+                    <button onClick={() => setRoleAndTab('farmer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-bold text-sm transition-colors ${role === 'farmer' ? 'text-brand-green bg-gray-50' : 'text-gray-600'}`}>👨‍🌾 Farmer Mode</button>
+                    <button onClick={() => setRoleAndTab('coop')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'coop' ? 'text-emerald-900 bg-emerald-50' : 'text-gray-600'}`}>🏭 HTX Mode</button>
+                  </div>
+                </div>
+              </div>
                 {role === 'farmer' && (
                   <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-yellow-400 text-yellow-900 shadow-md ring-2 ring-yellow-200' : 'bg-teal-800 text-gray-300'}`}>
                     <Crown className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'Premium' : 'Standard'}
+                  </button>
+                )}
+                {role === 'coop' && (
+                  <button onClick={() => setIsPremium(!isPremium)} className={`flex items-center gap-1 font-bold px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-colors whitespace-nowrap ${isPremium ? 'bg-emerald-700 text-yellow-400 shadow-md ring-2 ring-yellow-400/50' : 'bg-emerald-900 text-gray-300 border border-emerald-700'}`}>
+                    <Lock className="w-3 h-3 md:w-3.5 md:h-3.5"/> {isPremium ? 'HTX Premium' : 'Guest'}
                   </button>
                 )}
             </div>
@@ -139,7 +158,7 @@ export const App = () => {
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-7xl mx-auto p-3 sm:p-4 md:p-8">
+      <main className={`flex-1 w-full mx-auto ${role === 'coop' ? 'max-w-[1920px] p-0' : 'max-w-7xl p-3 sm:p-4 md:p-8'}`}>
         <AnimatePresence mode="wait">
           {activeTab === 'consumer' && ( 
             <motion.div key="consumer" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}> 
@@ -156,25 +175,32 @@ export const App = () => {
               <AdminLedger lang={lang} /> 
             </motion.div> 
           )}
+          {activeTab === 'coop' && (
+            <motion.div key="coop" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="h-full min-h-[85vh]"> 
+              <CoopAdminLayout isPremium={isPremium} /> 
+            </motion.div>
+          )}
         </AnimatePresence>
       </main>
 
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex justify-around p-2 pb-6 z-40 border-t border-gray-100">
-        {role === 'consumer' ? (
-          <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
-            <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('store')}</span>
-          </button>
-        ) : (
-          <>
-            <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
-              <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('farm')}</span>
+      {role !== 'coop' && (
+        <div className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex justify-around p-2 pb-6 z-40 border-t border-gray-100">
+          {role === 'consumer' ? (
+            <button onClick={() => setActiveTab('consumer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'consumer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+              <Store className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('store')}</span>
             </button>
-            <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'admin' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
-              <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('ledger')}</span>
-            </button>
-          </>
-        )}
-      </div>
+          ) : (
+            <>
+              <button onClick={() => setActiveTab('farmer')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'farmer' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+                <Activity className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('farm')}</span>
+              </button>
+              <button onClick={() => setActiveTab('admin')} className={`flex flex-col items-center p-2 rounded-xl flex-1 transition-colors ${activeTab === 'admin' ? 'text-brand-green bg-brand-light/50' : 'text-gray-400 hover:text-gray-600'}`}>
+                <Fingerprint className="w-6 h-6" /> <span className="text-[10px] mt-1 font-bold">{t('ledger')}</span>
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       <AnimatePresence>
         {isScanning && (
