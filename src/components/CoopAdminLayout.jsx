@@ -459,6 +459,7 @@ const MasterMap = ({ t }) => {
 
 const AICarpooling = ({ lang, currency, t }) => {
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [showScheduleDetails, setShowScheduleDetails] = useState(false);
 
   // Quick formatter to fix the NaN issue
   const localFormatMoney = (valInVND, curCode) => {
@@ -499,6 +500,12 @@ const AICarpooling = ({ lang, currency, t }) => {
                     disabled={isConfirmed}
                   >
                     {isConfirmed ? <><CheckCircle2 className="w-5 h-5"/> {t("log_confirmed")}</> : t("log_confirm")}
+                  </button>
+                  <button 
+                    onClick={() => setShowScheduleDetails(true)} 
+                    className="bg-white px-5 py-3 rounded-xl font-bold shadow-md transition-colors border border-orange-200 text-orange-700 hover:bg-orange-50"
+                  >
+                    Xem chi tiết lịch trình
                   </button>
                   <div className="bg-green-50 px-4 py-2 rounded-xl border border-green-200 text-green-800">
                      <span className="text-sm">{t("log_save")}</span> <span className="font-black text-lg">{localFormatMoney(2500000, currency)}</span>
@@ -548,6 +555,60 @@ const AICarpooling = ({ lang, currency, t }) => {
           </div>
         </div>
       </div>
+
+      {showScheduleDetails && (
+        <motion.div
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+           onClick={() => setShowScheduleDetails(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-2xl bg-white rounded-3xl p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto"
+          >
+            <button 
+              onClick={() => setShowScheduleDetails(false)}
+              className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h2 className="text-2xl font-black text-emerald-900 mb-6 flex items-center gap-3">
+              <CalendarClock className="w-8 h-8 text-emerald-500" />
+              Chi tiết lịch trình
+            </h2>
+
+            <div className="space-y-4">
+               {[
+                 { id: "HTX-1", dest: "CH Xanh", time: "08:00 - 10:00", status: "Sắp khởi hành", driver: "Trần Văn A", items: "Rau cải, củ cải", size: "1.5 tấn" },
+                 { id: "HTX-2", dest: "Cảng SG", time: "11:00 - 15:00", status: "Đang xếp hàng", driver: "Lê Văn B", items: "Trái cây các loại", size: "3 tấn" },
+                 { id: "HTX-3", dest: "Siêu thị Go", time: "16:00 - 18:00", status: "Chờ duyệt", driver: "Nguyễn Văn C", items: "Gạo Lài, Gạch", size: "2 tấn" }
+               ].map((trip) => (
+                 <div key={trip.id} className="p-4 border border-emerald-100 rounded-2xl bg-emerald-50/50 flex flex-col md:flex-row justify-between gap-4 items-center">
+                    <div className="flex-1 w-full">
+                       <h4 className="font-bold text-lg text-emerald-800 flex items-center gap-2">
+                          <Truck className="w-5 h-5"/> Chuyến {trip.id} 
+                          <span className="text-xs px-2 py-1 bg-emerald-200 text-emerald-800 rounded-full">{trip.status}</span>
+                       </h4>
+                       <div className="mt-2 text-sm text-gray-600 space-y-1">
+                          <p><span className="font-semibold">Địa điểm:</span> {trip.dest}</p>
+                          <p><span className="font-semibold">Thời gian:</span> {trip.time}</p>
+                          <p><span className="font-semibold">Tài xế/Xe:</span> {trip.driver} (Tải trọng {trip.size})</p>
+                          <p><span className="font-semibold">Hàng hóa:</span> {trip.items}</p>
+                       </div>
+                    </div>
+                    <div>
+                      <button className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-emerald-700">Theo dõi</button>
+                    </div>
+                 </div>
+               ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
     </div>
   );
 };

@@ -101,7 +101,16 @@ export const INITIAL_PRODUCTS = [
     image: './images/farmera_logo.png', // Fallback, normally product remote link
     farm: 'Highland Berry Farm', origin: 'Da Lat, VN', 
     logs: [{ date: '2026-03-05', type: 'Fertilizer', details: 'Organic Compost' }], 
-    certs: ['VietGAP', 'OCOP 4 Sao', 'HACCP'] 
+    certs: ['VietGAP', 'OCOP 4 Sao', 'HACCP'],
+    category: 'FRUIT',
+    standard: ['VietGAP', 'OCOP', 'Organic'],
+    details: {
+      expiry: { en: '7 days', vi: '7 ngày', ko: '7일' },
+      storage: { en: '2-4°C', vi: '2-4°C', ko: '2-4°C' },
+      distributor: 'FARMERA Logistics',
+      nutrition: { en: 'Vit C 58.8mg, Calories 32', vi: 'Vit C 58.8mg, 32 Calo', ko: '비타민 C 58.8mg, 32칼로리' },
+      area: '1.2 ha'
+    }
   },
   { 
     id: 2, name: { en: 'VietGAP Crisp Cabbage', vi: 'Bắp Cải Giòn VietGAP', ko: '비엣갭 바삭한 양배추' }, 
@@ -109,7 +118,16 @@ export const INITIAL_PRODUCTS = [
     image: './images/bap_cai.jpg', 
     farm: 'Mekong Greens', origin: 'Can Tho, VN', 
     logs: [{ date: '2026-03-10', type: 'Pesticide', details: 'Bio-Pesticide Neem Oil' }], 
-    certs: ['VietGAP', 'ISO 22000'] 
+    certs: ['VietGAP', 'ISO 22000'],
+    category: 'VEGETABLE',
+    standard: ['VietGAP'],
+    details: {
+      expiry: { en: '10 days', vi: '10 ngày', ko: '10일' },
+      storage: { en: 'Cool & Dry', vi: 'Nơi khô mát', ko: '서늘하고 건조한 곳' },
+      distributor: 'FARMERA Logistics',
+      nutrition: { en: 'Fiber 2.5g, Vit K 76mcg', vi: 'Chất xơ 2.5g, Vit K 76mcg', ko: '식이섬유 2.5g, 비타민 K 76mcg' },
+      area: '2.5 ha'
+    }
   },
   { 
     id: 3, name: { en: 'Premium OCOP Jasmine Rice', vi: 'Gạo Lài OCOP Cao Cấp', ko: '프리미엄 자스민 쌀' }, 
@@ -117,7 +135,16 @@ export const INITIAL_PRODUCTS = [
     image: './images/gao_lai.jpg', 
     farm: 'Golden Delta Fields', origin: 'Soc Trang, VN', 
     logs: [{ date: '2026-03-15', type: 'Fertilizer', details: 'NPK 20-20-15' }], 
-    certs: ['OCOP 5 Sao', 'HACCP', 'ISO 14001'] 
+    certs: ['OCOP 5 Sao', 'HACCP', 'ISO 14001'],
+    category: 'RICE_GRAIN',
+    standard: ['OCOP'],
+    details: {
+      expiry: { en: '12 months', vi: '12 tháng', ko: '12개월' },
+      storage: { en: 'Room temp, away from light', vi: 'Nhiệt độ phòng, tránh as', ko: '상온 보관, 직사광선 피함' },
+      distributor: 'FARMERA Logistics',
+      nutrition: { en: 'Carbs 79g, Protein 7g', vi: 'Tinh bột 79g, Đạm 7g', ko: '탄수화물 79g, 단백질 7g' },
+      area: '5.0 ha'
+    }
   },
 ];
 

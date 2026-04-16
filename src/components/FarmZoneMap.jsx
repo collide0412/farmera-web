@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext.jsx';
-import { Leaf, Warehouse, Sprout, Apple, Droplets, Thermometer, Activity, AlertTriangle, Lock } from 'lucide-react';
+import { Leaf, Warehouse, Sprout, Apple, Droplets, Thermometer, Activity, AlertTriangle, Lock, X } from 'lucide-react';
 import { DashboardCard } from './Shared.jsx';
 import { Map as MapIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const FarmZoneMap = ({ isPremium }) => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ export const FarmZoneMap = ({ isPremium }) => {
   ];
 
   const [selected, setSelected] = useState(ZONES[0]);
+  const [showEditFarm, setShowEditFarm] = useState(false);
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
@@ -109,7 +111,12 @@ export const FarmZoneMap = ({ isPremium }) => {
                   <span className="text-xs block"><span className="font-bold">Vị trí:</span> 21.0285° N, 105.8542° E</span>
                   <span className="text-xs block"><span className="font-bold">Đất:</span> Đất phù sa, giữ nước tốt (Phù hợp {selected.name})</span>
                   <span className="text-xs block"><span className="font-bold">Khí hậu:</span> Nhiệt đới gió mùa, độ ẩm TB 75-85%</span>
-                  <button className="mt-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg self-start transition-colors">Sửa Thông Tin Nông Trại</button>
+                  <button 
+                    onClick={() => setShowEditFarm(true)}
+                    className="mt-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg self-start transition-colors"
+                  >
+                    Sửa Thông Tin Nông Trại
+                  </button>
                 </div>
               </div>
             ) : (
@@ -151,6 +158,61 @@ export const FarmZoneMap = ({ isPremium }) => {
         </div>
       </div>
       )}
+
+      {showEditFarm && (
+        <motion.div
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+           onClick={() => setShowEditFarm(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto"
+          >
+            <button 
+              onClick={() => setShowEditFarm(false)}
+              className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h2 className="text-2xl font-black text-blue-900 mb-6 flex items-center gap-3">
+              <MapIcon className="w-8 h-8 text-blue-500" />
+              Sửa thông tin Nông Trại
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">Tên khu vực</label>
+                <input type="text" defaultValue={selected.name} className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">Vĩ độ</label>
+                  <input type="text" defaultValue="21.0285° N" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">Kinh độ</label>
+                  <input type="text" defaultValue="105.8542° E" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">Loại đất</label>
+                <input type="text" defaultValue="Đất phù sa, giữ nước tốt" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">Đặc điểm / Khí hậu</label>
+                <textarea rows="3" defaultValue="Nhiệt đới gió mùa, độ ẩm TB 75-85%" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+              </div>
+              <button onClick={() => setShowEditFarm(false)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors mt-4">
+                Lưu Thay Đổi
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
     </div>
   );
 };

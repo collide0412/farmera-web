@@ -35,10 +35,11 @@ export const App = () => {
   const [currency, setCurrency] = useState('VND');
   const [showTrace, setShowTrace] = useState(false);
   const [showActionPlan, setShowActionPlan] = useState(false);
-  const [traceTab, setTraceTab] = useState('lifecycle');
+  const [traceTab, setTraceTab] = useState('info');
 
   const handleScan = (product) => { 
     setIsScanning(true); 
+    setTraceTab('info');
     setTimeout(() => { 
       setIsScanning(false); 
       setSelectedProduct(product); 
@@ -61,9 +62,11 @@ export const App = () => {
               <span className="text-2xl font-bold tracking-tight" style={{display: 'none'}}>FARMERA</span>
             </div>
             
-            <button onClick={()=>setShowTrace(true)} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
-              <Fingerprint className="w-4 h-4 shrink-0" /> {t('nav_trace')}
-            </button>
+            {role === 'consumer' && (
+              <button onClick={()=>setShowTrace(true)} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
+                <Fingerprint className="w-4 h-4 shrink-0" /> {t('nav_trace')}
+              </button>
+            )}
           </div>
           
           <nav className="hidden md:flex gap-4 lg:gap-6 items-center justify-center flex-1">
@@ -100,13 +103,13 @@ export const App = () => {
             <div className="flex items-center gap-2">
               <div className="relative group h-full flex items-center cursor-pointer mr-1" tabIndex="0">
                 <button className="text-xs md:text-sm font-bold underline hover:text-brand-green transition-colors text-yellow-300 outline-none focus:text-yellow-400">
-                  {role === 'consumer' ? 'Client Mode' : role === 'farmer' ? 'Farmer Mode' : 'HTX Mode'}
+                  {role === 'consumer' ? t('nav_client_mode') : role === 'farmer' ? t('nav_farmer_mode') : t('nav_htx_mode')}
                 </button>
-                <div className="absolute left-0 md:left-auto md:right-0 top-full pt-2 md:pt-4 w-36 hidden group-hover:block group-focus-within:block focus-within:block z-50">
+                <div className="absolute left-0 md:left-auto md:right-0 top-full pt-2 md:pt-4 w-40 hidden group-hover:block group-focus-within:block focus-within:block z-50">
                   <div className="bg-white rounded-md shadow-2xl text-gray-800 border overflow-hidden">
-                    <button onClick={() => setRoleAndTab('consumer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'consumer' ? 'text-brand-teal bg-gray-50' : 'text-gray-600'}`}>Client Mode</button>
-                    <button onClick={() => setRoleAndTab('farmer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-bold text-sm transition-colors ${role === 'farmer' ? 'text-brand-green bg-gray-50' : 'text-gray-600'}`}>Farmer Mode</button>
-                    <button onClick={() => setRoleAndTab('coop')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'coop' ? 'text-emerald-900 bg-emerald-50' : 'text-gray-600'}`}>HTX Mode</button>
+                    <button onClick={() => setRoleAndTab('consumer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'consumer' ? 'text-brand-teal bg-gray-50' : 'text-gray-600'}`}>{t('nav_client_mode')}</button>
+                    <button onClick={() => setRoleAndTab('farmer')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light border-y font-bold text-sm transition-colors ${role === 'farmer' ? 'text-brand-green bg-gray-50' : 'text-gray-600'}`}>{t('nav_farmer_mode')}</button>
+                    <button onClick={() => setRoleAndTab('coop')} className={`block w-full text-left px-4 py-3 hover:bg-brand-light font-bold text-sm transition-colors ${role === 'coop' ? 'text-emerald-900 bg-emerald-50' : 'text-gray-600'}`}>{t('nav_htx_mode')}</button>
                   </div>
                 </div>
               </div>
@@ -151,9 +154,11 @@ export const App = () => {
                 </div>
               </div>
 
-              <button onClick={()=>setShowTrace(true)} className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
-                <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span>{t('nav_trace')}</span>
-              </button>
+              {role === 'consumer' && (
+                <button onClick={()=>setShowTrace(true)} className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
+                  <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span>{t('nav_trace')}</span>
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -299,16 +304,46 @@ export const App = () => {
                   </div>
                 )}
 
-                <div className="flex bg-gray-100 p-1 mb-6 rounded-xl relative">
-                  <button onClick={() => setTraceTab('lifecycle')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'lifecycle' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}>
+                <div className="flex bg-gray-100 p-1 mb-6 rounded-xl relative gap-1">
+                  <button onClick={() => setTraceTab('info')} className={`flex-1 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-lg transition-colors overflow-hidden truncate ${traceTab === 'info' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
+                    {t('trace_details_tab')}
+                  </button>
+                  <button onClick={() => setTraceTab('lifecycle')} className={`flex-1 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-lg transition-colors overflow-hidden truncate ${traceTab === 'lifecycle' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}>
                     {t('trace_lifecycle')}
                   </button>
-                  <button onClick={() => setTraceTab('environment')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-colors ${traceTab === 'environment' ? 'bg-white shadow text-brand-green' : 'text-gray-500 hover:text-gray-700'}`}>
+                  <button onClick={() => setTraceTab('environment')} className={`flex-1 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-lg transition-colors overflow-hidden truncate ${traceTab === 'environment' ? 'bg-white shadow text-brand-green' : 'text-gray-500 hover:text-gray-700'}`}>
                     {t('trace_environment')}
                   </button>
                 </div>
 
-                {traceTab === 'lifecycle' ? (
+                {traceTab === 'info' ? (
+                  <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                     <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-4 md:p-5">
+                        <ul className="space-y-4">
+                           <li className="flex justify-between items-center text-sm md:text-base border-b border-blue-100/50 pb-3">
+                             <span className="text-blue-800 font-bold">{t('trace_expiry')}</span>
+                             <span className="text-gray-800 font-medium">{selectedProduct.details?.expiry?.[lang] || 'N/A'}</span>
+                           </li>
+                           <li className="flex justify-between items-center text-sm md:text-base border-b border-blue-100/50 pb-3">
+                             <span className="text-blue-800 font-bold">{t('trace_storage')}</span>
+                             <span className="text-gray-800 font-medium">{selectedProduct.details?.storage?.[lang] || 'N/A'}</span>
+                           </li>
+                           <li className="flex justify-between items-start text-sm md:text-base border-b border-blue-100/50 pb-3">
+                             <span className="text-blue-800 font-bold max-w-[40%]">{t('trace_nutrition')}</span>
+                             <span className="text-gray-800 font-medium text-right max-w-[55%]">{selectedProduct.details?.nutrition?.[lang] || 'N/A'}</span>
+                           </li>
+                           <li className="flex justify-between items-center text-sm md:text-base border-b border-blue-100/50 pb-3">
+                             <span className="text-blue-800 font-bold">{t('trace_area')}</span>
+                             <span className="text-gray-800 font-medium">{selectedProduct.details?.area || 'N/A'}</span>
+                           </li>
+                           <li className="flex justify-between items-center text-sm md:text-base">
+                             <span className="text-blue-800 font-bold">{t('trace_distributor')}</span>
+                             <span className="text-gray-800 font-medium">{selectedProduct.details?.distributor || 'N/A'}</span>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                ) : traceTab === 'lifecycle' ? (
                   <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
                     <JourneyStep icon={<Sprout />} title={t('seed')} desc={t('seed_desc')} time={t('date_mar_1')} />
                     

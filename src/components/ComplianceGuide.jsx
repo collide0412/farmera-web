@@ -97,7 +97,7 @@ export const ComplianceGuide = () => {
   };
 
   const handleUpload = (stepId) => {
-    alert(`File Hash (IPFS) Generated for Step ${stepId}!`);
+    alert(`${t('cg_hash_gen_alert')} ${stepId}!`);
     const newStatuses = [...stepStatuses];
     newStatuses[stepId - 1] = 'completed';
     if (stepId < newStatuses.length && newStatuses[stepId] === 'pending') {
@@ -228,7 +228,7 @@ export const ComplianceGuide = () => {
                     onClick={() => handleUpload(step.id)}
                     className="w-full flex items-center justify-center gap-2 bg-brand-light text-brand-teal hover:bg-brand-teal hover:text-white font-bold py-2 px-4 rounded-xl transition"
                   >
-                    <Upload className="w-4 h-4" /> Upload Docs & Verify
+                    <Upload className="w-4 h-4" /> {t('cg_upload_verify')}
                   </button>
                 )}
               </div>
