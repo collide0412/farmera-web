@@ -17,20 +17,24 @@ const HTX_TRANSLATIONS = {
     htx_subtitle: "Quản trị viên Hệ thống",
     tab_dash: "Tổng quan",
     tab_members: "Thành viên",
-    tab_map: "Bản đồ tổng thể",
+    tab_map: "Bản đồ",
     tab_log: "Điều phối AI",
-    tab_cert: "Báo cáo & Chứng nhận",
+    tab_cert: "Chứng nhận",
     dash_title: "Tháp điều khiển HTX",
     dash_desc: "Theo dõi sức khỏe toàn khu vực trong thời gian thực.",
     stat_members: "Tổng Xã Viên",
     stat_area: "Tổng Diện Tích",
     stat_est: "Dự Kiến Cấp",
     stat_warn: "Cảnh Báo",
+    unit_farms: "Hộ",
+    unit_ha: "ha",
+    unit_tons: "Tấn",
+    unit_zones: "Khu",
     chart_title: "Tăng trưởng Sản Lượng (Tấn)",
     mem_title: "Quản lý Thành viên",
     mem_desc: "Danh sách hồ sơ và trạng thái trang trại của xã viên thuộc HTX.",
-    th_farmer: "Hộ Nông Dân",
-    th_crop: "Loại Cây",
+    th_farmer: "Hộ",
+    th_crop: "Cây Trồng",
     th_status: "Trạng Thái",
     th_plan: "Gói Cước",
     badge_prem: "Premium",
@@ -39,60 +43,69 @@ const HTX_TRANSLATIONS = {
     badge_ok: "Ổn định",
     txt_kg: "kg",
     map_title: "Bản Đồ Master HTX",
-    map_desc: "Giám sát 50+ vùng trồng trong thời gian thực. Định vị IoT trực tiếp.",
-    map_all: "Tất cả cây trồng",
+    map_desc: "Giám sát thời gian thực. Định vị IoT.",
+    map_all: "Tất cả",
     map_premium: "Premium IoT",
     map_standard: "Standard",
-    map_moist: "Độ ẩm (AI)",
-    map_manual: "Không có (Tay)",
-    map_alert: "Cần kiểm tra cấp tốc",
-    log_title: "Điều phối Logistics & Carpool",
-    log_desc: "Giảm 25% chi phí thu hoạch bằng AI Ghép chuyến",
-    log_hot: "AI Recommendation (Hot!)",
+    map_moist: "Độ ẩm",
+    map_manual: "Tay",
+    map_alert: "Kiểm tra",
+    log_title: "Điều phối Logistics",
+    log_desc: "Giảm 25% chi phí bằng AI",
+    log_hot: "AI Đề xuất",
     log_opt: "Tối ưu 90%",
-    log_found: "Hệ thống tìm thấy 2 xe tải 3 tấn đang trống chuyến",
-    log_detail: "Đề xuất gom hàng của 12 hộ (Tổng: ~5.4 tấn) khu vực phía Đông Hải Dương ngay chiều tối nay.",
-    log_confirm: "Xác nhận ghép chuyến & Chuyển lệnh",
+    log_found: "Tìm thấy 2 xe tải đang trống",
+    log_detail: "Đề xuất gom hàng của 12 hộ (Tổng: ~5.4 tấn) khu vực phía Đông.",
+    log_confirm: "Xác nhận ghép chuyến",
+    log_confirmed: "Đã xác nhận & Chuyển lệnh!",
     log_save: "Tiết kiệm ước tính:",
-    log_list: "Danh sách hộ báo cáo thu hoạch (3 ngày tới)",
+    log_list: "Hộ báo cáo thu hoạch (3 ngày tới)",
     log_est: "Dự kiến:",
     log_pos: "Tọa độ",
     log_live: "Trạm điều hướng Live",
     log_fleet: "Hạm đội xe",
-    log_empty: "Xe trống (Sẵn sàng)",
+    log_empty: "Xe trống",
+    log_base_rate: "Cước nền",
+    log_fuel: "Giá xăng dầu",
+    txt_farmer_name: "Ông Nguyễn Văn",
+    txt_zone_east: "Khu Đông",
     cert_title: "Chứng Nhận & Báo Cáo",
-    cert_desc: "Xuất tệp minh bạch, làm việc với Siêu thị & Đối tác XK",
-    cert_btn: "Xuất báo cáo PDF minh bạch",
-    cert_th_name: "Hộ Thành Viên",
-    cert_th_crop: "Loại Cây",
-    cert_th_prog: "Tiến Độ Ghi Chép (%)",
-    cert_th_miss: "Tiêu Chí Thiếu",
+    cert_desc: "Xuất tệp minh bạch, làm việc với Đối tác",
+    cert_btn: "Xuất PDF",
+    cert_th_name: "Hộ",
+    cert_th_crop: "Cây Trồng",
+    cert_th_prog: "Tiến Độ (%)",
+    cert_th_miss: "Thiếu",
     cert_th_action: "Hành động",
     cert_comp: "Đầy đủ",
     cert_remind: "Nhắc App",
   },
   en: {
-    need_role: "HTX Admin Role Required",
-    upgrade_desc: "Upgrade to the Cooperative management plan to unlock the Control Tower, Master Map, and AI Logistics.",
-    upgrade_btn: "Upgrade to HTX Plan",
+    need_role: "HTX Admin Required",
+    upgrade_desc: "Upgrade to Cooperative plan to unlock features.",
+    upgrade_btn: "Upgrade",
     htx_title: "FARMERA HTX",
     htx_subtitle: "System Administrator",
     tab_dash: "Dashboard",
     tab_members: "Members",
     tab_map: "Master Map",
     tab_log: "AI Logistics",
-    tab_cert: "Reports & Certs",
+    tab_cert: "Reports",
     dash_title: "HTX Control Tower",
     dash_desc: "Monitor regional health in real time.",
     stat_members: "Total Members",
     stat_area: "Total Area",
     stat_est: "Est. Harvest",
     stat_warn: "Alerts",
-    chart_title: "Ecological Yield Growth (Tons)",
+    unit_farms: "Farms",
+    unit_ha: "ha",
+    unit_tons: "Tons",
+    unit_zones: "Zones",
+    chart_title: "Growth (Tons)",
     mem_title: "Member Management",
-    mem_desc: "List module of all farmers under the Cooperative system.",
+    mem_desc: "List of all farmers in the Cooperative.",
     th_farmer: "Farmer",
-    th_crop: "Crop Type",
+    th_crop: "Crop",
     th_status: "Status",
     th_plan: "Plan",
     badge_prem: "Premium",
@@ -101,60 +114,69 @@ const HTX_TRANSLATIONS = {
     badge_ok: "Stable",
     txt_kg: "kg",
     map_title: "HTX Master Map",
-    map_desc: "Real-time monitoring of 50+ planting zones. Direct IoT positioning.",
+    map_desc: "Real-time monitoring. Direct IoT positioning.",
     map_all: "All Crops",
     map_premium: "Premium IoT",
     map_standard: "Standard",
-    map_moist: "Moisture (AI)",
-    map_manual: "N/A (Manual)",
-    map_alert: "Urgent Pest Inspection",
+    map_moist: "Moisture",
+    map_manual: "Manual",
+    map_alert: "Urgent",
     log_title: "Logistics & Carpooling",
-    log_desc: "Reduce harvest costs by 25% with AI Ride-sharing",
-    log_hot: "AI Recommendation (Hot!)",
+    log_desc: "Reduce costs by 25% with AI",
+    log_hot: "AI Recommendation",
     log_opt: "90% Optimized",
-    log_found: "System found two 3-ton trucks empty on the return trip",
-    log_detail: "Proposing to consolidate goods from 12 famers (Total: ~5.4 tons) in East Hai Duong this evening.",
-    log_confirm: "Confirm Carpool & Send Notice",
+    log_found: "Found two 3-ton trucks empty",
+    log_detail: "Proposing to consolidate goods from 12 famers in East Zone.",
+    log_confirm: "Confirm Carpool",
+    log_confirmed: "Confirmed & Sent Notice!",
     log_save: "Estimated Savings:",
-    log_list: "Harvest Reporting List (Next 3 days)",
+    log_list: "Harvest Reporting (Next 3 days)",
     log_est: "Estimated:",
-    log_pos: "Coordinates",
+    log_pos: "Pos",
     log_live: "Live Nav Station",
     log_fleet: "Fleet Status",
-    log_empty: "Empty (Ready)",
-    cert_title: "Certifications & Reports",
-    cert_desc: "Export transparent files, negotiate with Supermarkets & Exporters",
-    cert_btn: "Export Transparent PDF",
-    cert_th_name: "Member Name",
-    cert_th_crop: "Crop Type",
-    cert_th_prog: "Recording Progress (%)",
-    cert_th_miss: "Missing Criteria",
+    log_empty: "Empty",
+    log_base_rate: "Base rate",
+    log_fuel: "Fuel price",
+    txt_farmer_name: "Mr. Nguyen Van",
+    txt_zone_east: "East Zone",
+    cert_title: "Certifications",
+    cert_desc: "Export transparent files for negotiating",
+    cert_btn: "Export PDF",
+    cert_th_name: "Name",
+    cert_th_crop: "Crop",
+    cert_th_prog: "Progress (%)",
+    cert_th_miss: "Missing",
     cert_th_action: "Action",
     cert_comp: "Completed",
     cert_remind: "Ping App",
   },
   ko: {
     need_role: "HTX 관리자 권한 필요",
-    upgrade_desc: "협동조합 관리 플랜으로 업그레이드하여 관제탑, 마스터 지도, AI 물류를 잠금 해제하세요.",
-    upgrade_btn: "HTX 플랜으로 업그레이드",
+    upgrade_desc: "협동조합 관리 플랜으로 업그레이드하세요.",
+    upgrade_btn: "업그레이드",
     htx_title: "FARMERA HTX",
     htx_subtitle: "시스템 관리자",
     tab_dash: "대시보드",
     tab_members: "회원",
     tab_map: "마스터 지도",
     tab_log: "AI 물류",
-    tab_cert: "보고서 및 인증",
+    tab_cert: "보고서",
     dash_title: "HTX 관제탑",
-    dash_desc: "실시간으로 지역 건강 모니터링.",
+    dash_desc: "지역 건강 실시간 모니터링.",
     stat_members: "총 회원수",
     stat_area: "총 면적",
     stat_est: "예상 수확량",
     stat_warn: "경고",
-    chart_title: "생태학적 수확량 성장 (톤)",
+    unit_farms: "농장",
+    unit_ha: "ha",
+    unit_tons: "톤",
+    unit_zones: "구역",
+    chart_title: "성장 (톤)",
     mem_title: "회원 관리",
-    mem_desc: "협동조합 시스템 하의 모든 농부 목록 모듈.",
+    mem_desc: "모든 농부 목록.",
     th_farmer: "농부",
-    th_crop: "작물 종류",
+    th_crop: "작물",
     th_status: "상태",
     th_plan: "플랜",
     badge_prem: "프리미엄",
@@ -163,34 +185,39 @@ const HTX_TRANSLATIONS = {
     badge_ok: "안정",
     txt_kg: "kg",
     map_title: "HTX 마스터 지도",
-    map_desc: "50개 이상의 재배 구역 실시간 모니터링. 직접 IoT 위치 추적.",
+    map_desc: "실시간 모니터링 및 IoT 위치 추적.",
     map_all: "모든 작물",
     map_premium: "프리미엄 IoT",
     map_standard: "표준",
-    map_moist: "수분 (AI)",
+    map_moist: "수분",
     map_manual: "수동",
-    map_alert: "긴급 검사 요망",
+    map_alert: "긴급",
     log_title: "물류 및 카풀",
-    log_desc: "AI 카풀을 통해 수확 비용 25% 절감",
-    log_hot: "AI 추천 (인기!)",
+    log_desc: "AI를 통해 비용 25% 절감",
+    log_hot: "AI 추천",
     log_opt: "90% 최적화",
-    log_found: "빈 귀환 트럭 2대 발견",
-    log_detail: "오후에 12개 농가에서 약 5.4톤의 상품 통합 제안.",
+    log_found: "빈 역방향 트럭 2대 발견",
+    log_detail: "동부 구역 12개 농가의 화물 통합 제안.",
     log_confirm: "카풀 확인",
+    log_confirmed: "확인 및 알림 전송!",
     log_save: "예상 절감액:",
-    log_list: "수확 보고 목록 (향후 3일)",
+    log_list: "수확 보고 (향후 3일)",
     log_est: "예상:",
     log_pos: "좌표",
-    log_live: "실시간 내비 역",
+    log_live: "실시간 위치",
     log_fleet: "차량 상태",
-    log_empty: "비어 있음 (준비)",
+    log_empty: "비어 있음",
+    log_base_rate: "기본 요금",
+    log_fuel: "연료비",
+    txt_farmer_name: "응우옌 반",
+    txt_zone_east: "동부 구역",
     cert_title: "인증 및 보고서",
-    cert_desc: "투명한 파일 내보내기, 거래 협상",
-    cert_btn: "투명 PDF 내보내기",
-    cert_th_name: "회원 이름",
-    cert_th_crop: "작물 종류",
+    cert_desc: "거래를 위한 투명한 파일 내보내기",
+    cert_btn: "PDF 내보내기",
+    cert_th_name: "이름",
+    cert_th_crop: "작물",
     cert_th_prog: "진행률 (%)",
-    cert_th_miss: "누락 기준",
+    cert_th_miss: "누락",
     cert_th_action: "작업",
     cert_comp: "완료됨",
     cert_remind: "앱 알림",
@@ -322,10 +349,10 @@ const HTXDashboard = ({ t }) => {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: t("stat_members"), val: "50", unit: "Hộ/Farms", icon: Users },
-          { label: t("stat_area"), val: "12.5", unit: "ha", icon: Map },
-          { label: t("stat_est"), val: "45.2", unit: "Tấn/Tons", icon: Leaf },
-          { label: t("stat_warn"), val: "3", unit: "Khu/Zones", icon: AlertTriangle, color: "text-red-500" },
+          { label: t("stat_members"), val: "50", unit: t("unit_farms"), icon: Users },
+          { label: t("stat_area"), val: "12.5", unit: t("unit_ha"), icon: Map },
+          { label: t("stat_est"), val: "45.2", unit: t("unit_tons"), icon: Leaf },
+          { label: t("stat_warn"), val: "3", unit: t("unit_zones"), icon: AlertTriangle, color: "text-red-500" },
         ].map((s, i) => (
           <div key={i} className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-emerald-100 flex flex-col justify-between hover:shadow-md transition">
             <div className="flex justify-between items-start mb-4">
@@ -373,10 +400,8 @@ const MasterMap = ({ t }) => {
       </div>
 
       <div className="flex-1 bg-white rounded-3xl shadow-lg border border-emerald-100 relative overflow-hidden min-h-[500px]">
-        {/* Fake Map Grid */}
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(#000_1px,transparent_1px),linear-gradient(90deg,#000_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         
-        {/* Render Farmers as absolute points */}
         <div className="absolute inset-4 md:inset-10">
           {displayNodes.map((m) => {
             const x = ((m.lng - 105.7) / 0.2) * 100;
@@ -391,8 +416,6 @@ const MasterMap = ({ t }) => {
                 onMouseLeave={() => setActiveHover(null)}
               >
                 {isAlert && <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75"></div>}
-                
-                {/* Premium marker has distinct shape/color vs Standard marker */}
                 <div className={`relative flex items-center justify-center w-5 h-5 md:w-6 md:h-6 rounded-full border-[3px] border-white shadow-xl ${isAlert ? "bg-red-500" : m.isPremium ? "bg-yellow-400 border-yellow-200" : "bg-emerald-500"} ${activeHover?.id === m.id ? "scale-150 ring-4 ring-emerald-200" : "hover:scale-125"} transition-all`}>
                    {m.isPremium && <Crown className="w-3 h-3 text-yellow-900" />}
                 </div>
@@ -400,7 +423,6 @@ const MasterMap = ({ t }) => {
             );
           })}
 
-          {/* Tooltip Overlay */}
           {activeHover && (
             <div 
               className="absolute z-50 bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] p-4 border border-emerald-100 min-w-[200px] pointer-events-none transition-all duration-200 animate-in fade-in zoom-in-95"
@@ -436,6 +458,18 @@ const MasterMap = ({ t }) => {
 };
 
 const AICarpooling = ({ lang, currency, t }) => {
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
+  // Quick formatter to fix the NaN issue
+  const localFormatMoney = (valInVND, curCode) => {
+    let amount = valInVND;
+    if (curCode === 'KRW') amount = valInVND * 0.052; // roughly 130,000 KRW
+    if (curCode === 'USD') amount = valInVND / 25000; // roughly 100 USD
+
+    const loc = curCode === 'VND' ? 'vi-VN' : curCode === 'KRW' ? 'ko-KR' : 'en-US';
+    return new Intl.NumberFormat(loc, { style: 'currency', currency: curCode, maximumFractionDigits: 0 }).format(amount);
+  };
+
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
       <div>
@@ -459,11 +493,15 @@ const AICarpooling = ({ lang, currency, t }) => {
                   {t("log_found")}. <br/> {t("log_detail")}
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-orange-200 transition-transform hover:scale-105 active:scale-95 flex items-center gap-2">
-                    {t("log_confirm")}
+                  <button 
+                    onClick={() => setIsConfirmed(true)}
+                    className={`px-6 py-3 rounded-xl font-bold shadow-lg transition-all flex items-center gap-2 ${isConfirmed ? "bg-green-500 hover:bg-green-600 shadow-green-200 text-white cursor-default" : "bg-orange-500 hover:bg-orange-600 text-white shadow-orange-200 hover:scale-105 active:scale-95"}`}
+                    disabled={isConfirmed}
+                  >
+                    {isConfirmed ? <><CheckCircle2 className="w-5 h-5"/> {t("log_confirmed")}</> : t("log_confirm")}
                   </button>
                   <div className="bg-green-50 px-4 py-2 rounded-xl border border-green-200 text-green-800">
-                     <span className="text-sm">{t("log_save")}</span> <span className="font-black text-lg">{formatCurrency(2500000, currency)}</span>
+                     <span className="text-sm">{t("log_save")}</span> <span className="font-black text-lg">{localFormatMoney(2500000, currency)}</span>
                   </div>
                 </div>
               </div>
@@ -476,15 +514,15 @@ const AICarpooling = ({ lang, currency, t }) => {
               {[1,2,3].map(i => (
                 <div key={i} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border border-gray-100 rounded-2xl hover:bg-gray-50 transition-colors">
                   <div className="flex gap-4">
-                    <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center font-bold text-gray-500 shrink-0">Hộ {i}</div>
+                    <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center font-bold text-gray-500 shrink-0">{t("unit_farms")} {i}</div>
                     <div>
-                      <h4 className="font-bold text-gray-800">Ông Nguyễn Văn {i}</h4>
+                      <h4 className="font-bold text-gray-800">{t("txt_farmer_name")} {i}</h4>
                       <p className="text-emerald-600 font-bold text-sm bg-emerald-50 px-2 py-0.5 rounded inline-block mt-1">{t("log_est")} 450 {t("txt_kg")}</p>
                     </div>
                   </div>
                   <div className="mt-3 sm:mt-0 text-right w-full sm:w-auto">
                     <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{t("log_pos")}</p>
-                    <p className="text-sm font-mono text-gray-700 bg-gray-100 px-3 py-1 rounded-md inline-block">Khu Đông ({i}.2km)</p>
+                    <p className="text-sm font-mono text-gray-700 bg-gray-100 px-3 py-1 rounded-md inline-block">{t("txt_zone_east")} ({i}.2km)</p>
                   </div>
                 </div>
               ))}
@@ -502,9 +540,9 @@ const AICarpooling = ({ lang, currency, t }) => {
                 <div className="flex justify-between font-bold text-lg"><span className="text-white">{t("log_empty")}</span><span className="text-emerald-400">4 / 15</span></div>
               </div>
               <div className="bg-gray-800/50 p-4 rounded-2xl border border-gray-700">
-                <p className="text-gray-400 text-xs font-bold uppercase mb-1">Cước nền</p>
-                <div className="flex justify-between font-bold text-lg"><span className="text-white">Giá xăng dầu</span><span className="text-red-400">+0.2%</span></div>
-                <div className="mt-2 text-xs text-gray-400">Base rate: {formatCurrency(25000, currency)}/km</div>
+                <p className="text-gray-400 text-xs font-bold uppercase mb-1">{t("log_base_rate")}</p>
+                <div className="flex justify-between font-bold text-lg"><span className="text-white">{t("log_fuel")}</span><span className="text-red-400">+0.2%</span></div>
+                <div className="mt-2 text-xs text-gray-400">Base rate: {localFormatMoney(25000, currency)}/km</div>
               </div>
             </div>
           </div>
