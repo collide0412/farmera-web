@@ -33,7 +33,6 @@ export const App = () => {
   const [isPremium, setIsPremium] = useState(() => localStorage.getItem('premium') === 'true');
   useEffect(() => { localStorage.setItem('premium', isPremium); }, [isPremium]);
   const [currency, setCurrency] = useState('VND');
-  const [showTrace, setShowTrace] = useState(false);
   const [showActionPlan, setShowActionPlan] = useState(false);
   const [traceTab, setTraceTab] = useState('info');
 
@@ -63,7 +62,7 @@ export const App = () => {
             </div>
             
             {role === 'consumer' && (
-              <button onClick={()=>setShowTrace(true)} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
+              <button onClick={() => handleScan(products[0])} className="md:hidden bg-brand-green hover:bg-emerald-600 px-4 py-1.5 rounded-full font-bold shadow-lg flex items-center justify-center gap-1.5 text-sm whitespace-nowrap active:scale-95 transition-transform">
                 <Fingerprint className="w-4 h-4 shrink-0" /> {t('nav_trace')}
               </button>
             )}
@@ -155,7 +154,7 @@ export const App = () => {
               </div>
 
               {role === 'consumer' && (
-                <button onClick={()=>setShowTrace(true)} className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
+                <button onClick={() => handleScan(products[0])} className="hidden md:flex bg-brand-green md:ml-4 hover:bg-emerald-600 px-3 py-2 md:px-5 md:py-2.5 rounded-full font-bold shadow-lg transition-transform hover:scale-105 items-center justify-center gap-1 md:gap-2 text-sm md:text-base whitespace-nowrap">
                   <Fingerprint className="w-4 h-4 md:w-5 md:h-5 shrink-0" /> <span>{t('nav_trace')}</span>
                 </button>
               )}
@@ -415,41 +414,6 @@ export const App = () => {
                     <p className="text-sm text-gray-500">{t('farmer_quote')}</p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {showTrace && (
-          <motion.div className="fixed inset-0 z-50 flex flex-col items-center justify-end md:justify-center p-0 md:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="absolute inset-0 bg-brand-teal/80 backdrop-blur-sm" onClick={() => setShowTrace(false)} />
-            <motion.div className="bg-white max-w-lg w-full rounded-t-3xl md:rounded-2xl shadow-2xl relative flex flex-col z-10 max-h-[90vh]" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}>
-              <div className="bg-brand-teal p-5 md:p-6 text-white text-center shrink-0 rounded-t-3xl md:rounded-t-none">
-                <div className="w-12 h-1.5 bg-white/30 rounded-full mx-auto mb-4 md:hidden" />
-                <Fingerprint className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 text-brand-green mix-blend-screen" />
-                <h2 className="text-xl md:text-2xl font-bold">{t('nav_trace')}</h2>
-                <p className="text-white/80 mt-1 md:mt-2 text-xs md:text-sm">{t('demo_desc')}</p>
-              </div>
-              <div className="p-4 md:p-6 space-y-3 md:space-y-4 overflow-y-auto">
-                <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">{t('prod_scanned')}</p>
-                    <p className="font-bold text-sm md:text-base text-brand-teal">Premium Organic Rice</p>
-                  </div>
-                  <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-brand-green" />
-                </div>
-                <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">{t('harvest_date')}</p>
-                    <p className="font-bold text-sm md:text-base text-brand-teal">{t('days_ago')}</p>
-                  </div>
-                  <Activity className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
-                </div>
-              </div>
-              <div className="p-4 md:p-6 bg-gray-50 border-t border-gray-100 text-center shrink-0">
-                <button onClick={() => setShowTrace(false)} className="bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 md:py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 w-full text-sm md:text-base">
-                  {t('close_demo')}
-                </button>
               </div>
             </motion.div>
           </motion.div>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Line } from 'react-chartjs-2';
 import {
   LayoutDashboard, Users, Map, Truck, ShieldCheck, Download, AlertTriangle, AlertCircle,
   Leaf, Info, Share2, Printer, Factory, MessageCircle, FileText, CheckCircle2, Factory as Store,
-  Crown
+  Crown, X, CalendarClock
 } from 'lucide-react';
 import { COOP_MEMBERS } from '../data/coopMockData.js';
 import { formatCurrency } from '../utils/formatters.js';

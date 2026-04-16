@@ -166,7 +166,7 @@ export const translations = {
     trace_distributor: 'Nhà phân phối',
     trace_nutrition: 'Dinh dưỡng',
     trace_area: 'Diện tích trồng',
-    nav_client_mode: 'Hành Khách & Người Mua',
+    nav_client_mode: 'Chế độ Khách Hàng',
     nav_farmer_mode: 'Chế độ Nông Dân',
     nav_htx_mode: 'Chế độ HTX',
     cg_upload_verify: 'Tải lên & Xác minh',
