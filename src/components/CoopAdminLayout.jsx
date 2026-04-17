@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Line } from 'react-chartjs-2';
 import {
@@ -80,6 +80,23 @@ const HTX_TRANSLATIONS = {
     cert_th_miss: "Thiếu",
     cert_th_action: "Hành động",
     cert_comp: "Đầy đủ",
+    schedule_details: "Chi tiết lịch trình",
+    schedule_trip: "Chuyến",
+    schedule_loc: "Địa điểm:",
+    schedule_time: "Thời gian:",
+    schedule_driver: "Tài xế/Xe:",
+    schedule_weight: "Tải trọng",
+    schedule_goods: "Hàng hóa:",
+    schedule_track: "Theo dõi",
+    schedule_st_depart: "Sắp khởi hành",
+    schedule_st_loading: "Đang xếp hàng",
+    schedule_st_wait: "Chờ duyệt",
+    schedule_item_veg: "Rau cải, củ cải",
+    schedule_item_fruits: "Trái cây các loại",
+    schedule_item_rice: "Gạo Lài, Gạch",
+    schedule_dest_1: "CH Xanh",
+    schedule_dest_2: "Cảng SG",
+    schedule_dest_3: "Siêu thị Go",
     cert_remind: "Nhắc App",
   },
   en: {
@@ -152,6 +169,23 @@ const HTX_TRANSLATIONS = {
     cert_th_miss: "Missing",
     cert_th_action: "Action",
     cert_comp: "Completed",
+    schedule_details: "Schedule Details",
+    schedule_trip: "Trip",
+    schedule_loc: "Location:",
+    schedule_time: "Time:",
+    schedule_driver: "Driver/Vehicle:",
+    schedule_weight: "Payload",
+    schedule_goods: "Goods:",
+    schedule_track: "Track",
+    schedule_st_depart: "Departing soon",
+    schedule_st_loading: "Loading",
+    schedule_st_wait: "Pending",
+    schedule_item_veg: "Cabbages, Radishes",
+    schedule_item_fruits: "Mixed Fruits",
+    schedule_item_rice: "Jasmine Rice, Bricks",
+    schedule_dest_1: "Green Mart",
+    schedule_dest_2: "SG Port",
+    schedule_dest_3: "Go Supermarket",
     cert_remind: "Ping App",
   },
   ko: {
@@ -581,30 +615,30 @@ const AICarpooling = ({ lang, currency, t }) => {
             </button>
             <h2 className="text-2xl font-black text-emerald-900 mb-6 flex items-center gap-3">
               <CalendarClock className="w-8 h-8 text-emerald-500" />
-              Chi tiết lịch trình
+              {t('schedule_details')}
             </h2>
 
             <div className="space-y-4">
                {[
-                 { id: "HTX-1", dest: "CH Xanh", time: "08:00 - 10:00", status: "Sắp khởi hành", driver: "Trần Văn A", items: "Rau cải, củ cải", size: "1.5 tấn" },
-                 { id: "HTX-2", dest: "Cảng SG", time: "11:00 - 15:00", status: "Đang xếp hàng", driver: "Lê Văn B", items: "Trái cây các loại", size: "3 tấn" },
-                 { id: "HTX-3", dest: "Siêu thị Go", time: "16:00 - 18:00", status: "Chờ duyệt", driver: "Nguyễn Văn C", items: "Gạo Lài, Gạch", size: "2 tấn" }
+                 { id: "HTX-1", dest: t('schedule_dest_1'), time: "08:00 - 10:00", status: t('schedule_st_depart'), driver: "Trần Văn A", items: t('schedule_item_veg'), size: "1.5 " + t('unit_tons') },
+                 { id: "HTX-2", dest: t('schedule_dest_2'), time: "11:00 - 15:00", status: t('schedule_st_loading'), driver: "Lê Văn B", items: t('schedule_item_fruits'), size: "3 " + t('unit_tons') },
+                 { id: "HTX-3", dest: t('schedule_dest_3'), time: "16:00 - 18:00", status: t('schedule_st_wait'), driver: "Nguyễn Văn C", items: t('schedule_item_rice'), size: "2 " + t('unit_tons') }
                ].map((trip) => (
                  <div key={trip.id} className="p-4 border border-emerald-100 rounded-2xl bg-emerald-50/50 flex flex-col md:flex-row justify-between gap-4 items-center">
                     <div className="flex-1 w-full">
                        <h4 className="font-bold text-lg text-emerald-800 flex items-center gap-2">
-                          <Truck className="w-5 h-5"/> Chuyến {trip.id} 
+                          <Truck className="w-5 h-5"/> {t('schedule_trip')} {trip.id} 
                           <span className="text-xs px-2 py-1 bg-emerald-200 text-emerald-800 rounded-full">{trip.status}</span>
                        </h4>
                        <div className="mt-2 text-sm text-gray-600 space-y-1">
-                          <p><span className="font-semibold">Địa điểm:</span> {trip.dest}</p>
-                          <p><span className="font-semibold">Thời gian:</span> {trip.time}</p>
-                          <p><span className="font-semibold">Tài xế/Xe:</span> {trip.driver} (Tải trọng {trip.size})</p>
-                          <p><span className="font-semibold">Hàng hóa:</span> {trip.items}</p>
+                          <p><span className="font-semibold">{t('schedule_loc')}</span> {trip.dest}</p>
+                          <p><span className="font-semibold">{t('schedule_time')}</span> {trip.time}</p>
+                          <p><span className="font-semibold">{t('schedule_driver')}</span> {trip.driver} ({t('schedule_weight')} {trip.size})</p>
+                          <p><span className="font-semibold">{t('schedule_goods')}</span> {trip.items}</p>
                        </div>
                     </div>
                     <div>
-                      <button className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-emerald-700">Theo dõi</button>
+                      <button className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-emerald-700">{t('schedule_track')}</button>
                     </div>
                  </div>
                ))}
