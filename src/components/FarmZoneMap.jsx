@@ -6,7 +6,7 @@ import { Map as MapIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const FarmZoneMap = ({ isPremium }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const ZONES = [
     { id: 'A', name: t('fz_zoneA'), icon: <Sprout className="w-8 h-8" />, type: 'crop', stats: { moist: 68, temp: 28, ph: 6.5 }, logs: ['2026-03-10: NPK', '2026-03-15: Weekly water'] },
@@ -23,23 +23,23 @@ export const FarmZoneMap = ({ isPremium }) => {
       <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
         <Activity className="w-6 h-6 text-brand-green" /> {t('fz_title')}
       </h3>
-      {isPremium && <p className="text-sm font-bold text-brand-green mb-4 flex items-center gap-2 animate-pulse"><Activity className="w-4 h-4"/> Dữ liệu được lấy trực tiếp từ Gateway IoT mỗi 30 giây</p>}
+      {isPremium && <p className="text-sm font-bold text-brand-green mb-4 flex items-center gap-2 animate-pulse"><Activity className="w-4 h-4"/> {lang === 'vi' ? 'Dữ liệu được lấy trực tiếp từ Gateway IoT mỗi 30 giây' : lang === 'en' ? 'Data fetched directly from IoT Gateway every 30 seconds' : 'IoT 게이트웨이에서 30초마다 데이터 가져오기'}</p>}
       
       {!isPremium ? (
         <div className="bg-gray-50 rounded-2xl p-8 text-center border-2 border-dashed border-gray-200">
            <MapIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-           <h4 className="text-xl font-bold text-gray-700 mb-2">Bản Đồ Nông Trại Tiêu Chuẩn</h4>
-           <p className="text-gray-500 mb-6 max-w-md mx-auto">Chế độ Standard hiển thị thông số tổng quan theo dự báo thời tiết (API), không có thiết bị IoT cục bộ. Nâng cấp Premium kết hợp lắp đặt gateway IoT để quan trắc từng khu vực Real-time.</p>
+           <h4 className="text-xl font-bold text-gray-700 mb-2">{lang === 'vi' ? 'Bản Đồ Nông Trại Tiêu Chuẩn' : lang === 'en' ? 'Standard Farm Map' : '표준 농장 지도'}</h4>
+           <p className="text-gray-500 mb-6 max-w-md mx-auto">{lang === 'vi' ? 'Chế độ Standard hiển thị thông số tổng quan theo dự báo thời tiết (API), không có thiết bị IoT cục bộ. Nâng cấp Premium kết hợp lắp đặt gateway IoT để quan trắc từng khu vực Real-time.' : lang === 'en' ? 'Standard mode shows overview parameters based on weather forecast (API), without local IoT devices. Upgrade to Premium to integrate IoT gateways for real-time monitoring of each zone.' : '표준 모드는 로컬 IoT 장치 없이 날씨 예보(API)를 기반으로 한 개요 매개변수를 표시합니다. 프리미엄으로 업그레이드하여 각 구역의 실시간 모니터링을 위한 IoT 게이트웨이를 통합하세요.'}</p>
            <div className="flex justify-center gap-6">
              <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm w-32">
                <Thermometer className="w-8 h-8 text-orange-500 mx-auto mb-2" />
                <p className="font-black text-xl text-gray-800">29°C</p>
-               <p className="text-xs font-bold text-gray-400">TRUNG BÌNH</p>
+               <p className="text-xs font-bold text-gray-400">{lang === 'vi' ? 'TRUNG BÌNH' : lang === 'en' ? 'AVERAGE' : '평균'}</p>
              </div>
              <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm w-32">
                <Droplets className="w-8 h-8 text-blue-500 mx-auto mb-2" />
                <p className="font-black text-xl text-gray-800">65%</p>
-               <p className="text-xs font-bold text-gray-400">ĐỘ ẨM</p>
+               <p className="text-xs font-bold text-gray-400">{lang === 'vi' ? 'ĐỘ ẨM' : lang === 'en' ? 'HUMIDITY' : '습도'}</p>
              </div>
            </div>
         </div>
@@ -115,14 +115,14 @@ export const FarmZoneMap = ({ isPremium }) => {
                     onClick={() => setShowEditFarm(true)}
                     className="mt-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg self-start transition-colors"
                   >
-                    Sửa Thông Tin Nông Trại
+                    {lang === 'vi' ? 'Sửa Thông Tin' : lang === 'en' ? 'Edit Info' : '정보 수정'}
                   </button>
                 </div>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-48 bg-gray-100/50 rounded-xl border-2 border-dashed border-gray-200 text-gray-400">
                 <Warehouse className="w-10 h-10 mb-2 opacity-50" />
-                <p className="text-xs font-bold px-4 text-center">Kho lạnh không trang bị đủ Cảm biến IoT.</p>
+                <p className="text-xs font-bold px-4 text-center">{lang === 'vi' ? 'Kho lạnh không trang bị đủ Cảm biến IoT.' : lang === 'en' ? 'Cold storage not equipped with enough IoT sensors.' : '냉장 보관소에 충분한 IoT 센서가 없습니다.'}</p>
               </div>
             )}
           </div>
