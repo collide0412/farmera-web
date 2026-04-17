@@ -59,6 +59,7 @@ const HTX_TRANSLATIONS = {
     log_detail: "Đề xuất gom hàng của 12 hộ (Tổng: ~5.4 tấn) khu vực phía Đông.",
     log_confirm: "Xác nhận ghép chuyến",
     log_confirmed: "Đã xác nhận & Chuyển lệnh!",
+    log_view: "Xem chi tiết lịch trình",
     log_save: "Tiết kiệm ước tính:",
     log_list: "Hộ báo cáo thu hoạch (3 ngày tới)",
     log_est: "Dự kiến:",
@@ -130,6 +131,7 @@ const HTX_TRANSLATIONS = {
     log_detail: "Proposing to consolidate goods from 12 famers in East Zone.",
     log_confirm: "Confirm Carpool",
     log_confirmed: "Confirmed & Sent Notice!",
+    log_view: "View Schedule",
     log_save: "Estimated Savings:",
     log_list: "Harvest Reporting (Next 3 days)",
     log_est: "Estimated:",
@@ -201,6 +203,7 @@ const HTX_TRANSLATIONS = {
     log_detail: "동부 구역 12개 농가의 화물 통합 제안.",
     log_confirm: "카풀 확인",
     log_confirmed: "확인 및 알림 전송!",
+    log_view: "일정 세부 정보 보기",
     log_save: "예상 절감액:",
     log_list: "수확 보고 (향후 3일)",
     log_est: "예상:",
@@ -506,7 +509,7 @@ const AICarpooling = ({ lang, currency, t }) => {
                     onClick={() => setShowScheduleDetails(true)} 
                     className="bg-white px-5 py-3 rounded-xl font-bold shadow-md transition-colors border border-orange-200 text-orange-700 hover:bg-orange-50"
                   >
-                    Xem chi tiết lịch trình
+                    {t("log_view")}
                   </button>
                   <div className="bg-green-50 px-4 py-2 rounded-xl border border-green-200 text-green-800">
                      <span className="text-sm">{t("log_save")}</span> <span className="font-black text-lg">{localFormatMoney(2500000, currency)}</span>

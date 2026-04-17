@@ -437,6 +437,12 @@ export const App = () => {
                   <h4 className="font-bold text-orange-800 mb-1 text-sm md:text-base">{t('market_opp')}</h4>
                   <p className="text-xs md:text-sm text-orange-700">{t('ai_desc')}</p>
                 </div>
+                {role === 'farmer' && (
+                  <div className="bg-teal-50 border-l-4 border-teal-500 p-3 md:p-4 rounded-r-xl mb-4">
+                    <h4 className="font-bold text-teal-800 mb-1 text-sm md:text-base">{t('ai_weather_title')}</h4>
+                    <p className="text-xs md:text-sm text-teal-700">{t('ai_weather_alert')}</p>
+                  </div>
+                )}
                 <div className="space-y-3 md:space-y-4 relative before:absolute before:inset-0 before:ml-4 md:before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200">
                   <JourneyStep icon={<Activity className="w-4 h-4 md:w-5 md:h-5"/>} title={t('today')} desc={t('today_desc')} time={t('now')} />
                   <JourneyStep icon={<Leaf className="w-4 h-4 md:w-5 md:h-5"/>} title={t('tomorrow')} desc={t('tomorrow_desc')} time={t('in_1_day')} />

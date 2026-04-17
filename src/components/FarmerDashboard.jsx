@@ -308,7 +308,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
           {isPremium ? (
             <>
               <p className="text-white font-medium bg-black/20 p-3 rounded-lg border border-teal-500/30 leading-relaxed mb-6 relative z-10 text-sm md:text-base">
-                "Dự báo đêm nay sương muối tại Sơn La, hãy kích hoạt hệ thống phun sương ấm lúc 2h sáng."
+                {t('ai_weather_alert')}
               </p>
               <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
                 <button 

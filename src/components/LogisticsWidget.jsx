@@ -62,21 +62,21 @@ export const LogisticsWidget = ({ isPremium }) => {
             <div className={`p-3 rounded-2xl shrink-0 ${aiMatchConfirmed ? 'bg-green-100' : 'bg-orange-100'}`}><Truck className={`w-8 h-8 ${aiMatchConfirmed ? 'text-green-600' : 'text-orange-600'}`} /></div>
             <div>
               <h3 className={`text-lg font-bold mb-1 flex items-center gap-2 ${aiMatchConfirmed ? 'text-green-900' : 'text-orange-900'}`}>
-                AI Logistics Smart Match {aiMatchConfirmed ? <CheckCircle2 className="w-5 h-5 text-green-500" /> : <TrendingDown className="w-4 h-4 text-green-600" />}
+                {t('lw_ai_match')} {aiMatchConfirmed ? <CheckCircle2 className="w-5 h-5 text-green-500" /> : <TrendingDown className="w-4 h-4 text-green-600" />}
               </h3>
               {aiMatchConfirmed ? (
-                <p className="text-green-800 text-sm mb-4 leading-relaxed font-medium">Đã xác nhận ghép đơn hàng thành công! Đơn vị vận chuyển sẽ liên hệ với bạn trong vòng 30 phút.</p>
+                <p className="text-green-800 text-sm mb-4 leading-relaxed font-medium">{t('lw_ai_matched_desc')}</p>
               ) : (
-                <p className="text-orange-800 text-sm mb-4 leading-relaxed">Phát hiện xe tải của HTX X đang còn trống 40% tải trọng, khởi hành lúc 5h sáng mai. Bạn có muốn ghép đơn hàng 200kg vải thiều vào không?</p>
+                <p className="text-orange-800 text-sm mb-4 leading-relaxed">{t('lw_ai_match_desc')}</p>
               )}
               <div className="flex gap-3">
                 {!aiMatchConfirmed && (
                   <button onClick={handleConfirmAiMatch} className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-colors flex items-center gap-2 active:scale-95">
-                    <CheckCircle2 className="w-4 h-4"/> Xác nhận ghép chuyến
+                    <CheckCircle2 className="w-4 h-4"/> {t('lw_confirm_match')}
                   </button>
                 )}
                 <button onClick={() => setShowScheduleDetails(true)} className={`bg-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors border active:scale-95 ${aiMatchConfirmed ? 'text-green-700 hover:bg-green-50 border-green-200' : 'text-orange-700 hover:bg-orange-50 border-orange-200'}`}>
-                  Xem chi tiết lịch trình
+                  {t('lw_view_schedule')}
                 </button>
               </div>
             </div>
