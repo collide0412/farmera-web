@@ -44,6 +44,36 @@ export const App = () => {
       setSelectedProduct(product); 
     }, 1500); 
   };
+
+  const getSortedTimeline = () => {
+    if (!selectedProduct) return [];
+    
+    // Seed is marked as Mar 1, 2026. Give it a date matching that.
+    const timeline = [
+      { type: 'seed', desc: 'seed_desc', date: '2026-03-01', hardcoded: true, icon: 'Sprout' }
+    ];
+
+    if (selectedProduct.logs) {
+      selectedProduct.logs.forEach(log => {
+        timeline.push({ type: log.type, desc: log.details, date: log.date, isLog: true, icon: 'ClipboardCheck' });
+      });
+    }
+
+    if (selectedProduct.id !== 2) {
+      // IoT represents the growing phase, let's put it at roughly mid-March so logs don't conflict, 
+      // or we can sort by date and let it fall correctly.
+      timeline.push({ type: 'iot', desc: 'iot_desc', date: '2026-03-15', hardcoded: true, icon: 'Activity' });
+    }
+
+    // Harvest & Pack are April 12, 2026
+    timeline.push({ type: 'harvest', desc: 'harvest_desc', date: '2026-04-12', hardcoded: true, icon: 'Leaf' });
+    timeline.push({ type: 'pack', desc: 'pack_desc', date: '2026-04-12', hardcoded: true, icon: 'PackageCheck' });
+
+    // Sort ascending by date
+    return timeline.sort((a, b) => new Date(a.date) - new Date(b.date));
+  };
+  
+  const sortedTimeline = getSortedTimeline();
   
   const setRoleAndTab = (newRole) => {
     setRole(newRole);
@@ -344,22 +374,49 @@ export const App = () => {
                   </div>
                 ) : traceTab === 'lifecycle' ? (
                   <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-brand-green before:to-transparent">
-                    <JourneyStep icon={<Sprout />} title={t('seed')} desc={t('seed_desc')} time={t('date_mar_1')} />
-                    
-                    {selectedProduct.logs && selectedProduct.logs.map((log, index) => (
-                      <JourneyStep 
-                        key={index} 
-                        icon={<ClipboardCheck className="w-5 h-5" />} 
-                          title={t(log.type)} 
-                        desc={log.details} 
-                        time={new Date(log.date).toLocaleDateString(t('date_format'), {month: 'short', day: 'numeric', year: 'numeric'})} 
-                      />
-                    ))}
-                    {selectedProduct.id !== 2 && (
-                      <JourneyStep icon={<Activity />} title={t('iot')} desc={t('iot_desc')} time={t('date_mar_apr')} />
-                    )}
-                    <JourneyStep icon={<Leaf />} title={t('harvest')} desc={t('harvest_desc')} time={t('date_apr_12')} />
-                    <JourneyStep icon={<PackageCheck />} title={t('pack')} desc={t('pack_desc')} time={t('date_apr_12')} isLast />
+                    {(() => {
+                      const timeline = [
+                        { type: 'seed', desc: 'seed_desc', date: '2026-03-01', base: true, icon: 'Sprout' }
+                      ];
+                      if (selectedProduct.logs) {
+                        selectedProduct.logs.forEach(log => {
+                          timeline.push({ type: log.type, desc: log.details, date: log.date, base: false, icon: 'ClipboardCheck' });
+                        });
+                      }
+                      if (selectedProduct.id !== 2) {
+                        timeline.push({ type: 'iot', desc: 'iot_desc', date: '2026-03-15', base: true, icon: 'Activity' });
+                      }
+                      timeline.push({ type: 'harvest', desc: 'harvest_desc', date: '2026-04-12', base: true, icon: 'Leaf' });
+                      timeline.push({ type: 'pack', desc: 'pack_desc', date: '2026-04-12', base: true, icon: 'PackageCheck' });
+
+                      return timeline.sort((a, b) => new Date(a.date) - new Date(b.date)).map((item, index) => {
+                        let IconComp = ClipboardCheck;
+                        if (item.icon === 'Sprout') IconComp = Sprout;
+                        if (item.icon === 'Activity') IconComp = Activity;
+                        if (item.icon === 'Leaf') IconComp = Leaf;
+                        if (item.icon === 'PackageCheck') IconComp = PackageCheck;
+
+                        let timeStr = '';
+                        if (item.base) {
+                          if (item.type === 'seed') timeStr = t('date_mar_1');
+                          else if (item.type === 'iot') timeStr = t('date_mar_apr');
+                          else if (item.type === 'harvest' || item.type === 'pack') timeStr = t('date_apr_12');
+                        } else {
+                          timeStr = new Date(item.date).toLocaleDateString(t('date_format'), {month: 'short', day: 'numeric', year: 'numeric'});
+                        }
+
+                        return (
+                          <JourneyStep 
+                            key={index} 
+                            icon={<IconComp className={!item.base ? "w-5 h-5" : ""} />} 
+                            title={t(item.type)} 
+                            desc={!item.base ? item.desc : t(item.desc)} 
+                            time={timeStr} 
+                            isLast={index === timeline.length - 1}
+                          />
+                        );
+                      });
+                    })()}
                   </div>
                 ) : (
                   <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
