@@ -350,7 +350,7 @@ export const App = () => {
                       <JourneyStep 
                         key={index} 
                         icon={<ClipboardCheck className="w-5 h-5" />} 
-                        title={log.type} 
+                          title={t(log.type)} 
                         desc={log.details} 
                         time={new Date(log.date).toLocaleDateString(t('date_format'), {month: 'short', day: 'numeric', year: 'numeric'})} 
                       />
