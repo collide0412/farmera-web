@@ -366,8 +366,8 @@ export const App = () => {
                     {selectedProduct.id === 2 ? (
                       <div className="flex flex-col items-center justify-center p-8 bg-gray-50 border border-dashed border-gray-300 rounded-xl text-center mt-4">
                         <Lock className="w-12 h-12 text-gray-400 mb-3" />
-                        <h4 className="font-bold text-gray-600 mb-1">Dữ liệu đang được cập nhật</h4>
-                        <p className="text-sm text-gray-500 max-w-xs leading-relaxed">Nông trại đang trong quá trình số hóa và sẽ sớm triển khai hệ thống cảm biến thông minh.</p>
+                          <h4 className="font-bold text-gray-600 mb-1">{t('iot_lock_title')}</h4>
+                          <p className="text-sm text-gray-500 max-w-xs leading-relaxed">{t('iot_lock_desc')}</p>
                       </div>
                     ) : (
                       <>

@@ -156,45 +156,45 @@ export const LogisticsWidget = ({ isPremium }) => {
               <div className="flex items-center gap-3 mb-6">
                 <div className="bg-orange-100 p-2.5 rounded-xl"><Truck className="w-6 h-6 text-orange-600" /></div>
                 <div>
-                  <h2 className="text-xl font-black text-gray-800">Chi tiết lịch trình AI</h2>
-                  <p className="text-sm text-gray-500">Mã chuyến: AI-TRK-9902</p>
+                  <h2 className="text-xl font-black text-gray-800">{t('lw_ai_schedule_title')}</h2>
+                  <p className="text-sm text-gray-500">{t('lw_ai_schedule_code')}: AI-TRK-9902</p>
                 </div>
               </div>
 
               <div className="relative border-l-2 border-dashed border-gray-200 ml-4 space-y-6 pb-4">
                 <div className="relative pl-6">
                   <div className="absolute -left-[9px] top-1 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow-sm"></div>
-                  <h4 className="font-bold text-gray-800">1. Lấy hàng tại vườn bạn</h4>
-                  <p className="text-sm text-gray-500">Dự kiến: 05:00 Sáng mai</p>
-                  <p className="text-sm font-medium text-gray-700 mt-1">200kg vải thiều - Thanh Hà</p>
+                  <h4 className="font-bold text-gray-800">{t('lw_step_1')}</h4>
+                  <p className="text-sm text-gray-500">{t('lw_est')}: 05:00 {t('lw_tomorrow_morning')}</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">200kg {t('lw_lychee')} - Thanh Hà</p>
                 </div>
                 <div className="relative pl-6">
                   <div className="absolute -left-[9px] top-1 w-4 h-4 bg-orange-400 rounded-full border-4 border-white shadow-sm"></div>
-                  <h4 className="font-bold text-gray-800">2. Lấy hàng tại HTX X</h4>
-                  <p className="text-sm text-gray-500">Dự kiến: 06:30 Sáng mai</p>
-                  <p className="text-sm font-medium text-gray-700 mt-1">800kg thanh long - Lục Ngạn</p>
+                  <h4 className="font-bold text-gray-800">{t('lw_step_2')}</h4>
+                  <p className="text-sm text-gray-500">{t('lw_est')}: 06:30 {t('lw_tomorrow_morning')}</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">800kg {t('lw_dragonfruit')} - Lục Ngạn</p>
                 </div>
                 <div className="relative pl-6">
                   <div className="absolute -left-[9px] top-1 w-4 h-4 bg-brand-teal rounded-full border-4 border-white shadow-sm"></div>
-                  <h4 className="font-bold text-gray-800">3. Giao hàng tại chợ đầu mối</h4>
-                  <p className="text-sm text-gray-500">Dự kiến: 09:00 Sáng mai</p>
-                  <p className="text-sm font-medium text-gray-700 mt-1">Chợ đầu mối Long Biên, Hà Nội</p>
+                  <h4 className="font-bold text-gray-800">{t('lw_step_3')}</h4>
+                  <p className="text-sm text-gray-500">{t('lw_est')}: 09:00 {t('lw_tomorrow_morning')}</p>
+                  <p className="text-sm font-medium text-gray-700 mt-1">{t('lw_wholesale_market')} Long Biên, Hà Nội</p>
                 </div>
               </div>
 
               <div className="mt-6 bg-orange-50 p-4 rounded-xl border border-orange-100 flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-bold text-orange-900">Chi phí ước tính (Tiết kiệm 40%)</p>
-                  <p className="text-xs text-orange-700">Giá ghép: 450,000 VND</p>
+                  <p className="text-sm font-bold text-orange-900">{t('lw_est_cost')} ({t('lw_save')} 40%)</p>
+                  <p className="text-xs text-orange-700">{t('lw_matched_price')}: 450,000 VND</p>
                 </div>
                 <span className="text-xl font-black text-orange-600">450k</span>
               </div>
 
               <div className="mt-6 flex gap-3">
-                <button onClick={() => setShowScheduleDetails(false)} className="flex-1 py-3.5 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">Đóng</button>
+                <button onClick={() => setShowScheduleDetails(false)} className="flex-1 py-3.5 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">{t('lw_close')}</button>
                 {!aiMatchConfirmed && (
                   <button onClick={() => { handleConfirmAiMatch(); setShowScheduleDetails(false); }} className="flex-1 py-3.5 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 shadow-md transition-colors flex items-center justify-center gap-2">
-                    <CheckCircle2 className="w-5 h-5"/> Xác nhận ghép
+                    <CheckCircle2 className="w-5 h-5"/> {t('lw_confirm_match')}
                   </button>
                 )}
               </div>
@@ -207,8 +207,8 @@ export const LogisticsWidget = ({ isPremium }) => {
           <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.9 }} className="fixed bottom-20 left-4 right-4 md:left-auto md:right-8 md:bottom-8 md:w-96 z-[70] bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-4 flex items-start gap-4">
             <div className="bg-green-100 p-2 rounded-full shrink-0"><CheckCircle2 className="w-6 h-6 text-green-600" /></div>
             <div>
-              <h4 className="font-bold text-gray-800 mb-1">Ghép chuyến thành công!</h4>
-              <p className="text-sm text-gray-600">Đơn hàng của bạn đã được thêm vào lộ trình AI-TRK-9902. Tài xế sẽ liên hệ xác nhận trong 30 phút.</p>
+              <h4 className="font-bold text-gray-800 mb-1">{t('lw_success_title')}</h4>
+              <p className="text-sm text-gray-600">{t('lw_success_desc')}</p>
             </div>
           </motion.div>
         )}

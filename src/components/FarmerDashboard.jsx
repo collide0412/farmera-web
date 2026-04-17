@@ -125,7 +125,7 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
               </div>
                <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_price')}</label>
-                <input type="number" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="25000" />
+                <input type="text" className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green outline-none" placeholder="Vinaseed, CP Seeds..." />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">{t('np_date')}</label>
