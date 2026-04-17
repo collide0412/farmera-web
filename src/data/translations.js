@@ -51,6 +51,8 @@ export const translations = {
 
     lw_ai_match: 'AI Logistics Smart Match',
     ai_weather_title: 'Weather Warning (IoT)',
+    ai_premium_feature: 'Premium Feature',
+    ai_premium_desc: 'Upgrade to receive AI Pest Risk Forecast and Automation Plans.',
     lw_ai_matched_desc: 'Carpooling confirmed successfully! Transport unit will contact you within 30 mins.',
     lw_ai_match_desc: 'Detected Coop X truck with 40% payload available, departing at 5 AM tomorrow. Do you want to carpool 200kg of lychee?',
     lw_confirm_match: 'Confirm Carpool',
@@ -112,6 +114,7 @@ export const translations = {
     fz_title: "Farm Map (IoT & Zoning)", fz_zoneA: "Zone A (OCOP Rice)", fz_zoneB: "Zone B (Orchard)", fz_zoneC: "Zone C (VietGAP Veggies)", fz_zoneD: "Storage Hub",
     fz_realtime: "Real-time Metrics", fz_status: "Operation Status", fz_normal: "Normal", fz_alert_moist: "Alert: Critically low moisture",
     fz_logs: "Recent IoT Logs", fz_no_logs: "No IoT logs available.", fz_water: "Water", fz_temp: "Temp",
+    fz_light: "Light (Lux)", fz_coord: "Coordinates & Soil Info", fz_loc: "Location:", fz_soil: "Soil:", fz_climate: "Climate:", fz_edit_info: "Edit Info", fz_edit_title: "Edit Coord & Soil Info", fz_lat: "Latitude", fz_lng: "Longitude", fz_soil_type: "Soil Type", fz_soil_type_val: "Alluvial soil, good water retention", fz_climate_feat: "Characteristics / Climate", fz_climate_val: "Tropical monsoon, average humidity 75-85%", fz_save: "Save Changes", fz_suitable: "Suitable for",
 
     // Logistics
     lw_title: "Logistics & Trade Scheduling", lw_manage: "Shipment Management",
@@ -219,8 +222,10 @@ export const translations = {
     day_mon: "Th 2", day_tue: "Th 3", day_wed: "Th 4", day_thu: "Th 5", day_fri: "Th 6", day_sat: "Th 7", day_sun: "CN",
     trace_day_1: "Ngày 1", trace_day_2: "Ngày 2", trace_day_3: "Ngày 3", trace_day_4: "Ngày 4", trace_day_5: "Ngày 5", trace_day_6: "Ngày 6", trace_day_7: "Ngày 7",
 
-    lw_ai_match: 'AI Logistics Smart Match',
+    lw_ai_match: 'AI Ghép Chuyến Thông Minh',
     ai_weather_title: 'Cảnh Báo Thời Tiết (Từ cảm biến)',
+    ai_premium_feature: 'Tính năng Premium',
+    ai_premium_desc: 'Nâng cấp để nhận Dự báo rủi ro sâu bệnh và kế hoạch tự động hóa bằng AI.',
     lw_ai_matched_desc: 'Đã xác nhận ghép đơn hàng thành công! Đơn vị vận chuyển sẽ liên hệ với bạn trong vòng 30 phút.',
     lw_ai_match_desc: 'Phát hiện xe tải của HTX X đang còn trống 40% tải trọng, khởi hành lúc 5h sáng mai. Bạn có muốn ghép đơn hàng 200kg vải thiều vào không?',
     lw_confirm_match: 'Xác nhận ghép chuyến',
@@ -277,8 +282,7 @@ export const translations = {
 
     fz_title: "Bản đồ Nông trại (IoT & Chuyên canh)", fz_zoneA: "Khu A (Lúa OCOP)", fz_zoneB: "Khu B (Cây ăn quả)", fz_zoneC: "Khu C (Rau màu VietGAP)", fz_zoneD: "Nhà kho (Storage)",
     fz_realtime: "Thông số Thời gian thực", fz_status: "Trạng thái Hoạt động", fz_normal: "Bình thường", fz_alert_moist: "Cảnh báo: Độ ẩm cực thấp",
-    fz_logs: "Nhật ký chăm sóc gần đây", fz_no_logs: "Chưa có lịch sử IoT cho khu vực này", fz_water: "Nước", fz_temp: "Nhiệt",
-
+    fz_logs: "Nhật ký chăm sóc gần đây", fz_no_logs: "Chưa có lịch sử IoT cho khu vực này", fz_water: "Nước", fz_temp: "Nhiệt",    fz_light: "Ánh sáng (Lux)", fz_coord: "Thông tin Tọa độ & Thổ nhưỡng", fz_loc: "Vị trí:", fz_soil: "Đất:", fz_climate: "Khí hậu:", fz_edit_info: "Sửa Thông Tin", fz_edit_title: "Sửa Thông Tin Tọa độ & Thổ nhưỡng", fz_lat: "Vĩ độ", fz_lng: "Kinh độ", fz_soil_type: "Loại đất", fz_soil_type_val: "Đất phù sa, giữ nước tốt", fz_climate_feat: "Đặc điểm / Khí hậu", fz_climate_val: "Nhiệt đới gió mùa, độ ẩm TB 75-85%", fz_save: "Lưu Thay Đổi", fz_suitable: "Phù hợp",
     lw_title: "Lên lịch Vận chuyển & Giao thương", lw_manage: "Quản lý Chuyến hàng",
 
     cg_title: "Lộ trình Tiêu chuẩn", cg_subtitle: "Bạn đang hoàn thiện hồ sơ trên Blockchain.", cg_completed: "Hoàn thành", cg_step: "Bước",
@@ -383,6 +387,8 @@ export const translations = {
 
     lw_ai_match: 'AI 물류 스마트 매칭',
     ai_weather_title: '기상 경고 (센서 데이터)',
+    ai_premium_feature: '프리미엄 기능',
+    ai_premium_desc: 'AI 병해충 위험 예측 및 자동화 계획을 받으려면 업그레이드하세요.',
     lw_ai_matched_desc: '카풀이 성공적으로 확인되었습니다! 운송 업체가 30분 내로 연락 드릴 것입니다.',
     lw_ai_match_desc: '내일 새벽 5시에 출발하는 40% 적재 공간이 남은 조합 X 트럭을 발견했습니다. 200kg의 리치를 카풀하시겠습니까?',
     lw_confirm_match: '카풀 확인',
@@ -436,8 +442,7 @@ export const translations = {
 
     fz_title: "농장 구역 맵 (IoT & 작물)", fz_zoneA: "구역 A (OCOP 쌀)", fz_zoneB: "구역 B (과수원)", fz_zoneC: "구역 C (채소)", fz_zoneD: "자재 창고",
     fz_realtime: "실시간 지표", fz_status: "운영 상태", fz_normal: "정상", fz_alert_moist: "경고: 수분 부족",
-    fz_logs: "최근 IoT 로그", fz_no_logs: "해당 구역의 IoT 기록이 없습니다.", fz_water: "수분", fz_temp: "온도",
-
+    fz_logs: "최근 IoT 로그", fz_no_logs: "해당 구역의 IoT 기록이 없습니다.", fz_water: "수분", fz_temp: "온도",    fz_light: "조명 (Lux)", fz_coord: "좌표 및 토양 정보", fz_loc: "위치:", fz_soil: "토양:", fz_climate: "기후:", fz_edit_info: "정보 수정", fz_edit_title: "좌표 및 토양 정보 수정", fz_lat: "위도", fz_lng: "경도", fz_soil_type: "토양 종류", fz_soil_type_val: "충적토, 좋은 보수력", fz_climate_feat: "특징 / 기후", fz_climate_val: "열대 몬순, 평균 습도 75-85%", fz_save: "변경 사항 저장", fz_suitable: "적합한",
     lw_title: "배송 및 유통 일정", lw_manage: "출하 관리",
 
     cg_title: "VietGAP / OCOP 로드맵", cg_subtitle: "귀하의 프로필이 블록체인에서 완성되고 있습니다.", cg_completed: "완료", cg_step: "단계",

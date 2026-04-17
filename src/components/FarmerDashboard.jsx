@@ -307,9 +307,16 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
           <h3 className="font-bold text-xl mb-2 relative z-10">{t('ai_rec')}</h3>
           {isPremium ? (
             <>
-              <p className="text-white font-medium bg-black/20 p-3 rounded-lg border border-teal-500/30 leading-relaxed mb-6 relative z-10 text-sm md:text-base">
-                {t('ai_weather_alert')}
-              </p>
+              <div className="space-y-4 mb-6 relative z-10 w-full">
+                <div className="bg-orange-50 border-l-4 border-orange-500 p-3 rounded-r-xl shadow-sm">
+                  <h4 className="font-bold text-orange-800 mb-1 text-xs md:text-sm uppercase">{t('market_opp')}</h4>
+                  <p className="text-orange-900 text-sm">{t('ai_desc')}</p>
+                </div>
+                <div className="bg-teal-50 border-l-4 border-teal-500 p-3 rounded-r-xl shadow-sm">
+                  <h4 className="font-bold text-teal-800 mb-1 text-xs md:text-sm uppercase">{t('ai_weather_title')}</h4>
+                  <p className="text-teal-900 text-sm">{t('ai_weather_alert')}</p>
+                </div>
+              </div>
               <div className="relative z-10 flex border-t border-teal-700/50 pt-4 mt-auto">
                 <button 
                   onClick={() => setShowActionPlan(true)} 
@@ -322,8 +329,8 @@ export const FarmerDashboard = ({ products, setProducts, currency, setShowAction
           ) : (
             <div className="relative z-10 flex flex-col items-center justify-center p-4 bg-teal-950/60 backdrop-blur-md rounded-xl mt-2 text-center border border-teal-500/30">
               <Lock className="w-8 h-8 text-yellow-400 mb-2" />
-              <p className="font-bold text-sm text-yellow-100">Tính năng Premium</p>
-              <p className="text-xs text-teal-100 mt-1">Nâng cấp để nhận Dự báo rủi ro sâu bệnh và kế hoạch tự động hóa bằng AI.</p>
+              <p className="font-bold text-sm text-yellow-100">{t('ai_premium_feature')}</p>
+              <p className="text-xs text-teal-100 mt-1">{t('ai_premium_desc')}</p>
             </div>
           )}
         </div>

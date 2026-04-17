@@ -103,19 +103,19 @@ export const FarmZoneMap = ({ isPremium }) => {
                   <span className="font-black">{selected.stats.ph || '-'}</span>
                 </div>
                 <div className="p-3 bg-yellow-50 rounded-xl border border-yellow-100 flex items-center justify-between text-yellow-700 col-span-2">
-                  <span className="flex items-center gap-1 text-sm font-bold">Ánh sáng (Lux)</span>
+                  <span className="flex items-center gap-1 text-sm font-bold">{t('fz_light')}</span>
                   <span className="font-black">65,000 Lux</span>
                 </div>
                 <div className="p-3 bg-blue-50 rounded-xl border border-blue-100 flex flex-col gap-1 text-blue-900 col-span-2 mt-2 shadow-sm">
-                  <div className="flex items-center gap-1 text-sm font-bold border-b border-blue-200 pb-2 mb-1"><MapIcon className="w-4 h-4"/> Thông tin Tọa độ & Thổ nhưỡng</div>
-                  <span className="text-xs block"><span className="font-bold">Vị trí:</span> 21.0285° N, 105.8542° E</span>
-                  <span className="text-xs block"><span className="font-bold">Đất:</span> Đất phù sa, giữ nước tốt (Phù hợp {selected.name})</span>
-                  <span className="text-xs block"><span className="font-bold">Khí hậu:</span> Nhiệt đới gió mùa, độ ẩm TB 75-85%</span>
+                  <div className="flex items-center gap-1 text-sm font-bold border-b border-blue-200 pb-2 mb-1"><MapIcon className="w-4 h-4"/> {t('fz_coord')}</div>
+                  <span className="text-xs block"><span className="font-bold">{t('fz_loc')}</span> 21.0285° N, 105.8542° E</span>
+                  <span className="text-xs block"><span className="font-bold">{t('fz_soil')}</span> {t('fz_soil_type_val')} ({t('fz_suitable')} {selected.name})</span>
+                  <span className="text-xs block"><span className="font-bold">{t('fz_climate')}</span> {t('fz_climate_val')}</span>
                   <button 
                     onClick={() => setShowEditFarm(true)}
                     className="mt-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg self-start transition-colors"
                   >
-                    {lang === 'vi' ? 'Sửa Thông Tin' : lang === 'en' ? 'Edit Info' : '정보 수정'}
+                    {t('fz_edit_info')}
                   </button>
                 </div>
               </div>
@@ -180,33 +180,33 @@ export const FarmZoneMap = ({ isPremium }) => {
             </button>
             <h2 className="text-2xl font-black text-blue-900 mb-6 flex items-center gap-3">
               <MapIcon className="w-8 h-8 text-blue-500" />
-              Sửa thông tin Nông Trại
+              {t('fz_edit_title')}
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Tên khu vực</label>
+                <label className="block text-sm font-bold text-gray-700 mb-1">Zone Name / Tên khu vực</label>
                 <input type="text" defaultValue={selected.name} className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">Vĩ độ</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{t('fz_lat')}</label>
                   <input type="text" defaultValue="21.0285° N" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">Kinh độ</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">{t('fz_lng')}</label>
                   <input type="text" defaultValue="105.8542° E" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Loại đất</label>
-                <input type="text" defaultValue="Đất phù sa, giữ nước tốt" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('fz_soil_type')}</label>
+                <input type="text" defaultValue={t('fz_soil_type_val')} className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Đặc điểm / Khí hậu</label>
-                <textarea rows="3" defaultValue="Nhiệt đới gió mùa, độ ẩm TB 75-85%" className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                <label className="block text-sm font-bold text-gray-700 mb-1">{t('fz_climate_feat')}</label>
+                <textarea rows="3" defaultValue={t('fz_climate_val')} className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
               </div>
               <button onClick={() => setShowEditFarm(false)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors mt-4">
-                Lưu Thay Đổi
+                {t('fz_save')}
               </button>
             </div>
           </motion.div>
