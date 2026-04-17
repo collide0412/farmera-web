@@ -156,11 +156,11 @@ export const translations = {
     cg_upload_verify: 'Upload Docs & Verify', cg_detail_doc_title: 'Detailed Documentation', cg_understood: 'Understood',
     
     // New product dialog
-    np_btn: "List New Product", np_title: "List New Product", np_name: "Product Name", np_name_ph: "Ex: Luc Ngan Lychee",
-    np_qty: "Est. Quantity", np_unit: "Unit", np_unit_kg: "Kg", np_unit_ton: "Tons",
-    np_price: "Expected Price (VND/kg)", np_date: "Est. Harvest Date", np_img: "Product Images",
+    np_btn: "New Cultivation Batch", np_title: "Register Cultivation Batch (Genesis)", np_name: "Crop / Batch Name", np_name_ph: "Ex: Spring Luc Ngan Lychee",
+    np_qty: "Est. Yield", np_unit: "Unit", np_unit_kg: "Kg", np_unit_ton: "Tons",
+    np_price: "Seed Provider / Origin", np_date: "Est. Harvest Date", np_img: "Seed / Certificate Images",
     np_img_upload: "Upload files", np_img_drop: "or drag and drop", np_img_limit: "up to 5MB",
-    np_cancel: "Cancel", np_submit: "Submit", np_draft_ok: "Draft created successfully!"
+    np_cancel: "Cancel", np_submit: "Create Genesis Block", np_draft_ok: "Genesis block initiated! Ready for daily logs."
   },
   vi: {
     trace_details_tab: 'Chi tiết SP',
@@ -313,11 +313,11 @@ export const translations = {
     cg_upload_verify: 'Tải tài liệu & Xác minh', cg_detail_doc_title: 'Tài Liệu Hướng Dẫn Chi Tiết', cg_understood: 'Đã hiểu',
 
     // New product dialog
-    np_btn: "Đăng bán Nông sản mới", np_title: "Đăng Bán Nông Sản Mới", np_name: "Tên sản phẩm", np_name_ph: "VD: Vải thiều Lục Ngạn",
-    np_qty: "Số lượng dự kiến", np_unit: "Đơn vị", np_unit_kg: "Kg", np_unit_ton: "Tấn",
-    np_price: "Giá dự kiến (VND/kg)", np_date: "Thời gian Thu hoạch dự kiến", np_img: "Ảnh sản phẩm",
+    np_btn: "Khởi Tạo Lô Canh Tác", np_title: "Đăng Ký Lô Canh Tác (Genesis)", np_name: "Tên Giống / Lô Trồng", np_name_ph: "VD: Vải thiều Lục Ngạn Vụ Xuân",
+    np_qty: "Sản lượng dự kiến", np_unit: "Đơn vị", np_unit_kg: "Kg", np_unit_ton: "Tấn",
+    np_price: "Nhà cung cấp nguồn giống", np_date: "Ngày dự kiến thu hoạch", np_img: "Hình ảnh Giống / Giấy Tờ",
     np_img_upload: "Tải ảnh lên", np_img_drop: "hoặc kéo thả vào đây", np_img_limit: "tối đa 5MB",
-    np_cancel: "Hủy", np_submit: "Đăng Bán", np_draft_ok: "Đã tạo nháp thành công!"
+    np_cancel: "Hủy", np_submit: "Tạo Mã Genesis", np_draft_ok: "Đã tạo khối Genesis! Sẵn sàng ghi nhật ký."
   },
   ko: {
     trace_details_tab: '제품 상세',
@@ -465,10 +465,10 @@ export const translations = {
     cg_upload_verify: '안전성 증빙 자료 업로드', cg_detail_doc_title: '세부 가이드라인', cg_understood: '확인 완료',
 
     // New product dialog
-    np_btn: "신제품 등록", np_title: "새 농산물 등록", np_name: "제품명", np_name_ph: "예: 룩응안 리치",
+    np_btn: "새 재배 배치", np_title: "새 재배 배치 등록 (Genesis)", np_name: "작물 / 배치 이름", np_name_ph: "예: 봄 룩응안 리치",
     np_qty: "예상 수량", np_unit: "단위", np_unit_kg: "Kg", np_unit_ton: "톤(Ton)",
-    np_price: "예상 가격 (VND/kg)", np_date: "예상 수확일", np_img: "제품 이미지",
+    np_price: "씨앗 공급업체 / 산지", np_date: "예상 수확일", np_img: "씨앗 증명서 / 이미지",
     np_img_upload: "파일 업로드", np_img_drop: "또는 여기에 드래그 앤 드롭", np_img_limit: "최대 5MB",
-    np_cancel: "취소", np_submit: "등록하기", np_draft_ok: "임시등록 되었습니다!"
+    np_cancel: "취소", np_submit: "제네시스 블록 생성", np_draft_ok: "제네시스 블록이 시작되었습니다! 일일 로그 준비 완료."
   }
 };
